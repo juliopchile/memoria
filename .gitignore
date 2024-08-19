@@ -1,0 +1,6 @@
+runs/
+__pycache__/
+datasets_yaml/
+models/
+coco_converted/
+**.pt
