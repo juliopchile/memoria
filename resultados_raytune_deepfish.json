@@ -1,0 +1,1094 @@
+{
+    "tune": {
+        "name": "Deepfish_yolov8n-seg_AdamW",
+        "best": [
+            7,
+            1
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.94894,
+            "mAP50(M)": 0.98028,
+            "mAP50-95(M)": 0.79348,
+            "F1_score": 0.9738011431855266
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.94792,
+            "mAP50(M)": 0.97408,
+            "mAP50-95(M)": 0.77331,
+            "F1_score": 0.9732637890673129
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.001008994148123503,
+            "lrf": 0.01525788204763168,
+            "momentum": 0.625148462277264,
+            "warmup_epochs": 4.29781322748458,
+            "warmup_momentum": 0.16169162341012314,
+            "weight_decay": 0.0007347438533370868
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0007145753726399116,
+            "lrf": 0.12183432589782325,
+            "momentum": 0.6182531242445893,
+            "warmup_epochs": 2.778837214353154,
+            "warmup_momentum": 0.45518797461876026,
+            "weight_decay": 0.0006546248110665517
+        }
+    },
+    "tune2": {
+        "name": "Deepfish_yolov8n-seg_SGD",
+        "best": [
+            0,
+            14
+        ],
+        "score_1": {
+            "precision(M)": 0.9859863596127332,
+            "recall(M)": 0.9620253164556962,
+            "mAP50(M)": 0.9811508655172976,
+            "mAP50-95(M)": 0.744351655097657,
+            "F1_score": 0.9738584745465553
+        },
+        "score_2": {
+            "precision(M)": 0.97288,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.98928,
+            "mAP50-95(M)": 0.73198,
+            "F1_score": 0.9737791681899403
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.008754900884667386,
+            "lrf": 0.42175844905116644,
+            "momentum": 0.6304405079337692,
+            "warmup_epochs": 2.5452995141077412,
+            "warmup_momentum": 0.3830972622208526,
+            "weight_decay": 1.94840790525187e-05
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.00888883328067698,
+            "lrf": 0.11632657315774278,
+            "momentum": 0.8134779972254083,
+            "warmup_epochs": 4.2551251710689675,
+            "warmup_momentum": 0.33366519416122753,
+            "weight_decay": 0.0008641972231175113
+        }
+    },
+    "tune3": {
+        "name": "Deepfish_LO_yolov8n-seg_AdamW",
+        "best": [
+            1,
+            16
+        ],
+        "score_1": {
+            "precision(M)": 0.9999649754138272,
+            "recall(M)": 0.9367088607594936,
+            "mAP50(M)": 0.9761918598425096,
+            "mAP50-95(M)": 0.7716903328486825,
+            "F1_score": 0.9673038747402732
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.93546,
+            "mAP50(M)": 0.96489,
+            "mAP50-95(M)": 0.72174,
+            "F1_score": 0.9666539220650388
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0008570719580841435,
+            "lrf": 0.4179151836153935,
+            "momentum": 0.6350674306607096,
+            "warmup_epochs": 1.895640759304043,
+            "warmup_momentum": 0.5342577906580512,
+            "weight_decay": 0.00028416102113853315
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0011313849414678599,
+            "lrf": 0.06993548413949369,
+            "momentum": 0.6281789691272283,
+            "warmup_epochs": 3.1547458585561774,
+            "warmup_momentum": 0.050368710823373256,
+            "weight_decay": 0.00037982590256660807
+        }
+    },
+    "tune4": {
+        "name": "Deepfish_LO_yolov8n-seg_SGD",
+        "best": [
+            3,
+            18
+        ],
+        "score_1": {
+            "precision(M)": 0.99859,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.97332,
+            "mAP50-95(M)": 0.74678,
+            "F1_score": 0.979969129867083
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.95661,
+            "mAP50(M)": 0.9747,
+            "mAP50-95(M)": 0.70696,
+            "F1_score": 0.9778238892778837
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0030858301625825025,
+            "lrf": 0.49117862812269786,
+            "momentum": 0.8616311914704875,
+            "warmup_epochs": 4.7995905161553925,
+            "warmup_momentum": 0.6424362648539571,
+            "weight_decay": 0.0001572625289970948
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0036332951364663486,
+            "lrf": 0.09889825196017574,
+            "momentum": 0.814873609010726,
+            "warmup_epochs": 0.8653254497184631,
+            "warmup_momentum": 0.8550876589386731,
+            "weight_decay": 0.0006494548422604406
+        }
+    },
+    "tune5": {
+        "name": "Deepfish_yolov8s-seg_AdamW",
+        "best": [
+            3,
+            6
+        ],
+        "score_1": {
+            "precision(M)": 0.99865,
+            "recall(M)": 0.98734,
+            "mAP50(M)": 0.99132,
+            "mAP50-95(M)": 0.78472,
+            "F1_score": 0.9929627953816484
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.96112,
+            "mAP50(M)": 0.979,
+            "mAP50-95(M)": 0.7803,
+            "F1_score": 0.9801745941094885
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0005081063787053399,
+            "lrf": 0.20841731425594914,
+            "momentum": 0.746943647934323,
+            "warmup_epochs": 3.2002289039992005,
+            "warmup_momentum": 0.1396790487055509,
+            "weight_decay": 0.0003880262185740068
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0007295566980186238,
+            "lrf": 0.11226997322649392,
+            "momentum": 0.9506716736512255,
+            "warmup_epochs": 3.8109950283391747,
+            "warmup_momentum": 0.7561989006984976,
+            "weight_decay": 0.0009812874693649143
+        }
+    },
+    "tune6": {
+        "name": "Deepfish_yolov8s-seg_SGD",
+        "best": [
+            2,
+            8
+        ],
+        "score_1": {
+            "precision(M)": 0.99915,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.98533,
+            "mAP50-95(M)": 0.78113,
+            "F1_score": 0.9867633200427596
+        },
+        "score_2": {
+            "precision(M)": 0.99653,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.98656,
+            "mAP50-95(M)": 0.72932,
+            "F1_score": 0.9789761415529777
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.009697835362040857,
+            "lrf": 0.18279136449703595,
+            "momentum": 0.6588086375930504,
+            "warmup_epochs": 0.3996682405554275,
+            "warmup_momentum": 0.5661576180108788,
+            "weight_decay": 3.289156219434064e-05
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.004133394421027869,
+            "lrf": 0.3539457691605081,
+            "momentum": 0.9218186810861189,
+            "warmup_epochs": 2.522576415082456,
+            "warmup_momentum": 0.3733510342428143,
+            "weight_decay": 0.0006290492408522818
+        }
+    },
+    "tune7": {
+        "name": "Deepfish_LO_yolov8s-seg_AdamW",
+        "best": [
+            1,
+            12
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98084,
+            "mAP50(M)": 0.98739,
+            "mAP50-95(M)": 0.79773,
+            "F1_score": 0.9903273358777084
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97258,
+            "mAP50(M)": 0.98447,
+            "mAP50-95(M)": 0.81385,
+            "F1_score": 0.9860994230905717
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0005883746294283289,
+            "lrf": 0.38906753919114356,
+            "momentum": 0.630756444478962,
+            "warmup_epochs": 1.7168770538111688,
+            "warmup_momentum": 0.7525376569752665,
+            "weight_decay": 0.0003322574587466106
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0006493715587262553,
+            "lrf": 0.062253979011035264,
+            "momentum": 0.6611225413310671,
+            "warmup_epochs": 1.7877349091322166,
+            "warmup_momentum": 0.15063630841967857,
+            "weight_decay": 0.00016827928702423545
+        }
+    },
+    "tune8": {
+        "name": "Deepfish_LO_yolov8s-seg_SGD",
+        "best": [
+            0,
+            7
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.981155854203452,
+            "mAP50(M)": 0.9857074626865672,
+            "mAP50-95(M)": 0.7855239880583154,
+            "F1_score": 0.9904883072391473
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.9481,
+            "mAP50(M)": 0.96955,
+            "mAP50-95(M)": 0.75563,
+            "F1_score": 0.9733586571531235
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.007928916868114515,
+            "lrf": 0.32338627901812617,
+            "momentum": 0.6693433835558203,
+            "warmup_epochs": 4.885771698960894,
+            "warmup_momentum": 0.677214556900801,
+            "weight_decay": 0.0002785746483486289
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.005772710091730231,
+            "lrf": 0.045520500000092064,
+            "momentum": 0.6441613848172638,
+            "warmup_epochs": 1.9079008149188004,
+            "warmup_momentum": 0.4482737698403431,
+            "weight_decay": 0.00085009152808696
+        }
+    },
+    "tune9": {
+        "name": "Deepfish_yolov8m-seg_AdamW",
+        "best": [
+            0,
+            17
+        ],
+        "score_1": {
+            "precision(M)": 0.98704,
+            "recall(M)": 0.96374,
+            "mAP50(M)": 0.98068,
+            "mAP50-95(M)": 0.77025,
+            "F1_score": 0.9752508530946596
+        },
+        "score_2": {
+            "precision(M)": 0.97174,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.97898,
+            "mAP50-95(M)": 0.80161,
+            "F1_score": 0.9732077796159102
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0007191359558913115,
+            "lrf": 0.36022244322576036,
+            "momentum": 0.8598235122552917,
+            "warmup_epochs": 0.9060618078250865,
+            "warmup_momentum": 0.08416732012788475,
+            "weight_decay": 4.366217540534101e-05
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.000632128230169649,
+            "lrf": 0.3751997657401712,
+            "momentum": 0.6001714562725597,
+            "warmup_epochs": 0.9950183361802489,
+            "warmup_momentum": 0.844089282658222,
+            "weight_decay": 0.0002361192429597453
+        }
+    },
+    "tune10": {
+        "name": "Deepfish_yolov8m-seg_SGD",
+        "best": [
+            8,
+            1
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.9592,
+            "mAP50(M)": 0.9764,
+            "mAP50-95(M)": 0.79207,
+            "F1_score": 0.9791751735402205
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.94906,
+            "mAP50(M)": 0.98937,
+            "mAP50-95(M)": 0.80538,
+            "F1_score": 0.9738643243409644
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.006909738144575773,
+            "lrf": 0.01427079293981165,
+            "momentum": 0.7112710727324774,
+            "warmup_epochs": 3.1823002275007313,
+            "warmup_momentum": 0.32924054808207953,
+            "weight_decay": 0.00021309659936767278
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0011960245844801199,
+            "lrf": 0.3028919790392276,
+            "momentum": 0.8859123516434669,
+            "warmup_epochs": 4.86646704028637,
+            "warmup_momentum": 0.06286010593644022,
+            "weight_decay": 0.00015066077082064356
+        }
+    },
+    "tune11": {
+        "name": "Deepfish_LO_yolov8m-seg_AdamW",
+        "best": [
+            10,
+            3
+        ],
+        "score_1": {
+            "precision(M)": 0.98729,
+            "recall(M)": 0.98331,
+            "mAP50(M)": 0.99295,
+            "mAP50-95(M)": 0.82552,
+            "F1_score": 0.9852959808180249
+        },
+        "score_2": {
+            "precision(M)": 0.987152770850403,
+            "recall(M)": 0.9726524269306313,
+            "mAP50(M)": 0.9778625376402956,
+            "mAP50-95(M)": 0.8092721236917665,
+            "F1_score": 0.9798489558105749
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0006319687689696324,
+            "lrf": 0.18004960436570552,
+            "momentum": 0.859254212585975,
+            "warmup_epochs": 1.7617220848108022,
+            "warmup_momentum": 0.709417463276133,
+            "weight_decay": 0.0005476815260761863
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0005336326913165164,
+            "lrf": 0.02094993473678824,
+            "momentum": 0.7328464815517766,
+            "warmup_epochs": 3.5236105265969613,
+            "warmup_momentum": 0.8700628138366202,
+            "weight_decay": 0.0004782110177858292
+        }
+    },
+    "tune12": {
+        "name": "Deepfish_LO_yolov8m-seg_SGD",
+        "best": [
+            19,
+            4
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98594,
+            "mAP50(M)": 0.99282,
+            "mAP50-95(M)": 0.77717,
+            "F1_score": 0.9929202292113558
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97447,
+            "mAP50(M)": 0.98244,
+            "mAP50-95(M)": 0.8085,
+            "F1_score": 0.9870699478847488
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0023784158223852155,
+            "lrf": 0.1521434334806938,
+            "momentum": 0.6851370673559586,
+            "warmup_epochs": 0.43385473069447844,
+            "warmup_momentum": 0.42008832227772114,
+            "weight_decay": 0.0008059768056277851
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.00899480746225964,
+            "lrf": 0.1361697455670677,
+            "momentum": 0.6220056427969407,
+            "warmup_epochs": 3.665323767699056,
+            "warmup_momentum": 0.712244288024245,
+            "weight_decay": 0.0008642481531217318
+        }
+    },
+    "tune13": {
+        "name": "Deepfish_yolov8l-seg_AdamW",
+        "best": [
+            13,
+            12
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.95814,
+            "mAP50(M)": 0.96788,
+            "mAP50-95(M)": 0.78722,
+            "F1_score": 0.9786225703984394
+        },
+        "score_2": {
+            "precision(M)": 0.99993,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.97559,
+            "mAP50-95(M)": 0.72079,
+            "F1_score": 0.9739942995947264
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0011337776901875541,
+            "lrf": 0.42005585775895965,
+            "momentum": 0.8644063346131923,
+            "warmup_epochs": 4.879094635905653,
+            "warmup_momentum": 0.14364173914618428,
+            "weight_decay": 0.0009713047445174707
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.000619642226802108,
+            "lrf": 0.18577352756221105,
+            "momentum": 0.6744588417957756,
+            "warmup_epochs": 3.44701609283753,
+            "warmup_momentum": 0.6319340302399468,
+            "weight_decay": 0.0003464312955793346
+        }
+    },
+    "tune14": {
+        "name": "Deepfish_yolov8l-seg_SGD",
+        "best": [
+            9,
+            3
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98323,
+            "mAP50(M)": 0.98723,
+            "mAP50-95(M)": 0.81308,
+            "F1_score": 0.9915440972554873
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97447,
+            "mAP50(M)": 0.99213,
+            "mAP50-95(M)": 0.82266,
+            "F1_score": 0.9870699478847488
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.002939394117904846,
+            "lrf": 0.06908874709276104,
+            "momentum": 0.8299641800731534,
+            "warmup_epochs": 2.482322422122614,
+            "warmup_momentum": 0.27488676136420737,
+            "weight_decay": 0.00018146475713879683
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.004202973463849693,
+            "lrf": 0.1172396368135221,
+            "momentum": 0.7953925303948196,
+            "warmup_epochs": 3.898937091479355,
+            "warmup_momentum": 0.8037410352640715,
+            "weight_decay": 0.0003871975989426235
+        }
+    },
+    "tune15": {
+        "name": "Deepfish_LO_yolov8l-seg_AdamW",
+        "best": [
+            17,
+            16
+        ],
+        "score_1": {
+            "precision(M)": 0.9976,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.98392,
+            "mAP50-95(M)": 0.77618,
+            "F1_score": 0.979492177604956
+        },
+        "score_2": {
+            "precision(M)": 0.98711,
+            "recall(M)": 0.96912,
+            "mAP50(M)": 0.99039,
+            "mAP50-95(M)": 0.7771,
+            "F1_score": 0.9780322796399197
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0007005247742895579,
+            "lrf": 0.07306821221639681,
+            "momentum": 0.7898636148618886,
+            "warmup_epochs": 3.7035259985878137,
+            "warmup_momentum": 0.8878540677087886,
+            "weight_decay": 0.00030319933276740286
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0006741160370727212,
+            "lrf": 0.269975865629398,
+            "momentum": 0.9143417359661934,
+            "warmup_epochs": 1.8090197220478321,
+            "warmup_momentum": 0.7153498596095983,
+            "weight_decay": 0.000618794674782513
+        }
+    },
+    "tune16": {
+        "name": "Deepfish_LO_yolov8l-seg_SGD",
+        "best": [
+            11,
+            0
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98728,
+            "mAP50(M)": 0.99323,
+            "mAP50-95(M)": 0.81799,
+            "F1_score": 0.9935992914939011
+        },
+        "score_2": {
+            "precision(M)": 0.99684,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.98088,
+            "mAP50-95(M)": 0.82609,
+            "F1_score": 0.9856354601525726
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.006262146130697483,
+            "lrf": 0.13403952338826283,
+            "momentum": 0.8581322439896417,
+            "warmup_epochs": 0.687402683754379,
+            "warmup_momentum": 0.21747536820833852,
+            "weight_decay": 0.0006018470400497386
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0080821820902136,
+            "lrf": 0.06988218270274893,
+            "momentum": 0.629124372795584,
+            "warmup_epochs": 1.494795648131344,
+            "warmup_momentum": 0.8743287644255394,
+            "weight_decay": 0.00027571558456841196
+        }
+    },
+    "tune17": {
+        "name": "Deepfish_yolov8x-seg_AdamW",
+        "best": [
+            19,
+            17
+        ],
+        "score_1": {
+            "precision(M)": 0.99992,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.97337,
+            "mAP50-95(M)": 0.79901,
+            "F1_score": 0.973989555581776
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.94597,
+            "mAP50(M)": 0.98382,
+            "mAP50-95(M)": 0.79573,
+            "F1_score": 0.9722349265404914
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0006790518001368799,
+            "lrf": 0.1949803237514309,
+            "momentum": 0.9261642559382404,
+            "warmup_epochs": 2.1104906162672394,
+            "warmup_momentum": 0.6481838024955154,
+            "weight_decay": 2.6564748971329213e-05
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0005093152248516903,
+            "lrf": 0.23218518782673775,
+            "momentum": 0.7625330739605113,
+            "warmup_epochs": 3.2946406890729736,
+            "warmup_momentum": 0.08724548505619119,
+            "weight_decay": 0.0002837236961030547
+        }
+    },
+    "tune18": {
+        "name": "Deepfish_yolov8x-seg_SGD",
+        "best": [
+            3,
+            13
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.99912,
+            "mAP50(M)": 0.995,
+            "mAP50-95(M)": 0.80666,
+            "F1_score": 0.9995598063147785
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98495,
+            "mAP50(M)": 0.99452,
+            "mAP50-95(M)": 0.80551,
+            "F1_score": 0.9924179450363989
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.00205381087130409,
+            "lrf": 0.3075487824246046,
+            "momentum": 0.8005919870308251,
+            "warmup_epochs": 1.9966413726279375,
+            "warmup_momentum": 0.3894773848126397,
+            "weight_decay": 0.0004959238290363354
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.002426318969414404,
+            "lrf": 0.37676380801112697,
+            "momentum": 0.6539441073995254,
+            "warmup_epochs": 0.8028294483789128,
+            "warmup_momentum": 0.054850685747045096,
+            "weight_decay": 6.89450608132165e-05
+        }
+    },
+    "tune19": {
+        "name": "Deepfish_LO_yolov8x-seg_AdamW",
+        "best": [
+            2,
+            14
+        ],
+        "score_1": {
+            "precision(M)": 0.9984,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.97957,
+            "mAP50-95(M)": 0.8209,
+            "F1_score": 0.9798776309279086
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.9603167055824708,
+            "mAP50(M)": 0.9813994851994852,
+            "mAP50-95(M)": 0.8038811842002236,
+            "F1_score": 0.9797566922199247
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0010517715073868226,
+            "lrf": 0.02835818500725435,
+            "momentum": 0.8009250402693281,
+            "warmup_epochs": 2.2197905830312976,
+            "warmup_momentum": 0.814571980850513,
+            "weight_decay": 0.0005545753628145325
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.00062846797861947,
+            "lrf": 0.2205581355637319,
+            "momentum": 0.8696363530362592,
+            "warmup_epochs": 4.456332239900871,
+            "warmup_momentum": 0.776762963634676,
+            "weight_decay": 0.000737218637431613
+        }
+    },
+    "tune20": {
+        "name": "Deepfish_LO_yolov8x-seg_SGD",
+        "best": [
+            3,
+            14
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98724,
+            "mAP50(M)": 0.98841,
+            "mAP50-95(M)": 0.79085,
+            "F1_score": 0.9935790342384413
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98526,
+            "mAP50(M)": 0.98513,
+            "mAP50-95(M)": 0.77713,
+            "F1_score": 0.992575279812216
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.003285232984599383,
+            "lrf": 0.01037561053602745,
+            "momentum": 0.883804919430342,
+            "warmup_epochs": 0.9366607966965401,
+            "warmup_momentum": 0.4147232760988228,
+            "weight_decay": 2.0257980930528997e-05
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0018342630353231047,
+            "lrf": 0.3555758416225813,
+            "momentum": 0.9179601514134514,
+            "warmup_epochs": 0.688169446761211,
+            "warmup_momentum": 0.7654197879468211,
+            "weight_decay": 0.0007481671638855216
+        }
+    },
+    "tune21": {
+        "name": "Deepfish_yolov9c-seg_AdamW",
+        "best": [
+            9,
+            0
+        ],
+        "score_1": {
+            "precision(M)": 0.98503,
+            "recall(M)": 0.92405,
+            "mAP50(M)": 0.96959,
+            "mAP50-95(M)": 0.74762,
+            "F1_score": 0.9535660857585854
+        },
+        "score_2": {
+            "precision(M)": 0.96079,
+            "recall(M)": 0.93055,
+            "mAP50(M)": 0.95745,
+            "mAP50-95(M)": 0.70577,
+            "F1_score": 0.9454282513984793
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.000712276704011976,
+            "lrf": 0.4403755770858323,
+            "momentum": 0.6155502082157921,
+            "warmup_epochs": 0.8902170676217952,
+            "warmup_momentum": 0.5169980290258452,
+            "weight_decay": 5.448143006981176e-05
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0008840214843070626,
+            "lrf": 0.16828713884565652,
+            "momentum": 0.794825278831331,
+            "warmup_epochs": 0.0503653662099246,
+            "warmup_momentum": 0.32188039867970114,
+            "weight_decay": 8.674349633349333e-05
+        }
+    },
+    "tune22": {
+        "name": "Deepfish_yolov9c-seg_SGD",
+        "best": [
+            16,
+            10
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98624,
+            "mAP50(M)": 0.9944,
+            "mAP50-95(M)": 0.82827,
+            "F1_score": 0.9930723376832609
+        },
+        "score_2": {
+            "precision(M)": 0.99975,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.9836,
+            "mAP50-95(M)": 0.77363,
+            "F1_score": 0.987055838900341
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.001936964136400808,
+            "lrf": 0.48881061978497414,
+            "momentum": 0.894080272202101,
+            "warmup_epochs": 3.0157674711370634,
+            "warmup_momentum": 0.9499617337234423,
+            "weight_decay": 0.000271297004176989
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.002206538122518362,
+            "lrf": 0.032997674650346184,
+            "momentum": 0.8636349813959417,
+            "warmup_epochs": 1.5082366579569517,
+            "warmup_momentum": 0.25681586052959837,
+            "weight_decay": 6.682527604523425e-05
+        }
+    },
+    "tune23": {
+        "name": "Deepfish_LO_yolov9c-seg_AdamW",
+        "best": [
+            8,
+            6
+        ],
+        "score_1": {
+            "precision(M)": 0.98724,
+            "recall(M)": 0.97947,
+            "mAP50(M)": 0.98874,
+            "mAP50-95(M)": 0.76703,
+            "F1_score": 0.9833396512958189
+        },
+        "score_2": {
+            "precision(M)": 0.99695,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.97194,
+            "mAP50-95(M)": 0.75034,
+            "F1_score": 0.9725784264663571
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0005455295343856896,
+            "lrf": 0.06197009503083309,
+            "momentum": 0.9028075318502515,
+            "warmup_epochs": 3.6247912454987152,
+            "warmup_momentum": 0.8188015316786024,
+            "weight_decay": 4.057383524540126e-05
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0008608079494547439,
+            "lrf": 0.21451287690408868,
+            "momentum": 0.9208042991230208,
+            "warmup_epochs": 0.7350677479344525,
+            "warmup_momentum": 0.8729677510673453,
+            "weight_decay": 0.00099767882724053
+        }
+    },
+    "tune24": {
+        "name": "Deepfish_LO_yolov9c-seg_SGD",
+        "best": [
+            17,
+            11
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98595,
+            "mAP50(M)": 0.9944,
+            "mAP50-95(M)": 0.80967,
+            "F1_score": 0.9929253002341449
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98463,
+            "mAP50(M)": 0.99488,
+            "mAP50-95(M)": 0.80543,
+            "F1_score": 0.9922554833898509
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0019868411879413106,
+            "lrf": 0.09543327115148623,
+            "momentum": 0.8264956919330753,
+            "warmup_epochs": 2.912613844792858,
+            "warmup_momentum": 0.45150033969451,
+            "weight_decay": 0.00011638192702961225
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.002925936868788708,
+            "lrf": 0.04919470133208061,
+            "momentum": 0.6038705208047783,
+            "warmup_epochs": 1.0065361066837164,
+            "warmup_momentum": 0.30055754312967903,
+            "weight_decay": 5.46123328000484e-05
+        }
+    },
+    "tune25": {
+        "name": "Deepfish_yolov9e-seg_AdamW",
+        "best": [
+            1,
+            0
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97222,
+            "mAP50(M)": 0.98056,
+            "mAP50-95(M)": 0.78462,
+            "F1_score": 0.9859143503260285
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.96545,
+            "mAP50(M)": 0.98571,
+            "mAP50-95(M)": 0.7962,
+            "F1_score": 0.9824213284489557
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0006742131071648055,
+            "lrf": 0.3458216098221436,
+            "momentum": 0.9502722425632895,
+            "warmup_epochs": 1.792692346008367,
+            "warmup_momentum": 0.16630605304070528,
+            "weight_decay": 0.00035660505069996443
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0005051825767435261,
+            "lrf": 0.33748081332908003,
+            "momentum": 0.8928267803846626,
+            "warmup_epochs": 0.4026308771894016,
+            "warmup_momentum": 0.3549951942023627,
+            "weight_decay": 0.0009819420636848917
+        }
+    },
+    "tune26": {
+        "name": "Deepfish_yolov9e-seg_SGD",
+        "best": [
+            2,
+            19
+        ],
+        "score_1": {
+            "precision(M)": 0.99997,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.99194,
+            "mAP50-95(M)": 0.79869,
+            "F1_score": 0.9871630512749094
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97376,
+            "mAP50(M)": 0.98553,
+            "mAP50-95(M)": 0.80508,
+            "F1_score": 0.9867055771725032
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.004327736962200332,
+            "lrf": 0.08896968318493055,
+            "momentum": 0.7561305022627016,
+            "warmup_epochs": 0.5462229052272621,
+            "warmup_momentum": 0.34351331034754023,
+            "weight_decay": 6.756709883605849e-05
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.004716386004379363,
+            "lrf": 0.355815153515773,
+            "momentum": 0.6722885010210553,
+            "warmup_epochs": 3.4738604041373655,
+            "warmup_momentum": 0.6076802337045709,
+            "weight_decay": 9.43100175120326e-05
+        }
+    },
+    "tune27": {
+        "name": "Deepfish_LO_yolov9e-seg_AdamW",
+        "best": [
+            16,
+            15
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97439,
+            "mAP50(M)": 0.99096,
+            "mAP50-95(M)": 0.76668,
+            "F1_score": 0.987028905130192
+        },
+        "score_2": {
+            "precision(M)": 0.99881,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.98711,
+            "mAP50-95(M)": 0.78254,
+            "F1_score": 0.9865974804027383
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0006104516196869394,
+            "lrf": 0.3965978273063865,
+            "momentum": 0.9118134390601076,
+            "warmup_epochs": 4.400299095817807,
+            "warmup_momentum": 0.34532395821459866,
+            "weight_decay": 0.00029540965770797115
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0015166594749943996,
+            "lrf": 0.04217224778261725,
+            "momentum": 0.7903960969777379,
+            "warmup_epochs": 0.871004155549393,
+            "warmup_momentum": 0.5409097055380346,
+            "weight_decay": 0.0008390341128762089
+        }
+    },
+    "tune28": {
+        "name": "Deepfish_LO_yolov9e-seg_SGD",
+        "best": [
+            0,
+            10
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97451,
+            "mAP50(M)": 0.98342,
+            "mAP50-95(M)": 0.7777,
+            "F1_score": 0.9870904680148492
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97431,
+            "mAP50(M)": 0.98774,
+            "mAP50-95(M)": 0.80965,
+            "F1_score": 0.9869878590494907
+        },
+        "config2": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.009579993452782692,
+            "lrf": 0.04768899154071516,
+            "momentum": 0.8728969840163212,
+            "warmup_epochs": 0.7201974136063033,
+            "warmup_momentum": 0.4723089201141959,
+            "weight_decay": 8.300085111708145e-05
+        },
+        "config1": {
+            "data": "/home/asdasd/tesis_yolov9/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.00985681421635123,
+            "lrf": 0.015218091190483122,
+            "momentum": 0.9532006856664095,
+            "warmup_epochs": 2.9660902662848008,
+            "warmup_momentum": 0.05437853685870406,
+            "weight_decay": 0.0008581969781801337
+        }
+    }
+}
