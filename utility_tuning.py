@@ -57,7 +57,7 @@ def train_ray_tune(iterations: int, epochs: int) -> None:
         }
     }
 
-    for model_name in ALL_MODELS[5::]:
+    for model_name in ALL_MODELS[4::]:
         for dataset_yaml in os.listdir(datasets_yaml_dir):
             # Ignorar archivos YAML no relevantes
             if "export" in dataset_yaml or "Shiny" in dataset_yaml or "Salmones" in dataset_yaml:
@@ -74,9 +74,9 @@ def train_ray_tune(iterations: int, epochs: int) -> None:
 
                 # Parámetros adicionales de entrenamiento específicos para yolov9e-seg
                 if model_name in ['yolov9e-seg']:
-                    train_params = {"single_cls": True, "cos_lr": False, "freeze": 30}
+                    train_params = {"single_cls": False, "cos_lr": True, "freeze": 30}
                 else:
-                    train_params = {"single_cls": True, "cos_lr": False}
+                    train_params = {"single_cls": False, "cos_lr": True}
 
                 # Ajustar hiperparámetros con Ray Tune
                 result_grid = model.tune(data=data_yaml, iterations=iterations, epochs=epochs, optimizer=optimizer,
