@@ -57,7 +57,7 @@ def train_ray_tune(iterations: int, epochs: int) -> None:
         }
     }
 
-    for model_name in ALL_MODELS[4::]:
+    for model_name in ALL_MODELS:
         for dataset_yaml in os.listdir(datasets_yaml_dir):
             # Ignorar archivos YAML no relevantes
             if "export" in dataset_yaml or "Shiny" in dataset_yaml or "Salmones" in dataset_yaml:
@@ -132,9 +132,9 @@ def train_tune(search_spaces_dict: dict[str, dict], state_json_path: str, iterat
             
             # Congelar pesos en caso de ser yolov9e-seg
             if model_name in ['yolov9e-seg']:
-                train_params = {"single_cls": True, "cos_lr": True, "freeze": 30}
+                train_params = {"single_cls": False, "cos_lr": False, "freeze": 30}
             else:
-                train_params = {"single_cls": True, "cos_lr": True}
+                train_params = {"single_cls": False, "cos_lr": False}
 
             # Cargar modelo
             model = YOLO(get_backbone_path(model_name), task="segment")
@@ -259,16 +259,16 @@ def guardar_estado(state_json_path: str, data: dict) -> None:
 
 if __name__ == "__main__":
     #? Entrenar utilizando Raytune
-    train_ray_tune(iterations=20, epochs=40)
-    # Guardar resultados de Raytune con el notebook check_tune_results.ipynb
+    # train_ray_tune(iterations=20, epochs=40)
+    # Guardar resultados de Raytune con el notebook check_raytune_results.ipynb
     
     #? Cargar mejores hiperparámetros de los entrenamientos con Raytune.
-    #raytune_results = "resultados_raytune_deepfish_1.json"
-    #search_spaces_dict = leer_resultados_raytune(raytune_results)
+    raytune_results = "resultados_raytune_deepfish_1.json"
+    search_spaces_dict = leer_resultados_raytune(raytune_results)
     
     #? Inicializar el archivo JSON de estado de entrenamiento con Tune
-    #tune_training_state = "tune_training_state_deepfish.json"
-    #inicializar_estados(search_spaces_dict, tune_training_state)
+    tune_training_state = "tune_training_state_deepfish_1.json"
+    inicializar_estados(search_spaces_dict, tune_training_state)    # Util para parar entrenamiento y continuar luego
     
     #? Entrenar con Tune
-    #train_tune(search_spaces_dict, tune_training_state, 10, 40)
+    train_tune(search_spaces_dict, tune_training_state, 10, 40)

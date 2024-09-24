@@ -1,0 +1,341 @@
+{
+    "tune": {
+        "name": "Deepfish_yolov8n-seg_AdamW",
+        "config": {
+            "lr0": 0.00111,
+            "lrf": 0.01373,
+            "momentum": 0.68766,
+            "weight_decay": 0.0006,
+            "warmup_epochs": 3.16802,
+            "warmup_momentum": 0.50071
+        },
+        "score": {
+            "precision(M)": 0.98414,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.9849,
+            "mAP50-95(M)": 0.78913,
+            "F1_score": 0.9729594066294313
+        }
+    },
+    "tune2": {
+        "name": "Deepfish_yolov8n-seg_SGD",
+        "config": {
+            "lr0": 0.00788,
+            "lrf": 0.10745,
+            "momentum": 0.73883,
+            "weight_decay": 0.00053,
+            "warmup_epochs": 3.34158,
+            "warmup_momentum": 0.40658
+        },
+        "score": {
+            "precision(M)": 0.97451,
+            "recall(M)": 0.96796,
+            "mAP50(M)": 0.98919,
+            "mAP50-95(M)": 0.76689,
+            "F1_score": 0.9712239567149041
+        }
+    },
+    "tune3": {
+        "name": "Deepfish_LO_yolov8n-seg_AdamW",
+        "config": {
+            "lr0": 0.00124,
+            "lrf": 0.06294,
+            "momentum": 0.69857,
+            "weight_decay": 0.00032,
+            "warmup_epochs": 3.0,
+            "warmup_momentum": 0.58768
+        },
+        "score": {
+            "precision(M)": 0.98928,
+            "recall(M)": 0.93671,
+            "mAP50(M)": 0.98163,
+            "mAP50-95(M)": 0.7878,
+            "F1_score": 0.9622775495199871
+        }
+    },
+    "tune4": {
+        "name": "Deepfish_LO_yolov8n-seg_SGD",
+        "config": {
+            "lr0": 0.004,
+            "lrf": 0.08901,
+            "momentum": 0.88201,
+            "weight_decay": 0.00049,
+            "warmup_epochs": 2.75104,
+            "warmup_momentum": 0.86541
+        },
+        "score": {
+            "precision(M)": 0.99296,
+            "recall(M)": 0.89873,
+            "mAP50(M)": 0.97838,
+            "mAP50-95(M)": 0.75232,
+            "F1_score": 0.9434980792836034
+        }
+    },
+    "tune5": {
+        "name": "Deepfish_yolov8s-seg_AdamW",
+        "config": {
+            "lr0": 0.0008,
+            "lrf": 0.10104,
+            "momentum": 0.9482,
+            "weight_decay": 0.00046,
+            "warmup_epochs": 3.31591,
+            "warmup_momentum": 0.83182
+        },
+        "score": {
+            "precision(M)": 0.95948,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.97401,
+            "mAP50-95(M)": 0.79776,
+            "F1_score": 0.9607533079713351
+        }
+    },
+    "tune6": {
+        "name": "Deepfish_yolov8s-seg_SGD",
+        "config": {
+            "lr0": 0.01,
+            "lrf": 0.16451,
+            "momentum": 0.937,
+            "weight_decay": 0.0005,
+            "warmup_epochs": 2.77483,
+            "warmup_momentum": 0.62277
+        },
+        "score": {
+            "precision(M)": 0.99585,
+            "recall(M)": 0.91139,
+            "mAP50(M)": 0.98242,
+            "mAP50-95(M)": 0.77703,
+            "F1_score": 0.9517498914662025
+        }
+    },
+    "tune7": {
+        "name": "Deepfish_LO_yolov8s-seg_AdamW",
+        "config": {
+            "lr0": 0.00071,
+            "lrf": 0.05603,
+            "momentum": 0.71853,
+            "weight_decay": 0.00037,
+            "warmup_epochs": 1.96627,
+            "warmup_momentum": 0.8
+        },
+        "score": {
+            "precision(M)": 0.99816,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.98757,
+            "mAP50-95(M)": 0.81574,
+            "F1_score": 0.9731538504670019
+        }
+    },
+    "tune8": {
+        "name": "Deepfish_LO_yolov8s-seg_SGD",
+        "config": {
+            "lr0": 0.00872,
+            "lrf": 0.04097,
+            "momentum": 0.73628,
+            "weight_decay": 0.00049,
+            "warmup_epochs": 3.05048,
+            "warmup_momentum": 0.74494
+        },
+        "score": {
+            "precision(M)": 0.99781,
+            "recall(M)": 0.93671,
+            "mAP50(M)": 0.98655,
+            "mAP50-95(M)": 0.80655,
+            "F1_score": 0.9662951068999028
+        }
+    },
+    "tune9": {
+        "name": "Deepfish_yolov8m-seg_AdamW",
+        "config": {
+            "lr0": 0.00065,
+            "lrf": 0.3242,
+            "momentum": 0.6,
+            "weight_decay": 0.00026,
+            "warmup_epochs": 0.81546,
+            "warmup_momentum": 0.66944
+        },
+        "score": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.96075,
+            "mAP50(M)": 0.9886,
+            "mAP50-95(M)": 0.80751,
+            "F1_score": 0.9799821496876195
+        }
+    },
+    "tune10": {
+        "name": "Deepfish_yolov8m-seg_SGD",
+        "config": {
+            "lr0": 0.00739,
+            "lrf": 0.01297,
+            "momentum": 0.80096,
+            "weight_decay": 0.00023,
+            "warmup_epochs": 2.86407,
+            "warmup_momentum": 0.34838
+        },
+        "score": {
+            "precision(M)": 0.96216,
+            "recall(M)": 0.96555,
+            "mAP50(M)": 0.989,
+            "mAP50-95(M)": 0.84035,
+            "F1_score": 0.9638520192352584
+        }
+    },
+    "tune11": {
+        "name": "Deepfish_LO_yolov8m-seg_AdamW",
+        "config": {
+            "lr0": 0.0007,
+            "lrf": 0.01983,
+            "momentum": 0.75418,
+            "weight_decay": 0.00047,
+            "warmup_epochs": 2.78134,
+            "warmup_momentum": 0.77906
+        },
+        "score": {
+            "precision(M)": 0.97424,
+            "recall(M)": 0.95754,
+            "mAP50(M)": 0.99036,
+            "mAP50-95(M)": 0.82025,
+            "F1_score": 0.9658178152791725
+        }
+    },
+    "tune12": {
+        "name": "Deepfish_LO_yolov8m-seg_SGD",
+        "config": {
+            "lr0": 0.00989,
+            "lrf": 0.12255,
+            "momentum": 0.7487,
+            "weight_decay": 0.00074,
+            "warmup_epochs": 3.02875,
+            "warmup_momentum": 0.78347
+        },
+        "score": {
+            "precision(M)": 0.98634,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.99305,
+            "mAP50-95(M)": 0.82614,
+            "F1_score": 0.9804753354886742
+        }
+    },
+    "tune13": {
+        "name": "Deepfish_yolov8l-seg_AdamW",
+        "config": {
+            "lr0": 0.00125,
+            "lrf": 0.1672,
+            "momentum": 0.94383,
+            "weight_decay": 0.00053,
+            "warmup_epochs": 3.10231,
+            "warmup_momentum": 0.69513
+        },
+        "score": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.93394,
+            "mAP50(M)": 0.96921,
+            "mAP50-95(M)": 0.78105,
+            "F1_score": 0.9658417531050602
+        }
+    },
+    "tune14": {
+        "name": "Deepfish_yolov8l-seg_SGD",
+        "config": {
+            "lr0": 0.00384,
+            "lrf": 0.06218,
+            "momentum": 0.84481,
+            "weight_decay": 0.00039,
+            "warmup_epochs": 2.23409,
+            "warmup_momentum": 0.88412
+        },
+        "score": {
+            "precision(M)": 0.99779,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.99168,
+            "mAP50-95(M)": 0.83863,
+            "F1_score": 0.9729779702746564
+        }
+    },
+    "tune15": {
+        "name": "Deepfish_LO_yolov8l-seg_AdamW",
+        "config": {
+            "lr0": 0.00076,
+            "lrf": 0.06576,
+            "momentum": 0.78261,
+            "weight_decay": 0.0004,
+            "warmup_epochs": 2.99103,
+            "warmup_momentum": 0.85847
+        },
+        "score": {
+            "precision(M)": 0.98503,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.98388,
+            "mAP50-95(M)": 0.82492,
+            "F1_score": 0.966871310070306
+        }
+    },
+    "tune16": {
+        "name": "Deepfish_LO_yolov8l-seg_SGD",
+        "config": {
+            "lr0": 0.00865,
+            "lrf": 0.06289,
+            "momentum": 0.72422,
+            "weight_decay": 0.00056,
+            "warmup_epochs": 1.64428,
+            "warmup_momentum": 0.95
+        },
+        "score": {
+            "precision(M)": 0.98715,
+            "recall(M)": 0.97269,
+            "mAP50(M)": 0.99376,
+            "mAP50-95(M)": 0.84212,
+            "F1_score": 0.9798666559515063
+        }
+    },
+    "tune17": {
+        "name": "Deepfish_yolov8x-seg_AdamW",
+        "config": {
+            "lr0": 0.00075,
+            "lrf": 0.17548,
+            "momentum": 0.95012,
+            "weight_decay": 0.00031,
+            "warmup_epochs": 3.0,
+            "warmup_momentum": 0.71296
+        },
+        "score": {
+            "precision(M)": 0.96111,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.97449,
+            "mAP50-95(M)": 0.79592,
+            "F1_score": 0.9552039285415183
+        }
+    },
+    "tune18": {
+        "name": "Deepfish_yolov8x-seg_SGD"
+    },
+    "tune19": {
+        "name": "Deepfish_LO_yolov8x-seg_AdamW"
+    },
+    "tune20": {
+        "name": "Deepfish_LO_yolov8x-seg_SGD"
+    },
+    "tune21": {
+        "name": "Deepfish_yolov9c-seg_AdamW"
+    },
+    "tune22": {
+        "name": "Deepfish_yolov9c-seg_SGD"
+    },
+    "tune23": {
+        "name": "Deepfish_LO_yolov9c-seg_AdamW"
+    },
+    "tune24": {
+        "name": "Deepfish_LO_yolov9c-seg_SGD"
+    },
+    "tune25": {
+        "name": "Deepfish_yolov9e-seg_AdamW"
+    },
+    "tune26": {
+        "name": "Deepfish_yolov9e-seg_SGD"
+    },
+    "tune27": {
+        "name": "Deepfish_LO_yolov9e-seg_AdamW"
+    },
+    "tune28": {
+        "name": "Deepfish_LO_yolov9e-seg_SGD"
+    }
+}
