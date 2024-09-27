@@ -8,6 +8,35 @@ from ray import tune
 # Turn DVC y wandb false para que no molesten en el entrenamiento
 settings.update({'dvc': False, 'wandb': False})
 
+# Diccionario de acotamientos
+ACOTAMIENTOS = {
+    'lr0': (0.0005, 0.01),
+    'lrf': (0.01, 0.5),
+    'momentum': (0.6, 0.98),
+    'weight_decay': (0.0, 0.001),
+    'warmup_epochs': (0.0, 5.0),
+    'warmup_momentum': (0.0, 0.95),
+}
+
+# Definición del espacio de búsqueda para el primer entrenamiento con Ray Tune
+SEARCH_SPACE_DICT = {
+    "AdamW": {
+        'lr0': tune.uniform(0.0005, 0.002),
+        'lrf': tune.uniform(0.01, 0.5),  # final OneCycleLR learning rate (lr0 * lrf)
+        'momentum': tune.uniform(0.6, 0.98),  # SGD momentum/Adam beta1
+        'weight_decay': tune.uniform(0.0, 0.001),  # optimizer weight decay
+        'warmup_epochs': tune.uniform(0.0, 5.0),  # warmup epochs
+        'warmup_momentum': tune.uniform(0.0, 0.95),  # warmup initial momentum
+    },
+    "SGD": {
+        'lr0': tune.uniform(0.001, 0.01),
+        'lrf': tune.uniform(0.01, 0.5),  # final OneCycleLR learning rate (lr0 * lrf)
+        'momentum': tune.uniform(0.6, 0.98),  # SGD momentum/Adam beta1
+        'weight_decay': tune.uniform(0.0, 0.001),  # optimizer weight decay
+        'warmup_epochs': tune.uniform(0.0, 5.0),  # warmup epochs
+        'warmup_momentum': tune.uniform(0.0, 0.95),  # warmup initial momentum
+    }
+}
 
 def train_ray_tune(iterations: int, epochs: int) -> None:
     """
@@ -37,26 +66,6 @@ def train_ray_tune(iterations: int, epochs: int) -> None:
 
     datasets_yaml_dir = os.path.abspath("datasets_yaml")
 
-    # Definición del espacio de búsqueda para Ray Tune
-    search_space_raytune = {
-        "AdamW": {
-            'lr0': tune.uniform(0.0005, 0.002),
-            'lrf': tune.uniform(0.01, 0.5),  # final OneCycleLR learning rate (lr0 * lrf)
-            'momentum': tune.uniform(0.6, 0.98),  # SGD momentum/Adam beta1
-            'weight_decay': tune.uniform(0.0, 0.001),  # optimizer weight decay
-            'warmup_epochs': tune.uniform(0.0, 5.0),  # warmup epochs
-            'warmup_momentum': tune.uniform(0.0, 0.95),  # warmup initial momentum
-        },
-        "SGD": {
-            'lr0': tune.uniform(0.001, 0.01),
-            'lrf': tune.uniform(0.01, 0.5),  # final OneCycleLR learning rate (lr0 * lrf)
-            'momentum': tune.uniform(0.6, 0.98),  # SGD momentum/Adam beta1
-            'weight_decay': tune.uniform(0.0, 0.001),  # optimizer weight decay
-            'warmup_epochs': tune.uniform(0.0, 5.0),  # warmup epochs
-            'warmup_momentum': tune.uniform(0.0, 0.95),  # warmup initial momentum
-        }
-    }
-
     for model_name in ALL_MODELS:
         for dataset_yaml in os.listdir(datasets_yaml_dir):
             # Ignorar archivos YAML no relevantes
@@ -80,13 +89,13 @@ def train_ray_tune(iterations: int, epochs: int) -> None:
 
                 # Ajustar hiperparámetros con Ray Tune
                 result_grid = model.tune(data=data_yaml, iterations=iterations, epochs=epochs, optimizer=optimizer,
-                                         space=search_space_raytune[optimizer], gpu_per_trial=1, use_ray=True, **train_params)
+                                         space=SEARCH_SPACE_DICT[optimizer], gpu_per_trial=1, use_ray=True, **train_params)
 
                 del model
                 del result_grid
 
 
-def train_tune(search_spaces_dict: dict[str, dict], state_json_path: str, iterations: int, epochs: int) -> None:
+def train_tune(search_spaces_dict: dict[str, dict], state_json_path: str, iterations: int, epochs: int, raytune=False) -> None:
     """
     Realiza el entrenamiento de modelos utilizando los mejores hiperparámetros obtenidos en `search_spaces_dict`.
 
@@ -141,7 +150,7 @@ def train_tune(search_spaces_dict: dict[str, dict], state_json_path: str, iterat
 
             # Ajustar hiperparámetros
             result_grid = model.tune(data=data_yaml, iterations=iterations, epochs=epochs, optimizer=optimizer,
-                                     space=search_space, use_ray=False, **train_params)
+                                     space=search_space, use_ray=raytune, **train_params)
 
             del model
             del result_grid
@@ -151,9 +160,9 @@ def train_tune(search_spaces_dict: dict[str, dict], state_json_path: str, iterat
             guardar_estado(state_json_path, estados)
 
 
-def leer_resultados_raytune(ruta_json: str) -> dict:
+def leer_resultados_raytune_para_tune(ruta_json: str) -> dict:
     """
-    Lee un archivo JSON que contiene las configuraciones de los dos mejores experimentos con Ray-Tune
+    Lee un archivo JSON que contiene las configuraciones de los dos mejores experimentos con Raytune
     y crea un nuevo diccionario con los rangos de hiper-parámetros especificados para cada tune, para
     el entrenamiento con Tune, ajustados con una holgura del 10% y acotados según los rangos proporcionados.
 
@@ -172,47 +181,6 @@ def leer_resultados_raytune(ruta_json: str) -> dict:
     
     nuevo_diccionario = {}
 
-    # Diccionario de acotamientos
-    acotamientos = {
-        'lr0': (0.0005, 0.01),
-        'lrf': (0.01, 0.5),
-        'momentum': (0.6, 0.98),
-        'weight_decay': (0.0, 0.001),
-        'warmup_epochs': (0.0, 5.0),
-        'warmup_momentum': (0.0, 0.95),
-    }
-
-    def calcular_holgura(valor1, valor2, min_val, max_val):
-        """
-        Calcula el rango con una holgura del 10% basada en el mínimo y máximo de dos valores,
-        acotando el resultado dentro de los límites proporcionados.
-
-        Parámetros:
-        -----------
-        valor1 : float
-            Primer valor a comparar.
-        valor2 : float
-            Segundo valor a comparar.
-        min_val : float
-            Valor mínimo permitido para el rango.
-        max_val : float
-            Valor máximo permitido para el rango.
-        
-        Retorna:
-        --------
-        tuple
-            Rango ajustado con un 10% de holgura, acotado entre min_val y max_val.
-        """
-        minimo = min(valor1, valor2)
-        maximo = max(valor1, valor2)
-        rango_ampliado_min = minimo - 0.10 * abs(minimo)
-        rango_ampliado_max = maximo + 0.10 * abs(maximo)
-
-        rango_ampliado_min = max(rango_ampliado_min, min_val)
-        rango_ampliado_max = min(rango_ampliado_max, max_val)
-
-        return rango_ampliado_min, rango_ampliado_max
-
     for tune_number, contenido in datos.items():
         nombre_tune = contenido.get('name', tune_number)
         config1 = contenido.get('config1', {})
@@ -221,12 +189,81 @@ def leer_resultados_raytune(ruta_json: str) -> dict:
         # Crear un diccionario para los rangos de parámetros con holgura
         rango_config = {
             parametro: calcular_holgura(config1.get(parametro, 0), config2.get(parametro, 0), min_val, max_val)
-            for parametro, (min_val, max_val) in acotamientos.items()
+            for parametro, (min_val, max_val) in ACOTAMIENTOS.items()
         }
 
         nuevo_diccionario[tune_number] = {'name': nombre_tune, 'config': rango_config}
 
     return nuevo_diccionario
+
+
+def leer_resultados_raytune_para_raytune(ruta_json: str) -> dict:
+    """
+    Lee un archivo JSON que contiene las configuraciones de los dos mejores experimentos con Raytune
+    y crea un nuevo diccionario con los rangos de hiper-parámetros especificados para cada tune, para
+    el segundo entrenamiento con Raytune, ajustados con una holgura del 10% y acotados según los rangos proporcionados.
+
+    Parámetros:
+    -----------
+    ruta_json : str
+        Ruta al archivo JSON que contiene la información de los experimentos.
+    
+    Retorna:
+    --------
+    dict
+        Diccionario con los rangos de parámetros para cada tune.
+    """
+    with open(ruta_json, 'r') as archivo:
+        datos = json.load(archivo)
+    
+    nuevo_diccionario = {}
+
+    for tune_number, contenido in datos.items():
+        nombre_tune = contenido.get('name', tune_number)
+        config1 = contenido.get('config1', {})
+        config2 = contenido.get('config2', {})
+
+        # Crear un diccionario para los rangos de parámetros con holgura
+        rango_config = {
+            parametro: tune.uniform(*calcular_holgura(config1.get(parametro, 0), config2.get(parametro, 0), min_val, max_val))
+            for parametro, (min_val, max_val) in ACOTAMIENTOS.items()
+        }
+
+        nuevo_diccionario[tune_number] = {'name': nombre_tune, 'config': rango_config}
+
+    return nuevo_diccionario
+
+
+def calcular_holgura(valor1, valor2, min_val, max_val):
+    """
+    Calcula el rango con una holgura del 10% basada en el mínimo y máximo de dos valores,
+    acotando el resultado dentro de los límites proporcionados.
+
+    Parámetros:
+    -----------
+    valor1 : float
+        Primer valor a comparar.
+    valor2 : float
+        Segundo valor a comparar.
+    min_val : float
+        Valor mínimo permitido para el rango.
+    max_val : float
+        Valor máximo permitido para el rango.
+    
+    Retorna:
+    --------
+    tuple
+        Rango ajustado con un 10% de holgura, acotado entre min_val y max_val.
+    """
+    minimo = min(valor1, valor2)
+    maximo = max(valor1, valor2)
+    rango_ampliado_min = minimo - 0.10 * abs(minimo)
+    rango_ampliado_max = maximo + 0.10 * abs(maximo)
+
+    rango_ampliado_min = max(rango_ampliado_min, min_val)
+    rango_ampliado_max = min(rango_ampliado_max, max_val)
+
+    return rango_ampliado_min, rango_ampliado_max
 
 
 def inicializar_estados(diccionario: dict, ruta_salida: str) -> None:
@@ -264,11 +301,13 @@ if __name__ == "__main__":
     
     #? Cargar mejores hiperparámetros de los entrenamientos con Raytune.
     raytune_results = "resultados_raytune_deepfish_1.json"
-    search_spaces_dict = leer_resultados_raytune(raytune_results)
+    search_spaces_dict_tune = leer_resultados_raytune_para_tune(raytune_results)
+    search_spaces_dict_raytune = leer_resultados_raytune_para_raytune(raytune_results)
     
     #? Inicializar el archivo JSON de estado de entrenamiento con Tune
     tune_training_state = "tune_training_state_deepfish_1.json"
-    inicializar_estados(search_spaces_dict, tune_training_state)    # Util para parar entrenamiento y continuar luego
+    #inicializar_estados(search_spaces_dict, tune_training_state)    # Util para parar entrenamiento y continuar luego
     
-    #? Entrenar con Tune
-    train_tune(search_spaces_dict, tune_training_state, 10, 40)
+    #? Segunda busqueda de hiperparámetros (Con o sin raytune)
+    # train_tune(search_spaces_dict_tune, tune_training_state, 10, 40)
+    train_tune(search_spaces_dict_raytune, tune_training_state, 10, 40, True)

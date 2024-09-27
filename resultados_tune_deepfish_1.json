@@ -2,37 +2,37 @@
     "tune": {
         "name": "Deepfish_yolov8n-seg_AdamW",
         "config": {
-            "lr0": 0.00111,
-            "lrf": 0.01373,
-            "momentum": 0.68766,
-            "weight_decay": 0.0006,
-            "warmup_epochs": 3.16802,
-            "warmup_momentum": 0.50071
+            "lr0": 0.00074,
+            "lrf": 0.01551,
+            "momentum": 0.67574,
+            "weight_decay": 0.00063,
+            "warmup_epochs": 2.50095,
+            "warmup_momentum": 0.35819
         },
         "score": {
-            "precision(M)": 0.98414,
-            "recall(M)": 0.96203,
-            "mAP50(M)": 0.9849,
-            "mAP50-95(M)": 0.78913,
-            "F1_score": 0.9729594066294313
+            "precision(M)": 0.98591,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.98156,
+            "mAP50-95(M)": 0.7926,
+            "F1_score": 0.96729504433467
         }
     },
     "tune2": {
         "name": "Deepfish_yolov8n-seg_SGD",
         "config": {
             "lr0": 0.00788,
-            "lrf": 0.10745,
-            "momentum": 0.73883,
-            "weight_decay": 0.00053,
-            "warmup_epochs": 3.34158,
-            "warmup_momentum": 0.40658
+            "lrf": 0.10681,
+            "momentum": 0.82268,
+            "weight_decay": 0.00049,
+            "warmup_epochs": 2.83908,
+            "warmup_momentum": 0.37644
         },
         "score": {
-            "precision(M)": 0.97451,
-            "recall(M)": 0.96796,
-            "mAP50(M)": 0.98919,
-            "mAP50-95(M)": 0.76689,
-            "F1_score": 0.9712239567149041
+            "precision(M)": 0.97342,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.96807,
+            "mAP50-95(M)": 0.78156,
+            "F1_score": 0.961244592909262
         }
     },
     "tune3": {
@@ -41,178 +41,178 @@
             "lr0": 0.00124,
             "lrf": 0.06294,
             "momentum": 0.69857,
-            "weight_decay": 0.00032,
+            "weight_decay": 0.00042,
             "warmup_epochs": 3.0,
             "warmup_momentum": 0.58768
         },
         "score": {
-            "precision(M)": 0.98928,
-            "recall(M)": 0.93671,
-            "mAP50(M)": 0.98163,
-            "mAP50-95(M)": 0.7878,
-            "F1_score": 0.9622775495199871
+            "precision(M)": 0.99805,
+            "recall(M)": 0.92405,
+            "mAP50(M)": 0.9794,
+            "mAP50-95(M)": 0.77847,
+            "F1_score": 0.9596255163623121
         }
     },
     "tune4": {
         "name": "Deepfish_LO_yolov8n-seg_SGD",
         "config": {
             "lr0": 0.004,
-            "lrf": 0.08901,
-            "momentum": 0.88201,
-            "weight_decay": 0.00049,
-            "warmup_epochs": 2.75104,
-            "warmup_momentum": 0.86541
+            "lrf": 0.09043,
+            "momentum": 0.91348,
+            "weight_decay": 0.0005,
+            "warmup_epochs": 2.97177,
+            "warmup_momentum": 0.80191
         },
         "score": {
-            "precision(M)": 0.99296,
-            "recall(M)": 0.89873,
-            "mAP50(M)": 0.97838,
-            "mAP50-95(M)": 0.75232,
-            "F1_score": 0.9434980792836034
+            "precision(M)": 0.99654,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.97378,
+            "mAP50-95(M)": 0.73955,
+            "F1_score": 0.9723832857634732
         }
     },
     "tune5": {
         "name": "Deepfish_yolov8s-seg_AdamW",
         "config": {
-            "lr0": 0.0008,
-            "lrf": 0.10104,
-            "momentum": 0.9482,
-            "weight_decay": 0.00046,
-            "warmup_epochs": 3.31591,
-            "warmup_momentum": 0.83182
+            "lr0": 0.00068,
+            "lrf": 0.11776,
+            "momentum": 0.81996,
+            "weight_decay": 0.00049,
+            "warmup_epochs": 3.00467,
+            "warmup_momentum": 0.74592
         },
         "score": {
-            "precision(M)": 0.95948,
-            "recall(M)": 0.96203,
-            "mAP50(M)": 0.97401,
-            "mAP50-95(M)": 0.79776,
-            "F1_score": 0.9607533079713351
+            "precision(M)": 1.0,
+            "recall(M)": 0.94692,
+            "mAP50(M)": 0.97763,
+            "mAP50-95(M)": 0.80873,
+            "F1_score": 0.9727364247118525
         }
     },
     "tune6": {
         "name": "Deepfish_yolov8s-seg_SGD",
         "config": {
             "lr0": 0.01,
-            "lrf": 0.16451,
-            "momentum": 0.937,
-            "weight_decay": 0.0005,
+            "lrf": 0.21013,
+            "momentum": 0.7708,
+            "weight_decay": 0.00052,
             "warmup_epochs": 2.77483,
-            "warmup_momentum": 0.62277
+            "warmup_momentum": 0.50711
         },
         "score": {
-            "precision(M)": 0.99585,
-            "recall(M)": 0.91139,
-            "mAP50(M)": 0.98242,
-            "mAP50-95(M)": 0.77703,
-            "F1_score": 0.9517498914662025
+            "precision(M)": 0.97465,
+            "recall(M)": 0.97323,
+            "mAP50(M)": 0.98116,
+            "mAP50-95(M)": 0.81948,
+            "F1_score": 0.9739394824116476
         }
     },
     "tune7": {
         "name": "Deepfish_LO_yolov8s-seg_AdamW",
         "config": {
             "lr0": 0.00071,
-            "lrf": 0.05603,
-            "momentum": 0.71853,
-            "weight_decay": 0.00037,
-            "warmup_epochs": 1.96627,
-            "warmup_momentum": 0.8
+            "lrf": 0.07046,
+            "momentum": 0.72723,
+            "weight_decay": 0.00033,
+            "warmup_epochs": 1.54519,
+            "warmup_momentum": 0.82151
         },
         "score": {
-            "precision(M)": 0.99816,
-            "recall(M)": 0.94937,
-            "mAP50(M)": 0.98757,
-            "mAP50-95(M)": 0.81574,
-            "F1_score": 0.9731538504670019
+            "precision(M)": 0.9723,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.99143,
+            "mAP50-95(M)": 0.82254,
+            "F1_score": 0.967137736580625
         }
     },
     "tune8": {
         "name": "Deepfish_LO_yolov8s-seg_SGD",
         "config": {
-            "lr0": 0.00872,
+            "lr0": 0.00847,
             "lrf": 0.04097,
-            "momentum": 0.73628,
-            "weight_decay": 0.00049,
-            "warmup_epochs": 3.05048,
+            "momentum": 0.70334,
+            "weight_decay": 0.00059,
+            "warmup_epochs": 2.77089,
             "warmup_momentum": 0.74494
         },
         "score": {
-            "precision(M)": 0.99781,
-            "recall(M)": 0.93671,
-            "mAP50(M)": 0.98655,
-            "mAP50-95(M)": 0.80655,
-            "F1_score": 0.9662951068999028
+            "precision(M)": 0.99535,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.98841,
+            "mAP50-95(M)": 0.80378,
+            "F1_score": 0.9784064009032482
         }
     },
     "tune9": {
         "name": "Deepfish_yolov8m-seg_AdamW",
         "config": {
-            "lr0": 0.00065,
+            "lr0": 0.00077,
             "lrf": 0.3242,
-            "momentum": 0.6,
+            "momentum": 0.94581,
             "weight_decay": 0.00026,
-            "warmup_epochs": 0.81546,
-            "warmup_momentum": 0.66944
+            "warmup_epochs": 1.09452,
+            "warmup_momentum": 0.62489
         },
         "score": {
-            "precision(M)": 1.0,
-            "recall(M)": 0.96075,
-            "mAP50(M)": 0.9886,
-            "mAP50-95(M)": 0.80751,
-            "F1_score": 0.9799821496876195
+            "precision(M)": 0.97636,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.97753,
+            "mAP50-95(M)": 0.78591,
+            "F1_score": 0.9691420310670195
         }
     },
     "tune10": {
         "name": "Deepfish_yolov8m-seg_SGD",
         "config": {
-            "lr0": 0.00739,
-            "lrf": 0.01297,
-            "momentum": 0.80096,
+            "lr0": 0.00696,
+            "lrf": 0.01362,
+            "momentum": 0.84844,
             "weight_decay": 0.00023,
             "warmup_epochs": 2.86407,
-            "warmup_momentum": 0.34838
+            "warmup_momentum": 0.32696
         },
         "score": {
-            "precision(M)": 0.96216,
-            "recall(M)": 0.96555,
-            "mAP50(M)": 0.989,
-            "mAP50-95(M)": 0.84035,
-            "F1_score": 0.9638520192352584
+            "precision(M)": 0.99938,
+            "recall(M)": 0.93671,
+            "mAP50(M)": 0.97704,
+            "mAP50-95(M)": 0.83111,
+            "F1_score": 0.9670307060105677
         }
     },
     "tune11": {
         "name": "Deepfish_LO_yolov8m-seg_AdamW",
         "config": {
-            "lr0": 0.0007,
-            "lrf": 0.01983,
-            "momentum": 0.75418,
-            "weight_decay": 0.00047,
-            "warmup_epochs": 2.78134,
-            "warmup_momentum": 0.77906
+            "lr0": 0.00064,
+            "lrf": 0.01942,
+            "momentum": 0.937,
+            "weight_decay": 0.00048,
+            "warmup_epochs": 2.96775,
+            "warmup_momentum": 0.8
         },
         "score": {
-            "precision(M)": 0.97424,
-            "recall(M)": 0.95754,
-            "mAP50(M)": 0.99036,
-            "mAP50-95(M)": 0.82025,
-            "F1_score": 0.9658178152791725
+            "precision(M)": 0.99837,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.98907,
+            "mAP50-95(M)": 0.81903,
+            "F1_score": 0.9732536446342941
         }
     },
     "tune12": {
         "name": "Deepfish_LO_yolov8m-seg_SGD",
         "config": {
             "lr0": 0.00989,
-            "lrf": 0.12255,
-            "momentum": 0.7487,
-            "weight_decay": 0.00074,
-            "warmup_epochs": 3.02875,
+            "lrf": 0.13184,
+            "momentum": 0.75365,
+            "weight_decay": 0.00073,
+            "warmup_epochs": 3.15289,
             "warmup_momentum": 0.78347
         },
         "score": {
-            "precision(M)": 0.98634,
-            "recall(M)": 0.97468,
-            "mAP50(M)": 0.99305,
-            "mAP50-95(M)": 0.82614,
-            "F1_score": 0.9804753354886742
+            "precision(M)": 0.99668,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.98179,
+            "mAP50-95(M)": 0.82357,
+            "F1_score": 0.9790485170341705
         }
     },
     "tune13": {
@@ -220,122 +220,287 @@
         "config": {
             "lr0": 0.00125,
             "lrf": 0.1672,
-            "momentum": 0.94383,
-            "weight_decay": 0.00053,
+            "momentum": 0.937,
+            "weight_decay": 0.0005,
             "warmup_epochs": 3.10231,
             "warmup_momentum": 0.69513
         },
         "score": {
-            "precision(M)": 1.0,
-            "recall(M)": 0.93394,
-            "mAP50(M)": 0.96921,
-            "mAP50-95(M)": 0.78105,
-            "F1_score": 0.9658417531050602
+            "precision(M)": 0.95795,
+            "recall(M)": 0.93671,
+            "mAP50(M)": 0.97025,
+            "mAP50-95(M)": 0.79626,
+            "F1_score": 0.9472109449716571
         }
     },
     "tune14": {
         "name": "Deepfish_yolov8l-seg_SGD",
         "config": {
-            "lr0": 0.00384,
-            "lrf": 0.06218,
-            "momentum": 0.84481,
-            "weight_decay": 0.00039,
-            "warmup_epochs": 2.23409,
-            "warmup_momentum": 0.88412
+            "lr0": 0.00462,
+            "lrf": 0.06331,
+            "momentum": 0.91296,
+            "weight_decay": 0.00043,
+            "warmup_epochs": 3.02925,
+            "warmup_momentum": 0.83066
         },
         "score": {
-            "precision(M)": 0.99779,
-            "recall(M)": 0.94937,
-            "mAP50(M)": 0.99168,
-            "mAP50-95(M)": 0.83863,
-            "F1_score": 0.9729779702746564
+            "precision(M)": 0.99875,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.98082,
+            "mAP50-95(M)": 0.83688,
+            "F1_score": 0.9800461678515693
         }
     },
     "tune15": {
         "name": "Deepfish_LO_yolov8l-seg_AdamW",
         "config": {
-            "lr0": 0.00076,
-            "lrf": 0.06576,
-            "momentum": 0.78261,
-            "weight_decay": 0.0004,
-            "warmup_epochs": 2.99103,
-            "warmup_momentum": 0.85847
+            "lr0": 0.00077,
+            "lrf": 0.06699,
+            "momentum": 0.93762,
+            "weight_decay": 0.00048,
+            "warmup_epochs": 2.89124,
+            "warmup_momentum": 0.80362
         },
         "score": {
-            "precision(M)": 0.98503,
+            "precision(M)": 0.97284,
             "recall(M)": 0.94937,
-            "mAP50(M)": 0.98388,
-            "mAP50-95(M)": 0.82492,
-            "F1_score": 0.966871310070306
+            "mAP50(M)": 0.98381,
+            "mAP50-95(M)": 0.81254,
+            "F1_score": 0.9609617167739216
         }
     },
     "tune16": {
         "name": "Deepfish_LO_yolov8l-seg_SGD",
         "config": {
-            "lr0": 0.00865,
+            "lr0": 0.00841,
             "lrf": 0.06289,
-            "momentum": 0.72422,
-            "weight_decay": 0.00056,
+            "momentum": 0.87533,
+            "weight_decay": 0.00062,
             "warmup_epochs": 1.64428,
-            "warmup_momentum": 0.95
+            "warmup_momentum": 0.76515
         },
         "score": {
-            "precision(M)": 0.98715,
-            "recall(M)": 0.97269,
-            "mAP50(M)": 0.99376,
-            "mAP50-95(M)": 0.84212,
-            "F1_score": 0.9798666559515063
+            "precision(M)": 1.0,
+            "recall(M)": 0.97175,
+            "mAP50(M)": 0.984,
+            "mAP50-95(M)": 0.82562,
+            "F1_score": 0.9856726258399898
         }
     },
     "tune17": {
         "name": "Deepfish_yolov8x-seg_AdamW",
         "config": {
-            "lr0": 0.00075,
+            "lr0": 0.00072,
             "lrf": 0.17548,
-            "momentum": 0.95012,
+            "momentum": 0.89954,
             "weight_decay": 0.00031,
-            "warmup_epochs": 3.0,
-            "warmup_momentum": 0.71296
+            "warmup_epochs": 2.73032,
+            "warmup_momentum": 0.713
         },
         "score": {
-            "precision(M)": 0.96111,
+            "precision(M)": 0.97351,
             "recall(M)": 0.94937,
-            "mAP50(M)": 0.97449,
-            "mAP50-95(M)": 0.79592,
-            "F1_score": 0.9552039285415183
+            "mAP50(M)": 0.97667,
+            "mAP50-95(M)": 0.81686,
+            "F1_score": 0.961288472187552
         }
     },
     "tune18": {
-        "name": "Deepfish_yolov8x-seg_SGD"
+        "name": "Deepfish_yolov8x-seg_SGD",
+        "config": {
+            "lr0": 0.00267,
+            "lrf": 0.27679,
+            "momentum": 0.88065,
+            "weight_decay": 0.00055,
+            "warmup_epochs": 2.19631,
+            "warmup_momentum": 0.25908
+        },
+        "score": {
+            "precision(M)": 0.98713,
+            "recall(M)": 0.97073,
+            "mAP50(M)": 0.99203,
+            "mAP50-95(M)": 0.84222,
+            "F1_score": 0.97886131275985
+        }
     },
     "tune19": {
-        "name": "Deepfish_LO_yolov8x-seg_AdamW"
+        "name": "Deepfish_LO_yolov8x-seg_AdamW",
+        "config": {
+            "lr0": 0.00114,
+            "lrf": 0.0266,
+            "momentum": 0.87988,
+            "weight_decay": 0.00053,
+            "warmup_epochs": 3.22438,
+            "warmup_momentum": 0.7998
+        },
+        "score": {
+            "precision(M)": 0.95828,
+            "recall(M)": 0.92405,
+            "mAP50(M)": 0.97808,
+            "mAP50-95(M)": 0.80874,
+            "F1_score": 0.9408537652802644
+        }
     },
     "tune20": {
-        "name": "Deepfish_LO_yolov8x-seg_SGD"
+        "name": "Deepfish_LO_yolov8x-seg_SGD",
+        "config": {
+            "lr0": 0.00361,
+            "lrf": 0.01,
+            "momentum": 0.937,
+            "weight_decay": 0.00035,
+            "warmup_epochs": 1.03033,
+            "warmup_momentum": 0.84196
+        },
+        "score": {
+            "precision(M)": 0.99857,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.99214,
+            "mAP50-95(M)": 0.84432,
+            "F1_score": 0.9733486666940461
+        }
     },
     "tune21": {
-        "name": "Deepfish_yolov9c-seg_AdamW"
+        "name": "Deepfish_yolov9c-seg_AdamW",
+        "config": {
+            "lr0": 0.00089,
+            "lrf": 0.15733,
+            "momentum": 0.8408,
+            "weight_decay": 9e-05,
+            "warmup_epochs": 0.97924,
+            "warmup_momentum": 0.5687
+        },
+        "score": {
+            "precision(M)": 0.98538,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.97198,
+            "mAP50-95(M)": 0.77371,
+            "F1_score": 0.9670398869104535
+        }
     },
     "tune22": {
-        "name": "Deepfish_yolov9c-seg_SGD"
+        "name": "Deepfish_yolov9c-seg_SGD",
+        "config": {
+            "lr0": 0.00235,
+            "lrf": 0.03085,
+            "momentum": 0.8831,
+            "weight_decay": 0.0003,
+            "warmup_epochs": 2.73229,
+            "warmup_momentum": 0.58253
+        },
+        "score": {
+            "precision(M)": 0.9875,
+            "recall(M)": 0.99964,
+            "mAP50(M)": 0.99475,
+            "mAP50-95(M)": 0.83664,
+            "F1_score": 0.9935329166540857
+        }
     },
     "tune23": {
-        "name": "Deepfish_LO_yolov9c-seg_AdamW"
+        "name": "Deepfish_LO_yolov9c-seg_AdamW",
+        "config": {
+            "lr0": 0.00085,
+            "lrf": 0.05695,
+            "momentum": 0.85162,
+            "weight_decay": 0.00043,
+            "warmup_epochs": 3.63229,
+            "warmup_momentum": 0.95
+        },
+        "score": {
+            "precision(M)": 0.98715,
+            "recall(M)": 0.97267,
+            "mAP50(M)": 0.99119,
+            "mAP50-95(M)": 0.79877,
+            "F1_score": 0.9798565077405067
+        }
     },
     "tune24": {
-        "name": "Deepfish_LO_yolov9c-seg_SGD"
+        "name": "Deepfish_LO_yolov9c-seg_SGD",
+        "config": {
+            "lr0": 0.00322,
+            "lrf": 0.04965,
+            "momentum": 0.81529,
+            "weight_decay": 0.00013,
+            "warmup_epochs": 3.11185,
+            "warmup_momentum": 0.39378
+        },
+        "score": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98385,
+            "mAP50(M)": 0.99419,
+            "mAP50-95(M)": 0.83089,
+            "F1_score": 0.9918592635531921
+        }
     },
     "tune25": {
-        "name": "Deepfish_yolov9e-seg_AdamW"
+        "name": "Deepfish_yolov9e-seg_AdamW",
+        "config": {
+            "lr0": 0.00057,
+            "lrf": 0.30373,
+            "momentum": 0.80354,
+            "weight_decay": 0.00041,
+            "warmup_epochs": 1.96889,
+            "warmup_momentum": 0.38364
+        },
+        "score": {
+            "precision(M)": 0.98516,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.98003,
+            "mAP50-95(M)": 0.80303,
+            "F1_score": 0.9669339314458809
+        }
     },
     "tune26": {
-        "name": "Deepfish_yolov9e-seg_SGD"
+        "name": "Deepfish_yolov9e-seg_SGD",
+        "config": {
+            "lr0": 0.00519,
+            "lrf": 0.09558,
+            "momentum": 0.83174,
+            "weight_decay": 0.0001,
+            "warmup_epochs": 2.64074,
+            "warmup_momentum": 0.63014
+        },
+        "score": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98575,
+            "mAP50(M)": 0.99231,
+            "mAP50-95(M)": 0.83825,
+            "F1_score": 0.9928238700742793
+        }
     },
     "tune27": {
-        "name": "Deepfish_LO_yolov9e-seg_AdamW"
+        "name": "Deepfish_LO_yolov9e-seg_AdamW",
+        "config": {
+            "lr0": 0.00167,
+            "lrf": 0.03796,
+            "momentum": 0.84061,
+            "weight_decay": 0.00042,
+            "warmup_epochs": 2.80797,
+            "warmup_momentum": 0.595
+        },
+        "score": {
+            "precision(M)": 0.98301,
+            "recall(M)": 0.93671,
+            "mAP50(M)": 0.98614,
+            "mAP50-95(M)": 0.79506,
+            "F1_score": 0.959301665972121
+        }
     },
     "tune28": {
-        "name": "Deepfish_LO_yolov9e-seg_SGD"
+        "name": "Deepfish_LO_yolov9e-seg_SGD",
+        "config": {
+            "lr0": 0.00995,
+            "lrf": 0.01583,
+            "momentum": 0.78561,
+            "weight_decay": 0.0005,
+            "warmup_epochs": 3.01684,
+            "warmup_momentum": 0.51954
+        },
+        "score": {
+            "precision(M)": 0.98699,
+            "recall(M)": 0.96048,
+            "mAP50(M)": 0.99106,
+            "mAP50-95(M)": 0.81995,
+            "F1_score": 0.973554565872645
+        }
     }
 }
