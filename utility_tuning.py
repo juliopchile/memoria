@@ -150,7 +150,7 @@ def train_tune(search_spaces_dict: dict[str, dict], state_json_path: str, iterat
 
             # Ajustar hiperparámetros
             result_grid = model.tune(data=data_yaml, iterations=iterations, epochs=epochs, optimizer=optimizer,
-                                     space=search_space, use_ray=raytune, **train_params)
+                                     space=search_space, gpu_per_trial=1, use_ray=raytune, **train_params)
 
             del model
             del result_grid
@@ -297,7 +297,7 @@ def guardar_estado(state_json_path: str, data: dict) -> None:
 if __name__ == "__main__":
     #? Entrenar utilizando Raytune
     # train_ray_tune(iterations=20, epochs=40)
-    # Guardar resultados de Raytune con el notebook check_raytune_results.ipynb
+    # Guardar resultados de Raytune con el notebook check_raytune_results_1.ipynb
     
     #? Cargar mejores hiperparámetros de los entrenamientos con Raytune.
     raytune_results = "resultados_raytune_deepfish_1.json"
@@ -306,7 +306,7 @@ if __name__ == "__main__":
     
     #? Inicializar el archivo JSON de estado de entrenamiento con Tune
     tune_training_state = "tune_training_state_deepfish_1.json"
-    #inicializar_estados(search_spaces_dict, tune_training_state)    # Util para parar entrenamiento y continuar luego
+    inicializar_estados(search_spaces_dict_raytune, tune_training_state)    # Util para parar entrenamiento y continuar luego
     
     #? Segunda busqueda de hiperparámetros (Con o sin raytune)
     # train_tune(search_spaces_dict_tune, tune_training_state, 10, 40)
