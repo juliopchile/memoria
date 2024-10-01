@@ -141,9 +141,9 @@ def train_tune(search_spaces_dict: dict[str, dict], state_json_path: str, iterat
             
             # Congelar pesos en caso de ser yolov9e-seg
             if model_name in ['yolov9e-seg']:
-                train_params = {"single_cls": False, "cos_lr": True, "freeze": 30}
+                train_params = {"single_cls": True, "cos_lr": False, "freeze": 30}
             else:
-                train_params = {"single_cls": False, "cos_lr": True}
+                train_params = {"single_cls": True, "cos_lr": False}
 
             # Cargar modelo
             model = YOLO(get_backbone_path(model_name), task="segment")
@@ -300,12 +300,12 @@ if __name__ == "__main__":
     # Guardar resultados de Raytune con el notebook check_raytune_results_1.ipynb
     
     #? Cargar mejores hiperparámetros de los entrenamientos con Raytune.
-    raytune_results = "resultados_raytune_deepfish_2.json"
+    raytune_results = "tuning/resultados_raytune_deepfish_3.json"
     search_spaces_dict_tune = leer_resultados_raytune_para_tune(raytune_results)
     search_spaces_dict_raytune = leer_resultados_raytune_para_raytune(raytune_results)
     
     #? Inicializar el archivo JSON de estado de entrenamiento con Tune
-    tune_training_state = "tune_training_state_deepfish_2.json"
+    tune_training_state = "tuning/tune_training_state_deepfish_3.json"
     #inicializar_estados(search_spaces_dict_raytune, tune_training_state)    # Util para parar entrenamiento y continuar luego
     
     #? Segunda busqueda de hiperparámetros (Con o sin raytune)

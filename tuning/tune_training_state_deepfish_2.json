@@ -77,38 +77,38 @@
     },
     "tune20": {
         "name": "Deepfish_LO_yolov8x-seg_SGD",
-        "state": 0
+        "state": 1
     },
     "tune21": {
         "name": "Deepfish_yolov9c-seg_AdamW",
-        "state": 0
+        "state": 1
     },
     "tune22": {
         "name": "Deepfish_yolov9c-seg_SGD",
-        "state": 0
+        "state": 1
     },
     "tune23": {
         "name": "Deepfish_LO_yolov9c-seg_AdamW",
-        "state": 0
+        "state": 1
     },
     "tune24": {
         "name": "Deepfish_LO_yolov9c-seg_SGD",
-        "state": 0
+        "state": 1
     },
     "tune25": {
         "name": "Deepfish_yolov9e-seg_AdamW",
-        "state": 0
+        "state": 1
     },
     "tune26": {
         "name": "Deepfish_yolov9e-seg_SGD",
-        "state": 0
+        "state": 1
     },
     "tune27": {
         "name": "Deepfish_LO_yolov9e-seg_AdamW",
-        "state": 0
+        "state": 1
     },
     "tune28": {
         "name": "Deepfish_LO_yolov9e-seg_SGD",
-        "state": 0
+        "state": 1
     }
 }
