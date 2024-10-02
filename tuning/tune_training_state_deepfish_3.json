@@ -1,0 +1,114 @@
+{
+    "tune": {
+        "name": "Deepfish_yolov8n-seg_AdamW",
+        "state": 1
+    },
+    "tune2": {
+        "name": "Deepfish_yolov8n-seg_SGD",
+        "state": 1
+    },
+    "tune3": {
+        "name": "Deepfish_LO_yolov8n-seg_AdamW",
+        "state": 1
+    },
+    "tune4": {
+        "name": "Deepfish_LO_yolov8n-seg_SGD",
+        "state": 1
+    },
+    "tune5": {
+        "name": "Deepfish_yolov8s-seg_AdamW",
+        "state": 1
+    },
+    "tune6": {
+        "name": "Deepfish_yolov8s-seg_SGD",
+        "state": 1
+    },
+    "tune7": {
+        "name": "Deepfish_LO_yolov8s-seg_AdamW",
+        "state": 1
+    },
+    "tune8": {
+        "name": "Deepfish_LO_yolov8s-seg_SGD",
+        "state": 1
+    },
+    "tune9": {
+        "name": "Deepfish_yolov8m-seg_AdamW",
+        "state": 1
+    },
+    "tune10": {
+        "name": "Deepfish_yolov8m-seg_SGD",
+        "state": 1
+    },
+    "tune11": {
+        "name": "Deepfish_LO_yolov8m-seg_AdamW",
+        "state": 1
+    },
+    "tune12": {
+        "name": "Deepfish_LO_yolov8m-seg_SGD",
+        "state": 1
+    },
+    "tune13": {
+        "name": "Deepfish_yolov8l-seg_AdamW",
+        "state": 1
+    },
+    "tune14": {
+        "name": "Deepfish_yolov8l-seg_SGD",
+        "state": 1
+    },
+    "tune15": {
+        "name": "Deepfish_LO_yolov8l-seg_AdamW",
+        "state": 1
+    },
+    "tune16": {
+        "name": "Deepfish_LO_yolov8l-seg_SGD",
+        "state": 1
+    },
+    "tune17": {
+        "name": "Deepfish_yolov8x-seg_AdamW",
+        "state": 1
+    },
+    "tune18": {
+        "name": "Deepfish_yolov8x-seg_SGD",
+        "state": 1
+    },
+    "tune19": {
+        "name": "Deepfish_LO_yolov8x-seg_AdamW",
+        "state": 1
+    },
+    "tune20": {
+        "name": "Deepfish_LO_yolov8x-seg_SGD",
+        "state": 1
+    },
+    "tune21": {
+        "name": "Deepfish_yolov9c-seg_AdamW",
+        "state": 1
+    },
+    "tune22": {
+        "name": "Deepfish_yolov9c-seg_SGD",
+        "state": 1
+    },
+    "tune23": {
+        "name": "Deepfish_LO_yolov9c-seg_AdamW",
+        "state": 1
+    },
+    "tune24": {
+        "name": "Deepfish_LO_yolov9c-seg_SGD",
+        "state": 1
+    },
+    "tune25": {
+        "name": "Deepfish_yolov9e-seg_AdamW",
+        "state": 1
+    },
+    "tune26": {
+        "name": "Deepfish_yolov9e-seg_SGD",
+        "state": 1
+    },
+    "tune27": {
+        "name": "Deepfish_LO_yolov9e-seg_AdamW",
+        "state": 1
+    },
+    "tune28": {
+        "name": "Deepfish_LO_yolov9e-seg_SGD",
+        "state": 1
+    }
+}
