@@ -306,7 +306,7 @@ if __name__ == "__main__":
     
     #? Inicializar el archivo JSON de estado de entrenamiento con Tune
     tune_training_state = os.path.join("tuning", "tune_training_state_deepfish_4.json")
-    inicializar_estados(search_spaces_dict_raytune, tune_training_state)    # Util para parar entrenamiento y continuar luego
+    # inicializar_estados(search_spaces_dict_raytune, tune_training_state)    # Util para parar entrenamiento y continuar luego
     
     #? Segunda busqueda de hiperparámetros (Con o sin raytune)
     # train_tune(search_spaces_dict_tune, tune_training_state, 10, 40)

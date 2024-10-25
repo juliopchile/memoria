@@ -1,6 +1,6 @@
 runs/
 __pycache__/
-datasets_yaml/
+datasets_coco/
+datasets_yolo/
 models/
-coco_converted/
 **.pt

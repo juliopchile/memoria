@@ -1,0 +1,7 @@
+names:
+- fish
+nc: 1
+path: /home/asdasd/tesis_yolov9/datasets_yolo/Deepfish
+test: images/test
+train: images/train
+val: images/valid
