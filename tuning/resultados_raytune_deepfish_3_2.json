@@ -1090,5 +1090,65 @@
             "warmup_momentum": 0.14644129750356955,
             "weight_decay": 0.0006606406872963795
         }
+    },
+    "tune29": {
+        "name": "Deepfish_yolo11n-seg_AdamW"
+    },
+    "tune30": {
+        "name": "Deepfish_yolo11n-seg_SGD"
+    },
+    "tune31": {
+        "name": "Deepfish_LO_yolo11n-seg_AdamW"
+    },
+    "tune32": {
+        "name": "Deepfish_LO_yolo11n-seg_SGD"
+    },
+    "tune33": {
+        "name": "Deepfish_yolo11s-seg_AdamW"
+    },
+    "tune34": {
+        "name": "Deepfish_yolo11s-seg_SGD"
+    },
+    "tune35": {
+        "name": "Deepfish_LO_yolo11s-seg_AdamW"
+    },
+    "tune36": {
+        "name": "Deepfish_LO_yolo11s-seg_SGD"
+    },
+    "tune37": {
+        "name": "Deepfish_yolo11m-seg_AdamW"
+    },
+    "tune38": {
+        "name": "Deepfish_yolo11m-seg_SGD"
+    },
+    "tune39": {
+        "name": "Deepfish_LO_yolo11m-seg_AdamW"
+    },
+    "tune40": {
+        "name": "Deepfish_LO_yolo11m-seg_SGD"
+    },
+    "tune41": {
+        "name": "Deepfish_yolo11l-seg_AdamW"
+    },
+    "tune42": {
+        "name": "Deepfish_yolo11l-seg_SGD"
+    },
+    "tune43": {
+        "name": "Deepfish_LO_yolo11l-seg_AdamW"
+    },
+    "tune44": {
+        "name": "Deepfish_LO_yolo11l-seg_SGD"
+    },
+    "tune45": {
+        "name": "Deepfish_yolo11x-seg_AdamW"
+    },
+    "tune46": {
+        "name": "Deepfish_yolo11x-seg_SGD"
+    },
+    "tune47": {
+        "name": "Deepfish_LO_yolo11x-seg_AdamW"
+    },
+    "tune48": {
+        "name": "Deepfish_LO_yolo11x-seg_SGD"
     }
 }

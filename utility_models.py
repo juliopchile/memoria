@@ -2,7 +2,8 @@ import os
 from ultralytics import YOLO
 
 
-ALL_MODELS = ['yolov8n-seg', 'yolov8s-seg', 'yolov8m-seg', 'yolov8l-seg', 'yolov8x-seg', 'yolov9c-seg', 'yolov9e-seg']
+ALL_MODELS = ['yolov8n-seg', 'yolov8s-seg', 'yolov8m-seg', 'yolov8l-seg', 'yolov8x-seg', 'yolov9c-seg', 'yolov9e-seg',
+              'yolo11n-seg', 'yolo11s-seg', 'yolo11m-seg', 'yolo11l-seg', 'yolo11x-seg']
 BACKBONES_DIR = os.path.join('models', 'backbone')
 
 
@@ -33,7 +34,9 @@ def download_models(models_to_download: list = None):
     if models_to_download is None:
         models_to_download = ALL_MODELS
     for model in models_to_download:
-        YOLO(get_backbone_path(model))
+        model_path = get_backbone_path(model)
+        model = YOLO(model_path)
+        del model
 
 
 def export_to_onnx(model_path: str, **extra_params):
