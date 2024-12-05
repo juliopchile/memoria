@@ -85,10 +85,7 @@ def train_ray_tune(iterations: int, epochs: int) -> None:
                 default_params = {"single_cls": False, "cos_lr": False}
 
                 # Parámetros adicionales de entrenamiento específicos para yolov9e-seg y yolo11x-seg
-                model_specific_params = {
-                    'yolov9e-seg': {"freeze": 30},
-                    'yolo11x-seg': {"freeze": 11},#
-                }
+                model_specific_params = {'yolov9e-seg': {"freeze": 30}, 'yolo11x-seg': {"freeze": 11}}
                 train_params = {**default_params, **model_specific_params.get(model_name, {})}
 
                 # Ajustar hiperparámetros con Ray Tune
@@ -143,11 +140,12 @@ def train_tune(search_spaces_dict: dict[str, dict], state_json_path: str, iterat
             datasets_yaml_dir = os.path.abspath("datasets_yaml")
             data_yaml = os.path.join(datasets_yaml_dir, f"{dataset_name}.yaml")
             
-            # Congelar pesos en caso de ser yolov9e-seg
-            if model_name in ['yolov9e-seg']:
-                train_params = {"single_cls": True, "cos_lr": True, "freeze": 30}
-            else:
-                train_params = {"single_cls": True, "cos_lr": True}
+            # Parámetros por defecto a cambiar.
+            default_params = {"single_cls": False, "cos_lr": False}
+
+            # Parámetros adicionales de entrenamiento específicos para yolov9e-seg y yolo11x-seg
+            model_specific_params = {'yolov9e-seg': {"freeze": 30}, 'yolo11x-seg': {"freeze": 11}}
+            train_params = {**default_params, **model_specific_params.get(model_name, {})}
 
             # Cargar modelo
             model = YOLO(get_backbone_path(model_name), task="segment")
@@ -300,18 +298,18 @@ def guardar_estado(state_json_path: str, data: dict) -> None:
 
 if __name__ == "__main__":
     #? Entrenar utilizando Raytune
-    train_ray_tune(iterations=20, epochs=40)
+    # train_ray_tune(iterations=20, epochs=40)
     # Guardar resultados de Raytune con el notebook check_raytune_results_1.ipynb
     
     #? Cargar mejores hiperparámetros de los entrenamientos con Raytune.
-    #raytune_results = os.path.join("tuning", "resultados_raytune_deepfish_v11_1.json")
-    #search_spaces_dict_tune = leer_resultados_raytune_para_tune(raytune_results)
-    #search_spaces_dict_raytune = leer_resultados_raytune_para_raytune(raytune_results)
+    raytune_results = os.path.join("tuning", "resultados_raytune_deepfish_v11_1.json")
+    search_spaces_dict_tune = leer_resultados_raytune_para_tune(raytune_results)
+    search_spaces_dict_raytune = leer_resultados_raytune_para_raytune(raytune_results)
     
     #? Inicializar el archivo JSON de estado de entrenamiento con Tune
-    #tune_training_state = os.path.join("tuning", "tune_training_state_deepfish_v11.json")
-    #inicializar_estados(search_spaces_dict_raytune, tune_training_state)    # Util para parar entrenamiento y continuar luego
+    tune_training_state = os.path.join("tuning", "tune_training_state_deepfish_v11.json")
+    inicializar_estados(search_spaces_dict_raytune, tune_training_state)    # Util para parar entrenamiento y continuar luego
     
     #? Segunda busqueda de hiperparámetros (Con o sin raytune)
     # train_tune(search_spaces_dict_tune, tune_training_state, 10, 40)
-    #train_tune(search_spaces_dict_raytune, tune_training_state, 10, 40, True)
+    train_tune(search_spaces_dict_raytune, tune_training_state, 10, 40, True)
