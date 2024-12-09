@@ -1,2 +1,2 @@
-# tesis_yolov9
-Trabajo de tésis utilizando YOLOv9 para segmentación de instancias de salmones.
+# tesis
+Trabajo de tésis utilizando YOLO para segmentación de instancias de salmones.
