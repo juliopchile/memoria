@@ -38,6 +38,57 @@ SEARCH_SPACE_DICT = {
     }
 }
 
+# Lista de nombres de casos, para iterar sobre ellos y saber si saltarlos o no.
+NAMES = ["Deepfish_yolov8n-seg_AdamW",
+"Deepfish_yolov8n-seg_SGD",
+"Deepfish_LO_yolov8n-seg_AdamW",
+"Deepfish_LO_yolov8n-seg_SGD",
+"Deepfish_yolov8s-seg_AdamW",
+"Deepfish_yolov8s-seg_SGD",
+"Deepfish_LO_yolov8s-seg_AdamW",
+"Deepfish_LO_yolov8s-seg_SGD",
+"Deepfish_yolov8m-seg_AdamW",
+"Deepfish_yolov8m-seg_SGD",
+"Deepfish_LO_yolov8m-seg_AdamW",
+"Deepfish_LO_yolov8m-seg_SGD",
+"Deepfish_yolov8l-seg_AdamW",
+"Deepfish_yolov8l-seg_SGD",
+"Deepfish_LO_yolov8l-seg_AdamW",
+"Deepfish_LO_yolov8l-seg_SGD",
+"Deepfish_yolov8x-seg_AdamW",
+"Deepfish_yolov8x-seg_SGD",
+"Deepfish_LO_yolov8x-seg_AdamW",
+"Deepfish_LO_yolov8x-seg_SGD",
+"Deepfish_yolov9c-seg_AdamW",
+"Deepfish_yolov9c-seg_SGD",
+"Deepfish_LO_yolov9c-seg_AdamW",
+"Deepfish_LO_yolov9c-seg_SGD",
+"Deepfish_yolov9e-seg_AdamW",
+"Deepfish_yolov9e-seg_SGD",
+"Deepfish_LO_yolov9e-seg_AdamW",
+"Deepfish_LO_yolov9e-seg_SGD",
+"Deepfish_yolo11n-seg_AdamW",
+"Deepfish_yolo11n-seg_SGD",
+"Deepfish_LO_yolo11n-seg_AdamW",
+"Deepfish_LO_yolo11n-seg_SGD",
+"Deepfish_yolo11s-seg_AdamW",
+"Deepfish_yolo11s-seg_SGD",
+"Deepfish_LO_yolo11s-seg_AdamW",
+"Deepfish_LO_yolo11s-seg_SGD",
+"Deepfish_yolo11m-seg_AdamW",
+"Deepfish_yolo11m-seg_SGD",
+"Deepfish_LO_yolo11m-seg_AdamW",
+"Deepfish_LO_yolo11m-seg_SGD",
+"Deepfish_yolo11l-seg_AdamW",
+"Deepfish_yolo11l-seg_SGD",
+"Deepfish_LO_yolo11l-seg_AdamW",
+"Deepfish_LO_yolo11l-seg_SGD",
+"Deepfish_yolo11x-seg_AdamW",
+"Deepfish_yolo11x-seg_SGD",
+"Deepfish_LO_yolo11x-seg_AdamW",
+"Deepfish_LO_yolo11x-seg_SGD"]
+
+
 def train_ray_tune(iterations: int, epochs: int) -> None:
     """
     Realiza la búsqueda y ajuste de hiperparámetros usando Ray Tune para entrenar varios modelos YOLO 
@@ -80,6 +131,12 @@ def train_ray_tune(iterations: int, epochs: int) -> None:
 
                 # Definir nombre del experimento
                 name = os.path.splitext(dataset_yaml)[0] + "_" + model_name + "_" + optimizer
+                # Saltarselo si ya lo hice antes
+                if name in NAMES[0:32]:
+                    print(f"Skipping experiment {name}")
+                    continue
+                else: 
+                    print(f"Proceeding with experiment {name}")
 
                 # Parámetros por defecto a cambiar.
                 default_params = {"single_cls": False, "cos_lr": True}

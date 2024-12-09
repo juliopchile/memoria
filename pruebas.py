@@ -1,5 +1,55 @@
 from utility_models import ALL_MODELS
+NAMES = ["Deepfish_yolov8n-seg_AdamW",
+"Deepfish_yolov8n-seg_SGD",
+"Deepfish_LO_yolov8n-seg_AdamW",
+"Deepfish_LO_yolov8n-seg_SGD",
+"Deepfish_yolov8s-seg_AdamW",
+"Deepfish_yolov8s-seg_SGD",
+"Deepfish_LO_yolov8s-seg_AdamW",
+"Deepfish_LO_yolov8s-seg_SGD",
+"Deepfish_yolov8m-seg_AdamW",
+"Deepfish_yolov8m-seg_SGD",
+"Deepfish_LO_yolov8m-seg_AdamW",
+"Deepfish_LO_yolov8m-seg_SGD",
+"Deepfish_yolov8l-seg_AdamW",
+"Deepfish_yolov8l-seg_SGD",
+"Deepfish_LO_yolov8l-seg_AdamW",
+"Deepfish_LO_yolov8l-seg_SGD",
+"Deepfish_yolov8x-seg_AdamW",
+"Deepfish_yolov8x-seg_SGD",
+"Deepfish_LO_yolov8x-seg_AdamW",
+"Deepfish_LO_yolov8x-seg_SGD",
+"Deepfish_yolov9c-seg_AdamW",
+"Deepfish_yolov9c-seg_SGD",
+"Deepfish_LO_yolov9c-seg_AdamW",
+"Deepfish_LO_yolov9c-seg_SGD",
+"Deepfish_yolov9e-seg_AdamW",
+"Deepfish_yolov9e-seg_SGD",
+"Deepfish_LO_yolov9e-seg_AdamW",
+"Deepfish_LO_yolov9e-seg_SGD",
+"Deepfish_yolo11n-seg_AdamW",
+"Deepfish_yolo11n-seg_SGD",
+"Deepfish_LO_yolo11n-seg_AdamW",
+"Deepfish_LO_yolo11n-seg_SGD",
+"Deepfish_yolo11s-seg_AdamW",
+"Deepfish_yolo11s-seg_SGD",
+"Deepfish_LO_yolo11s-seg_AdamW",
+"Deepfish_LO_yolo11s-seg_SGD",
+"Deepfish_yolo11m-seg_AdamW",
+"Deepfish_yolo11m-seg_SGD",
+"Deepfish_LO_yolo11m-seg_AdamW",
+"Deepfish_LO_yolo11m-seg_SGD",
+"Deepfish_yolo11l-seg_AdamW",
+"Deepfish_yolo11l-seg_SGD",
+"Deepfish_LO_yolo11l-seg_AdamW",
+"Deepfish_LO_yolo11l-seg_SGD",
+"Deepfish_yolo11x-seg_AdamW",
+"Deepfish_yolo11x-seg_SGD",
+"Deepfish_LO_yolo11x-seg_AdamW",
+"Deepfish_LO_yolo11x-seg_SGD"]
 
-
-for model_name in ALL_MODELS[6::]:
-    print(model_name)
+#for model_name in ALL_MODELS[6::]:
+#    print(model_name)
+    
+for name in NAMES[0:32]:
+    print(name)
