@@ -5,19 +5,9 @@ import yaml
 from ultralytics.data.converter import convert_coco
 from roboflow import Roboflow
 
+from config import DATASETS_COCO, DATASETS_YOLO, YAML_DIRECTORY, DATASETS_ROBOFLOW_LINKS
 from supersecrets import API_KEY
 
-
-# Path donde guardar todos los datasets
-DATASETS_COCO = "datasets_coco"             # Path temporal donde guardar datasets descargados desde Roboflow
-DATASETS_YOLO = "datasets_yolo"             # Path donde guardar los datasets de segmentación ya procesados
-YAML_DIRECTORY = "datasets_yaml"            # Path donde se encuentran los archivos yaml de cada dataset
-
-# Diccionario usado para descargar datasets desde Roboflow
-DATASETS_ROBOFLOW_LINKS = {
-    "Deepfish": dict(workspace="memristor", project="deepfish-segmentation-ocdlj", version=3, name="Deepfish"),
-    "Deepfish_LO": dict(workspace="memristor", project="deepfish-segmentation-ocdlj", version=4, name="Deepfish_LO")
-}
 
 def download_roboflow_dataset(workspace, project_id, version_number, model_format, location):
     """
@@ -380,4 +370,3 @@ def setup_datasets():
 
 if __name__ == "__main__":
     setup_datasets()
-

@@ -1,4 +1,3 @@
-from utility_models import ALL_MODELS
 NAMES = ["Deepfish_yolov8n-seg_AdamW",
 "Deepfish_yolov8n-seg_SGD",
 "Deepfish_LO_yolov8n-seg_AdamW",
@@ -48,8 +47,5 @@ NAMES = ["Deepfish_yolov8n-seg_AdamW",
 "Deepfish_LO_yolo11x-seg_AdamW",
 "Deepfish_LO_yolo11x-seg_SGD"]
 
-#for model_name in ALL_MODELS[6::]:
-#    print(model_name)
-    
-for name in NAMES[0:32]:
+for name in NAMES[0:28]:
     print(name)

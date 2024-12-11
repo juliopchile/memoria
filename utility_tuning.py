@@ -1,7 +1,8 @@
 import json
 import os
 from ultralytics import YOLO, settings
-from utility_models import get_backbone_path, ALL_MODELS
+from utility_models import get_backbone_path
+from config import DATASETS_YAML_LIST, ALL_MODELS, TUNING_NAMES_LIST_DEEPFISH
 from ray import tune
 
 
@@ -38,56 +39,6 @@ SEARCH_SPACE_DICT = {
     }
 }
 
-# Lista de nombres de casos, para iterar sobre ellos y saber si saltarlos o no.
-NAMES = ["Deepfish_yolov8n-seg_AdamW",
-"Deepfish_yolov8n-seg_SGD",
-"Deepfish_LO_yolov8n-seg_AdamW",
-"Deepfish_LO_yolov8n-seg_SGD",
-"Deepfish_yolov8s-seg_AdamW",
-"Deepfish_yolov8s-seg_SGD",
-"Deepfish_LO_yolov8s-seg_AdamW",
-"Deepfish_LO_yolov8s-seg_SGD",
-"Deepfish_yolov8m-seg_AdamW",
-"Deepfish_yolov8m-seg_SGD",
-"Deepfish_LO_yolov8m-seg_AdamW",
-"Deepfish_LO_yolov8m-seg_SGD",
-"Deepfish_yolov8l-seg_AdamW",
-"Deepfish_yolov8l-seg_SGD",
-"Deepfish_LO_yolov8l-seg_AdamW",
-"Deepfish_LO_yolov8l-seg_SGD",
-"Deepfish_yolov8x-seg_AdamW",
-"Deepfish_yolov8x-seg_SGD",
-"Deepfish_LO_yolov8x-seg_AdamW",
-"Deepfish_LO_yolov8x-seg_SGD",
-"Deepfish_yolov9c-seg_AdamW",
-"Deepfish_yolov9c-seg_SGD",
-"Deepfish_LO_yolov9c-seg_AdamW",
-"Deepfish_LO_yolov9c-seg_SGD",
-"Deepfish_yolov9e-seg_AdamW",
-"Deepfish_yolov9e-seg_SGD",
-"Deepfish_LO_yolov9e-seg_AdamW",
-"Deepfish_LO_yolov9e-seg_SGD",
-"Deepfish_yolo11n-seg_AdamW",
-"Deepfish_yolo11n-seg_SGD",
-"Deepfish_LO_yolo11n-seg_AdamW",
-"Deepfish_LO_yolo11n-seg_SGD",
-"Deepfish_yolo11s-seg_AdamW",
-"Deepfish_yolo11s-seg_SGD",
-"Deepfish_LO_yolo11s-seg_AdamW",
-"Deepfish_LO_yolo11s-seg_SGD",
-"Deepfish_yolo11m-seg_AdamW",
-"Deepfish_yolo11m-seg_SGD",
-"Deepfish_LO_yolo11m-seg_AdamW",
-"Deepfish_LO_yolo11m-seg_SGD",
-"Deepfish_yolo11l-seg_AdamW",
-"Deepfish_yolo11l-seg_SGD",
-"Deepfish_LO_yolo11l-seg_AdamW",
-"Deepfish_LO_yolo11l-seg_SGD",
-"Deepfish_yolo11x-seg_AdamW",
-"Deepfish_yolo11x-seg_SGD",
-"Deepfish_LO_yolo11x-seg_AdamW",
-"Deepfish_LO_yolo11x-seg_SGD"]
-
 
 def train_ray_tune(iterations: int, epochs: int) -> None:
     """
@@ -106,23 +57,24 @@ def train_ray_tune(iterations: int, epochs: int) -> None:
     Esta función realiza los siguientes pasos para cada combinación de modelo y conjunto de datos:
         1. Define el espacio de búsqueda de hiperparámetros para los optimizadores AdamW y SGD.
         2. Carga cada modelo YOLO especificado en `ALL_MODELS`.
-        3. Itera sobre los archivos de configuración YAML en el directorio `datasets_yaml` para cargar los conjuntos de datos.
+        3. Itera sobre los archivos de configuración YAML en el directorio `datasets_yaml`, especificados en la lista `DATASETS_YAML_LIST`.
         4. Para cada combinación de optimizador y modelo, realiza el ajuste de hiperparámetros usando Ray Tune.
         5. Guarda los resultados de la búsqueda de hiperparámetros.
 
-    Solo se consideran los archivos YAML que no contienen las palabras "export", "Shiny" o "Salmones" en su nombre.
+    Solo se consideran los archivos YAML que no contengan alguna palabra especifica en su nombre, por ejemplo "export".
 
-    La función también asigna parámetros adicionales específicos para el modelo `yolov9e-seg`.
+    La función también asigna parámetros adicionales específicos para el modelo `yolov9e-seg` y `yolo11x-seg`.
     """
 
     datasets_yaml_dir = os.path.abspath("datasets_yaml")
 
-    for model_name in ALL_MODELS[8::]:
-        for dataset_yaml in os.listdir(datasets_yaml_dir):
-            # Ignorar archivos YAML no relevantes
-            if "export" in dataset_yaml or "Shiny" in dataset_yaml or "Salmones" in dataset_yaml:
+    for model_name in ALL_MODELS:
+        for dataset_yaml in DATASETS_YAML_LIST:
+            # Ignorar archivos YAML no relevantes para este caso
+            if "export" in dataset_yaml or "Salmons" in dataset_yaml:
                 continue
 
+            # Path completo del archivo Yaml
             data_yaml = os.path.join(datasets_yaml_dir, dataset_yaml)
 
             for optimizer in ["AdamW", "SGD"]:
@@ -131,8 +83,9 @@ def train_ray_tune(iterations: int, epochs: int) -> None:
 
                 # Definir nombre del experimento
                 name = os.path.splitext(dataset_yaml)[0] + "_" + model_name + "_" + optimizer
+
                 # Saltarselo si ya lo hice antes
-                if name in NAMES[0:32]:
+                if name in TUNING_NAMES_LIST_DEEPFISH[0:28]:
                     print(f"Skipping experiment {name}")
                     continue
                 else: 

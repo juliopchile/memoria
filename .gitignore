@@ -1,5 +1,6 @@
 runs/
 __pycache__/
+datasets/
 datasets_coco/
 datasets_yolo/
 models/

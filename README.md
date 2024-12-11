@@ -1,11 +1,11 @@
-# tesis
-Trabajo de tésis utilizando YOLO para segmentación de instancias de salmones.
+[![English](https://img.shields.io/badge/lang-English-blue)](README.md)
+[![Español](https://img.shields.io/badge/lang-Español-green)](README.es.md)
+[![Français](https://img.shields.io/badge/lang-Français-yellow)](README.fr.md)
+[![中文](https://img.shields.io/badge/lang-中文-red)](README.zh.md)
 
-
-
-# Setup
-## Linux (Recomendado)
-Si se tiene un Linux nuevo recién instalado, empezar con estos comandos para configurar correctamente el sistema operativo.
+# Configuration
+## Linux (recommended)
+To properly configure a newly installed Linux system, run the following commands:
 ```bash
 sudo apt update
 sudo apt upgrade -y
@@ -16,23 +16,25 @@ sudo apt install -y build-essential curl wget git vim
 sudo apt install -y software-properties-common
 sudo apt install -y zip unzip tar
 ```
-## Instalar miniconda (Recomendado)
-No es necesario utilizar la distribución de Python a travez de Anaconda, pero es recomendado ya que así fue diseñado este código. A continuación se muestra como instalar Miniconda en un sistema Linux.
+
+## Miniconda Installation (recommended)
+Although it is not mandatory to use the Python distribution through Anaconda, it is recommended to do so, since this code was designed like that. The following is how to install Miniconda on a Linux system:
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
-Además se recomienda crear un ambiente exclusivo para este proyecto.
+
+It is suggested to create a dedicated environment for this project:
 ```bash
-conda create -n tesis python=3.10
-conda activate tesis
+conda create -n thesis python=3.10
+conda activate thesis
 ```
 
-## Drivers de Nvidia
-Es necesario tener los drivers de nvidia con soporte de CUDA para realizar los entrenamientos e inferencias con GPU. Visita la [página oficial](https://www.nvidia.com) de Nvidia para obtener los drivers necesarios. Puedes revisar si lo tienes instalado escribiendo `nvidia-smi` dentro de tu terminal.
+## Nvidia drivers
+To perform GPU training and inference, you need to have Nvidia drivers with CUDA support. Visit the [official Nvidia website](https://www.nvidia.com) to obtain the appropriate drivers. Verify your installation by using ``nvidia-smi`` in the terminal.
 
 ## CUDA Toolkit
-Es necesario tener CUDA Toolkit instalado en tu sistema operativo para poder utilizar las. A continuación se muestra como instalarlo en un sistema Linux. Para más información o para instalar una versión más actualizada, visitar la [página](https://developer.nvidia.com/cuda-downloads?) de CUDA Toolkit de Nvidia.
+It is essential to have the CUDA Toolkit installed on your system to take advantage of GPU training. The installation process on Linux is detailed below, but for more details or updated versions, see the [Nvidia CUDA Toolkit page](https://developer.nvidia.com/cuda-downloads).
 ```bash
 wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
 sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
@@ -43,15 +45,21 @@ sudo apt-get update
 sudo apt-get -y install cuda-toolkit-12-6
 ```
 
-# Requerimientos
-Una vez dentro del ambiente python que deseas utilizar, instalar los paquetes necesarios.
+# Requirements
+Within the Python environment you have created, install the necessary packages by running:
 ```bash
-# Para utilizar los notebooks
+# To use notebooks
 conda install ipykernel
-# Instalar pytorch
+# Install pytorch
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-# Instalar Ultralytics
+# Install Ultralytics
 pip install ultralytics
-# Instalar Roboflow para importar el dataset Deepfish
+# Install Roboflow to import the Deepfish dataset
 pip install roboflow
+```
+
+# # Install AutoUpdates
+Some libraries used by Ultralytics are not installed automatically, so it is necessary to run code that requests these dependencies so that updates are performed automatically. To do this, run the ``setup.py`` file, which not only ensures the automatic update of the required libraries, but also prepares the environment with the Deepfish dataset and downloads the required models.
+```bash
+python setup.py
 ```

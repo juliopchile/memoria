@@ -1,10 +1,7 @@
 import os
 from ultralytics import YOLO
 
-
-ALL_MODELS = ['yolov8n-seg', 'yolov8s-seg', 'yolov8m-seg', 'yolov8l-seg', 'yolov8x-seg', 'yolov9c-seg', 'yolov9e-seg',
-              'yolo11n-seg', 'yolo11s-seg', 'yolo11m-seg', 'yolo11l-seg', 'yolo11x-seg']
-BACKBONES_DIR = os.path.join('models', 'backbone')
+from config import ALL_MODELS, BACKBONES_DIR
 
 
 def get_backbone_path(model_name: str):
