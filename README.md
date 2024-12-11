@@ -58,7 +58,7 @@ pip install ultralytics
 pip install roboflow
 ```
 
-# # Install AutoUpdates
+## Install AutoUpdates
 Some libraries used by Ultralytics are not installed automatically, so it is necessary to run code that requests these dependencies so that updates are performed automatically. To do this, run the ``setup.py`` file, which not only ensures the automatic update of the required libraries, but also prepares the environment with the Deepfish dataset and downloads the required models.
 ```bash
 python setup.py
