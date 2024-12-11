@@ -52,4 +52,6 @@ conda install ipykernel
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 # Instalar Ultralytics
 pip install ultralytics
+# Instalar Roboflow para importar el dataset Deepfish
+pip install roboflow
 ```
