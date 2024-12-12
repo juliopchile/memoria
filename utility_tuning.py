@@ -308,18 +308,18 @@ def guardar_estado(state_json_path: str, data: dict) -> None:
 
 if __name__ == "__main__":
     #? Entrenar utilizando Raytune
-    train_ray_tune(iterations=20, epochs=40)
+    # train_ray_tune(iterations=20, epochs=40)
     # Guardar resultados de Raytune con el notebook check_raytune_results.ipynb
     
     #? Cargar mejores hiperparámetros de los entrenamientos con Raytune.
-    # raytune_results = os.path.join("tuning", "resultados_raytune_deepfish_v11_1.json")
+    raytune_results = os.path.join("tuning", "resultados_raytune_deepfish_v11.json")
     #// search_spaces_dict_tune = leer_resultados_raytune_para_tune(raytune_results)
-    # search_spaces_dict_raytune = leer_resultados_raytune_para_raytune(raytune_results)
+    search_spaces_dict_raytune = leer_resultados_raytune_para_raytune(raytune_results)
     
     #? Inicializar el archivo JSON de estado de entrenamiento con Tune (guarda el estado del entrenamiento).
-    # tune_training_state = os.path.join("tuning", "tune_training_state_deepfish_v11.json")
-    # inicializar_estados(search_spaces_dict_raytune, tune_training_state)    # Util para parar entrenamiento y continuar luego
+    tune_training_state = os.path.join("tuning", "tune_training_state_deepfish_v11.json")
+    inicializar_estados(search_spaces_dict_raytune, tune_training_state)    # Util para parar entrenamiento y continuar luego
     
     #? Segunda busqueda de hiperparámetros (Con o sin raytune)
     #// train_tune(search_spaces_dict_tune, tune_training_state, 10, 40)
-    # train_tune(search_spaces_dict_raytune, tune_training_state, 10, 40, True)
+    train_tune(search_spaces_dict_raytune, tune_training_state, 10, 40, True)

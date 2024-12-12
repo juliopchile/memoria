@@ -1,0 +1,782 @@
+{
+    "tune29": {
+        "name": "Deepfish_yolo11n-seg_AdamW",
+        "best": [
+            17,
+            4
+        ],
+        "score_1": {
+            "precision(M)": 0.98657,
+            "recall(M)": 0.98734,
+            "mAP50(M)": 0.98549,
+            "mAP50-95(M)": 0.77627,
+            "F1_score": 0.9869548498158476
+        },
+        "score_2": {
+            "precision(M)": 0.98726,
+            "recall(M)": 0.98085,
+            "mAP50(M)": 0.99255,
+            "mAP50-95(M)": 0.78168,
+            "F1_score": 0.984044561533654
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0005375399537209545,
+            "lrf": 0.19861032342728874,
+            "momentum": 0.797359937498269,
+            "warmup_epochs": 2.321696170342987,
+            "warmup_momentum": 0.39082211741584405,
+            "weight_decay": 0.00028841287710589967
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0006688556338348617,
+            "lrf": 0.17141691300161238,
+            "momentum": 0.6845340160471431,
+            "warmup_epochs": 4.959911746836717,
+            "warmup_momentum": 0.07007636692052278,
+            "weight_decay": 0.0005037680602288986
+        }
+    },
+    "tune30": {
+        "name": "Deepfish_yolo11n-seg_SGD",
+        "best": [
+            19,
+            1
+        ],
+        "score_1": {
+            "precision(M)": 0.98714,
+            "recall(M)": 0.97194,
+            "mAP50(M)": 0.994,
+            "mAP50-95(M)": 0.73406,
+            "F1_score": 0.9794810335463584
+        },
+        "score_2": {
+            "precision(M)": 0.99107,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.97491,
+            "mAP50-95(M)": 0.73698,
+            "F1_score": 0.9763341069069684
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.001602666363291855,
+            "lrf": 0.34399797165389145,
+            "momentum": 0.9466914514995177,
+            "warmup_epochs": 2.221499655347401,
+            "warmup_momentum": 0.4090743780241709,
+            "weight_decay": 0.0007119952952787369
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.005047578019844959,
+            "lrf": 0.13908396304839363,
+            "momentum": 0.7019616308113745,
+            "warmup_epochs": 1.5120034391361514,
+            "warmup_momentum": 0.5228132711128228,
+            "weight_decay": 0.0003135866368278709
+        }
+    },
+    "tune31": {
+        "name": "Deepfish_LO_yolo11n-seg_AdamW",
+        "best": [
+            5,
+            0
+        ],
+        "score_1": {
+            "precision(M)": 0.99641,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.98666,
+            "mAP50-95(M)": 0.7493,
+            "F1_score": 0.9854252203603083
+        },
+        "score_2": {
+            "precision(M)": 0.99922,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.9841,
+            "mAP50-95(M)": 0.74883,
+            "F1_score": 0.9802723942383683
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0006650732538650029,
+            "lrf": 0.0955328051229062,
+            "momentum": 0.6589886022568928,
+            "warmup_epochs": 1.5180895899874884,
+            "warmup_momentum": 0.8404845082619223,
+            "weight_decay": 4.966758321932307e-05
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0007976044366675084,
+            "lrf": 0.04658182776839664,
+            "momentum": 0.6272393049660893,
+            "warmup_epochs": 4.886715083368671,
+            "warmup_momentum": 0.6031163849526101,
+            "weight_decay": 0.0007945699041340856
+        }
+    },
+    "tune32": {
+        "name": "Deepfish_LO_yolo11n-seg_SGD",
+        "best": [
+            3,
+            2
+        ],
+        "score_1": {
+            "precision(M)": 0.98197,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.99041,
+            "mAP50-95(M)": 0.73326,
+            "F1_score": 0.9783114196202694
+        },
+        "score_2": {
+            "precision(M)": 0.94814,
+            "recall(M)": 0.98734,
+            "mAP50(M)": 0.9825,
+            "mAP50-95(M)": 0.73062,
+            "F1_score": 0.9673430338727343
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0012332667236267937,
+            "lrf": 0.39913283636312086,
+            "momentum": 0.9294017316043955,
+            "warmup_epochs": 3.996442826222496,
+            "warmup_momentum": 0.8279064786032031,
+            "weight_decay": 0.0005148823770346426
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.006609223901360927,
+            "lrf": 0.10797508300292545,
+            "momentum": 0.7319912848163959,
+            "warmup_epochs": 0.43109020108721197,
+            "warmup_momentum": 0.4469427327357179,
+            "weight_decay": 0.00029062001436592664
+        }
+    },
+    "tune33": {
+        "name": "Deepfish_yolo11s-seg_AdamW",
+        "best": [
+            10,
+            8
+        ],
+        "score_1": {
+            "precision(M)": 0.99995,
+            "recall(M)": 0.98734,
+            "mAP50(M)": 0.99452,
+            "mAP50-95(M)": 0.78216,
+            "F1_score": 0.9936049927287914
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.96174,
+            "mAP50(M)": 0.98447,
+            "mAP50-95(M)": 0.77649,
+            "F1_score": 0.9804969058081091
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0005310340458761437,
+            "lrf": 0.24373766571457148,
+            "momentum": 0.6751191872008375,
+            "warmup_epochs": 1.3796774449244598,
+            "warmup_momentum": 0.29566009331228005,
+            "weight_decay": 0.0009004194534321984
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0005315083125646508,
+            "lrf": 0.027411484156893505,
+            "momentum": 0.6203066235904209,
+            "warmup_epochs": 1.1953884838202766,
+            "warmup_momentum": 0.7303501197379207,
+            "weight_decay": 0.00041061323791846205
+        }
+    },
+    "tune34": {
+        "name": "Deepfish_yolo11s-seg_SGD",
+        "best": [
+            9,
+            6
+        ],
+        "score_1": {
+            "precision(M)": 0.99972,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.98307,
+            "mAP50-95(M)": 0.79842,
+            "F1_score": 0.9870412171799027
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97364,
+            "mAP50(M)": 0.99153,
+            "mAP50-95(M)": 0.79744,
+            "F1_score": 0.9866439674915384
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.00294564511911066,
+            "lrf": 0.21373371729233478,
+            "momentum": 0.8684530752319348,
+            "warmup_epochs": 4.490967084094588,
+            "warmup_momentum": 0.18057453334039264,
+            "weight_decay": 0.000929279795605131
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0060474085559583625,
+            "lrf": 0.2294589391362892,
+            "momentum": 0.7753715826891392,
+            "warmup_epochs": 1.0236760371061893,
+            "warmup_momentum": 0.16640195914547548,
+            "weight_decay": 0.00022955463477091943
+        }
+    },
+    "tune35": {
+        "name": "Deepfish_LO_yolo11s-seg_AdamW",
+        "best": [
+            14,
+            8
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97349,
+            "mAP50(M)": 0.99178,
+            "mAP50-95(M)": 0.79904,
+            "F1_score": 0.9865669448540403
+        },
+        "score_2": {
+            "precision(M)": 0.99687,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.96568,
+            "mAP50-95(M)": 0.72981,
+            "F1_score": 0.9791401767318394
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0006375880186809679,
+            "lrf": 0.0673069143566253,
+            "momentum": 0.7732234514468915,
+            "warmup_epochs": 2.049594663128847,
+            "warmup_momentum": 0.857710085083206,
+            "weight_decay": 0.0003684412609638862
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0005073664666723175,
+            "lrf": 0.19412972392479966,
+            "momentum": 0.6121754620073737,
+            "warmup_epochs": 3.578480448270154,
+            "warmup_momentum": 0.40003559421961615,
+            "weight_decay": 0.00045516421281841034
+        }
+    },
+    "tune36": {
+        "name": "Deepfish_LO_yolo11s-seg_SGD",
+        "best": [
+            17,
+            9
+        ],
+        "score_1": {
+            "precision(M)": 0.99954,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.98314,
+            "mAP50-95(M)": 0.74008,
+            "F1_score": 0.9804263586820761
+        },
+        "score_2": {
+            "precision(M)": 0.99943,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.9787,
+            "mAP50-95(M)": 0.75983,
+            "F1_score": 0.9803734390708961
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0023520636725093175,
+            "lrf": 0.3174492544315108,
+            "momentum": 0.818603246865517,
+            "warmup_epochs": 3.0980551376549648,
+            "warmup_momentum": 0.8123397762805723,
+            "weight_decay": 0.00018903569366992046
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0033284031126901378,
+            "lrf": 0.1441953950528307,
+            "momentum": 0.7642640019487488,
+            "warmup_epochs": 3.6603817299658936,
+            "warmup_momentum": 0.1608289319302929,
+            "weight_decay": 0.0008312954471742872
+        }
+    },
+    "tune37": {
+        "name": "Deepfish_yolo11m-seg_AdamW",
+        "best": [
+            0,
+            18
+        ],
+        "score_1": {
+            "precision(M)": 0.97458,
+            "recall(M)": 0.97079,
+            "mAP50(M)": 0.98231,
+            "mAP50-95(M)": 0.80744,
+            "F1_score": 0.9726813081316151
+        },
+        "score_2": {
+            "precision(M)": 0.98696,
+            "recall(M)": 0.95778,
+            "mAP50(M)": 0.98115,
+            "mAP50-95(M)": 0.73774,
+            "F1_score": 0.9721510832296348
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0007459621698079666,
+            "lrf": 0.38516829486212384,
+            "momentum": 0.9409548818935127,
+            "warmup_epochs": 0.8282763480299921,
+            "warmup_momentum": 0.31236153762942587,
+            "weight_decay": 0.0009104010509034532
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0007960763152026276,
+            "lrf": 0.04803207458497596,
+            "momentum": 0.6330881236986178,
+            "warmup_epochs": 2.4827702635690816,
+            "warmup_momentum": 0.09850663735086455,
+            "weight_decay": 0.0009080296485797879
+        }
+    },
+    "tune38": {
+        "name": "Deepfish_yolo11m-seg_SGD",
+        "best": [
+            1,
+            9
+        ],
+        "score_1": {
+            "precision(M)": 0.99826,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.98439,
+            "mAP50-95(M)": 0.81448,
+            "F1_score": 0.986329089379302
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.96171,
+            "mAP50(M)": 0.99219,
+            "mAP50-95(M)": 0.79649,
+            "F1_score": 0.9804813147712964
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0023653360005170335,
+            "lrf": 0.3336982104231516,
+            "momentum": 0.7753845414879409,
+            "warmup_epochs": 4.294626075295867,
+            "warmup_momentum": 0.39733756053848185,
+            "weight_decay": 1.7198050220711415e-06
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.003691951380577977,
+            "lrf": 0.014534422018378814,
+            "momentum": 0.7661408923222978,
+            "warmup_epochs": 0.39668962671627395,
+            "warmup_momentum": 0.784078490300569,
+            "weight_decay": 0.0005163446861409168
+        }
+    },
+    "tune39": {
+        "name": "Deepfish_LO_yolo11m-seg_AdamW",
+        "best": [
+            6,
+            0
+        ],
+        "score_1": {
+            "precision(M)": 0.98504,
+            "recall(M)": 0.98734,
+            "mAP50(M)": 0.99123,
+            "mAP50-95(M)": 0.76022,
+            "F1_score": 0.986188658980521
+        },
+        "score_2": {
+            "precision(M)": 0.99958,
+            "recall(M)": 0.94937,
+            "mAP50(M)": 0.97867,
+            "mAP50-95(M)": 0.75326,
+            "F1_score": 0.9738282301752226
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0005263980033487773,
+            "lrf": 0.14809745277023997,
+            "momentum": 0.869284104715651,
+            "warmup_epochs": 3.3285150061120024,
+            "warmup_momentum": 0.9498621897516769,
+            "weight_decay": 0.0008222756880869373
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0005284096521247453,
+            "lrf": 0.44622380738120077,
+            "momentum": 0.6957364242858795,
+            "warmup_epochs": 0.45286362677806946,
+            "warmup_momentum": 0.40906975103758914,
+            "weight_decay": 0.0007239260730832926
+        }
+    },
+    "tune40": {
+        "name": "Deepfish_LO_yolo11m-seg_SGD",
+        "best": [
+            3,
+            0
+        ],
+        "score_1": {
+            "precision(M)": 0.9975,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.99145,
+            "mAP50-95(M)": 0.81579,
+            "F1_score": 0.9859579754383474
+        },
+        "score_2": {
+            "precision(M)": 0.99954,
+            "recall(M)": 0.96203,
+            "mAP50(M)": 0.98963,
+            "mAP50-95(M)": 0.82131,
+            "F1_score": 0.9804263586820761
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.009763301445739388,
+            "lrf": 0.10043706265319385,
+            "momentum": 0.8281880621061174,
+            "warmup_epochs": 4.48003948684406,
+            "warmup_momentum": 0.2139266310259289,
+            "weight_decay": 0.00030324071920394513
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.003432762017679428,
+            "lrf": 0.07371157975332401,
+            "momentum": 0.7979363079166084,
+            "warmup_epochs": 4.174676262599932,
+            "warmup_momentum": 0.6343976734056661,
+            "weight_decay": 0.00018461030447803383
+        }
+    },
+    "tune41": {
+        "name": "Deepfish_yolo11l-seg_AdamW",
+        "best": [
+            19,
+            17
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.95861,
+            "mAP50(M)": 0.98076,
+            "mAP50-95(M)": 0.75363,
+            "F1_score": 0.9788676663552213
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.94883,
+            "mAP50(M)": 0.96355,
+            "mAP50-95(M)": 0.74319,
+            "F1_score": 0.973743220291149
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.000971005307580241,
+            "lrf": 0.1390216609883108,
+            "momentum": 0.8744184534734224,
+            "warmup_epochs": 0.5904839087449182,
+            "warmup_momentum": 0.620090835293689,
+            "weight_decay": 0.0006922460686885044
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0010285145725761483,
+            "lrf": 0.052190123549087496,
+            "momentum": 0.6062953192531338,
+            "warmup_epochs": 4.860007378675701,
+            "warmup_momentum": 0.27125912718161677,
+            "weight_decay": 0.0007273038528522337
+        }
+    },
+    "tune42": {
+        "name": "Deepfish_yolo11l-seg_SGD",
+        "best": [
+            7,
+            8
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.98692,
+            "mAP50(M)": 0.99103,
+            "mAP50-95(M)": 0.81608,
+            "F1_score": 0.9934169468322831
+        },
+        "score_2": {
+            "precision(M)": 0.9996,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.97887,
+            "mAP50-95(M)": 0.81026,
+            "F1_score": 0.9869827258544888
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.002719652207179499,
+            "lrf": 0.16413670095215646,
+            "momentum": 0.6075362808126546,
+            "warmup_epochs": 3.221533068530258,
+            "warmup_momentum": 0.31287029354140244,
+            "weight_decay": 8.871619511800511e-05
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.00409551415010897,
+            "lrf": 0.4795611708226588,
+            "momentum": 0.6873209806890146,
+            "warmup_epochs": 1.6180522715475487,
+            "warmup_momentum": 0.8958224620841394,
+            "weight_decay": 2.1479096527756705e-06
+        }
+    },
+    "tune43": {
+        "name": "Deepfish_LO_yolo11l-seg_AdamW",
+        "best": [
+            6,
+            19
+        ],
+        "score_1": {
+            "precision(M)": 0.98326,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.97364,
+            "mAP50-95(M)": 0.74302,
+            "F1_score": 0.9789512005475143
+        },
+        "score_2": {
+            "precision(M)": 0.97335,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.97548,
+            "mAP50-95(M)": 0.75652,
+            "F1_score": 0.974014545977218
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0010013411534324297,
+            "lrf": 0.1425184502875883,
+            "momentum": 0.8899133008912423,
+            "warmup_epochs": 4.886555101514876,
+            "warmup_momentum": 0.5139202157563111,
+            "weight_decay": 0.0002128746894833573
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0005319945408408358,
+            "lrf": 0.18018285690792896,
+            "momentum": 0.8461706485386263,
+            "warmup_epochs": 1.2958296239819895,
+            "warmup_momentum": 0.2613111380022102,
+            "weight_decay": 0.0009207965499310992
+        }
+    },
+    "tune44": {
+        "name": "Deepfish_LO_yolo11l-seg_SGD",
+        "best": [
+            18,
+            0
+        ],
+        "score_1": {
+            "precision(M)": 0.99753,
+            "recall(M)": 1.0,
+            "mAP50(M)": 0.995,
+            "mAP50-95(M)": 0.80922,
+            "F1_score": 0.9987634728890179
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97464,
+            "mAP50(M)": 0.99334,
+            "mAP50-95(M)": 0.78704,
+            "F1_score": 0.9871571526961876
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.003861803824107412,
+            "lrf": 0.13111196206755096,
+            "momentum": 0.8352164051900188,
+            "warmup_epochs": 1.5983908797458524,
+            "warmup_momentum": 0.08724631311339379,
+            "weight_decay": 0.00014790625112574553
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.006033895098668571,
+            "lrf": 0.42818347726216727,
+            "momentum": 0.8830358523934692,
+            "warmup_epochs": 2.4897872727628045,
+            "warmup_momentum": 0.7383774308879594,
+            "weight_decay": 7.645325285104255e-05
+        }
+    },
+    "tune45": {
+        "name": "Deepfish_yolo11x-seg_AdamW",
+        "best": [
+            9,
+            6
+        ],
+        "score_1": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97438,
+            "mAP50(M)": 0.9883,
+            "mAP50-95(M)": 0.79941,
+            "F1_score": 0.9870237745520113
+        },
+        "score_2": {
+            "precision(M)": 0.99533,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.98991,
+            "mAP50-95(M)": 0.74329,
+            "F1_score": 0.9848967714884695
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0005945935106446097,
+            "lrf": 0.2856943780779317,
+            "momentum": 0.8249219668377129,
+            "warmup_epochs": 2.4024924241652172,
+            "warmup_momentum": 0.6648148642456834,
+            "weight_decay": 0.00022491381924443998
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.0015842356906090908,
+            "lrf": 0.12449547889807962,
+            "momentum": 0.9432894219274518,
+            "warmup_epochs": 3.8455618254159334,
+            "warmup_momentum": 0.8986921381036619,
+            "weight_decay": 0.000847976110904286
+        }
+    },
+    "tune46": {
+        "name": "Deepfish_yolo11x-seg_SGD",
+        "best": [
+            2,
+            14
+        ],
+        "score_1": {
+            "precision(M)": 0.99998,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.99348,
+            "mAP50-95(M)": 0.79264,
+            "F1_score": 0.9871679239970425
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97229,
+            "mAP50(M)": 0.99285,
+            "mAP50-95(M)": 0.77271,
+            "F1_score": 0.985950341988247
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.006477229999734754,
+            "lrf": 0.14514560085939834,
+            "momentum": 0.86852730746362,
+            "warmup_epochs": 3.0669847864738653,
+            "warmup_momentum": 0.05552183773820662,
+            "weight_decay": 0.0005621071057546195
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish.yaml",
+            "lr0": 0.006947559598963643,
+            "lrf": 0.4993164511731367,
+            "momentum": 0.7612973541949923,
+            "warmup_epochs": 4.457070098757267,
+            "warmup_momentum": 0.6663184052799048,
+            "weight_decay": 0.0009300345998785257
+        }
+    },
+    "tune47": {
+        "name": "Deepfish_LO_yolo11x-seg_AdamW",
+        "best": [
+            11,
+            9
+        ],
+        "score_1": {
+            "precision(M)": 0.99845,
+            "recall(M)": 0.98734,
+            "mAP50(M)": 0.98846,
+            "mAP50-95(M)": 0.77165,
+            "F1_score": 0.9928639211598407
+        },
+        "score_2": {
+            "precision(M)": 0.97434,
+            "recall(M)": 0.98734,
+            "mAP50(M)": 0.98816,
+            "mAP50-95(M)": 0.74657,
+            "F1_score": 0.9807969246768077
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0006997652019667877,
+            "lrf": 0.4559916723279413,
+            "momentum": 0.8941603049858167,
+            "warmup_epochs": 0.43040366709316824,
+            "warmup_momentum": 0.5116494626477104,
+            "weight_decay": 0.0009689221339391242
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.0006057088666290272,
+            "lrf": 0.37616815856448643,
+            "momentum": 0.8614734743533955,
+            "warmup_epochs": 2.137659855376966,
+            "warmup_momentum": 0.061485707767161404,
+            "weight_decay": 0.00024169744268704606
+        }
+    },
+    "tune48": {
+        "name": "Deepfish_LO_yolo11x-seg_SGD",
+        "best": [
+            0,
+            2
+        ],
+        "score_1": {
+            "precision(M)": 0.99936,
+            "recall(M)": 0.97468,
+            "mAP50(M)": 0.98162,
+            "mAP50-95(M)": 0.78742,
+            "F1_score": 0.9868657218698709
+        },
+        "score_2": {
+            "precision(M)": 1.0,
+            "recall(M)": 0.97306,
+            "mAP50(M)": 0.99118,
+            "mAP50-95(M)": 0.76159,
+            "F1_score": 0.9863460817207789
+        },
+        "config1": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.00901546710511894,
+            "lrf": 0.24513436379563455,
+            "momentum": 0.8578885047813147,
+            "warmup_epochs": 1.44954996295477,
+            "warmup_momentum": 0.13362750884624874,
+            "weight_decay": 0.0009095379725171147
+        },
+        "config2": {
+            "data": "/home/memristor/tesis/datasets_yaml/Deepfish_LO.yaml",
+            "lr0": 0.00495664405207937,
+            "lrf": 0.10905516261382289,
+            "momentum": 0.7840146221435598,
+            "warmup_epochs": 2.38809820317789,
+            "warmup_momentum": 0.928312797515983,
+            "weight_decay": 0.0006596520638328271
+        }
+    }
+}
