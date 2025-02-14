@@ -2,6 +2,7 @@ runs/
 __pycache__/
 datasets/
 datasets_coco/
+datasets_yaml/
 datasets_yolo/
 models/
 **.pt

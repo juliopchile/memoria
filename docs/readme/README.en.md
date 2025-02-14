@@ -1,7 +1,7 @@
-[![English](https://img.shields.io/badge/lang-English-blue)](docs/readme/README.en.md)
-[![Español](https://img.shields.io/badge/lang-Español-green)](docs/readme/README.es.md)
-[![Français](https://img.shields.io/badge/lang-Français-yellow)](docs/readme/README.fr.md)
-[![中文](https://img.shields.io/badge/lang-中文-red)](docs/readme/README.zh.md)
+[![English](https://img.shields.io/badge/lang-English-blue)](README.md)
+[![Español](https://img.shields.io/badge/lang-Español-green)](README.es.md)
+[![Français](https://img.shields.io/badge/lang-Français-yellow)](README.fr.md)
+[![中文](https://img.shields.io/badge/lang-中文-red)](README.zh.md)
 
 # Configuration
 ## Linux (recommended)

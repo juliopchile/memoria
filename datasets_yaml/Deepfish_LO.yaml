@@ -1,7 +1,7 @@
 names:
 - fish
 nc: 1
-path: /home/memristor/tesis/datasets_yolo/Deepfish_LO
+path: /home/memorista01/tesis/datasets_yolo/Deepfish_LO
 test: images/test
 train: images/train
 val: images/valid
