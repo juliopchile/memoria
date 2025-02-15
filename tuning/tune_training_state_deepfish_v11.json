@@ -1,82 +1,82 @@
 {
     "tune29": {
         "name": "Deepfish_yolo11n-seg_AdamW",
-        "state": 1
+        "state": 0
     },
     "tune30": {
         "name": "Deepfish_yolo11n-seg_SGD",
-        "state": 1
+        "state": 0
     },
     "tune31": {
         "name": "Deepfish_LO_yolo11n-seg_AdamW",
-        "state": 1
+        "state": 0
     },
     "tune32": {
         "name": "Deepfish_LO_yolo11n-seg_SGD",
-        "state": 1
+        "state": 0
     },
     "tune33": {
         "name": "Deepfish_yolo11s-seg_AdamW",
-        "state": 1
+        "state": 0
     },
     "tune34": {
         "name": "Deepfish_yolo11s-seg_SGD",
-        "state": 1
+        "state": 0
     },
     "tune35": {
         "name": "Deepfish_LO_yolo11s-seg_AdamW",
-        "state": 1
+        "state": 0
     },
     "tune36": {
         "name": "Deepfish_LO_yolo11s-seg_SGD",
-        "state": 1
+        "state": 0
     },
     "tune37": {
         "name": "Deepfish_yolo11m-seg_AdamW",
-        "state": 1
+        "state": 0
     },
     "tune38": {
         "name": "Deepfish_yolo11m-seg_SGD",
-        "state": 1
+        "state": 0
     },
     "tune39": {
         "name": "Deepfish_LO_yolo11m-seg_AdamW",
-        "state": 1
+        "state": 0
     },
     "tune40": {
         "name": "Deepfish_LO_yolo11m-seg_SGD",
-        "state": 1
+        "state": 0
     },
     "tune41": {
         "name": "Deepfish_yolo11l-seg_AdamW",
-        "state": 1
+        "state": 0
     },
     "tune42": {
         "name": "Deepfish_yolo11l-seg_SGD",
-        "state": 1
+        "state": 0
     },
     "tune43": {
         "name": "Deepfish_LO_yolo11l-seg_AdamW",
-        "state": 1
+        "state": 0
     },
     "tune44": {
         "name": "Deepfish_LO_yolo11l-seg_SGD",
-        "state": 1
+        "state": 0
     },
     "tune45": {
         "name": "Deepfish_yolo11x-seg_AdamW",
-        "state": 1
+        "state": 0
     },
     "tune46": {
         "name": "Deepfish_yolo11x-seg_SGD",
-        "state": 1
+        "state": 0
     },
     "tune47": {
         "name": "Deepfish_LO_yolo11x-seg_AdamW",
-        "state": 1
+        "state": 0
     },
     "tune48": {
         "name": "Deepfish_LO_yolo11x-seg_SGD",
-        "state": 1
+        "state": 0
     }
 }

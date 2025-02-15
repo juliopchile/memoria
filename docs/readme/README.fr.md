@@ -1,4 +1,4 @@
-[![English](https://img.shields.io/badge/lang-English-blue)](README.md)
+[![English](https://img.shields.io/badge/lang-English-blue)](README.en.md)
 [![Español](https://img.shields.io/badge/lang-Español-green)](README.es.md)
 [![Français](https://img.shields.io/badge/lang-Français-yellow)](README.fr.md)
 [![中文](https://img.shields.io/badge/lang-中文-red)](README.zh.md)
