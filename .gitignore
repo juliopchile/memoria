@@ -5,4 +5,5 @@ datasets_coco/
 datasets_yaml/
 datasets_yolo/
 models/
+training/
 **.pt

@@ -36,12 +36,13 @@ def download_models(models_to_download: list = None):
         del model
 
 
-def export_to_onnx(model_path: str, **extra_params):
+def export_to_onnx(model_path: str, extra_params):
     model = YOLO(model_path)
     model.export(format="onnx", **extra_params)
 
 
-def export_to_tensor_rt(model, **extra_params):
+def export_to_tensor_rt(model_path, extra_params):
+    model = YOLO(model_path)
     model.export(format="engine", **extra_params)
 
 

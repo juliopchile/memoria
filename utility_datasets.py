@@ -338,6 +338,27 @@ def create_yaml_directory(yaml_directory: str, yolo_datasets: str):
             print(f"No se encontró data.yaml en {dataset}, omitiendo...")
 
 
+def get_export_yaml_path(dataset_yaml: str) -> str:
+    """
+    Dado el path de un archivo YAML de dataset, retorna el path de su versión de exportación.
+    
+    Args:
+        dataset_yaml (str): Ruta del archivo YAML del dataset.
+    
+    Returns:
+        str: Ruta del archivo de exportación con el prefijo 'export_' en el mismo directorio.
+    """
+    # Obtener el directorio y el nombre del archivo sin extensión
+    dir_name = os.path.dirname(dataset_yaml)
+    dataset_name_without_ext = os.path.splitext(os.path.basename(dataset_yaml))[0]
+    
+    # Construir el nuevo nombre de archivo
+    export_yaml_name = f"export_{dataset_name_without_ext}.yaml"
+    
+    # Retornar la ruta completa
+    return os.path.join(dir_name, export_yaml_name)
+
+
 def setup_datasets():
     datasets_a_descargar = ["Deepfish", "Deepfish_LO", "Salmon", "Salmon_LO", "Shiny_v4"]
 

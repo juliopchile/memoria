@@ -1,61 +1,362 @@
 import os
-from threading import Thread
+import json
+from threading import Lock
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from ultralytics import YOLO
 
-from utility_models import get_backbone_path
+from utility_models import get_backbone_path, export_to_tensor_rt
+from utility_datasets import get_export_yaml_path
 from config import *
 
+
 def thread_safe_train(model_path, params):
-    """Train on dataset using a new YOLO model instance in a thread-safe manner."""
+    """
+    Entrena un modelo YOLO en un dataset especificado utilizando una instancia local del modelo de manera segura para hilos.
+    
+    Parámetros:
+    -----------
+    model_path : str
+        Ruta del modelo pre-entrenado o backbone descargado.
+    params : dict
+        Diccionario con los parámetros e hiperparámetros de entrenamiento, el cual puede incluir:
+          - data: ruta al archivo YAML del dataset.
+          - optimizer: optimizador a utilizar (por ejemplo, "SGD" o "AdamW").
+          - freeze: número de capas a congelar o None si no se congela el backbone.
+          - project: directorio del proyecto para almacenar los resultados.
+          - name: nombre del run de entrenamiento.
+          - otros parámetros adicionales (por ejemplo, epochs, batch, etc.)
+    
+    Retorna:
+    --------
+    None
+    """
     local_model = YOLO(model_path)
     local_model.train(**params)
     del local_model
 
 
-def train_run(dataset_yaml_list, model_name_list, optimizer_list, project_name, freeze_dict, epochs):
+def train_run(config_file, max_concurrent_threads=1):
+    """
+    Ejecuta entrenamientos de modelos basados en las configuraciones definidas en un archivo JSON, 
+    limitando el número de entrenamientos concurrentes a 'max_concurrent_threads'.
+    
+    Para cada configuración de entrenamiento en el archivo JSON que no esté marcada como completada 
+    ("done": False), se envía una tarea a un ThreadPoolExecutor con límite de hilos concurrentes. Una vez 
+    finalizado el entrenamiento de una tarea, se actualiza su estado a True en el diccionario y se guarda 
+    la actualización en el archivo JSON.
+    
+    Parámetros:
+    -----------
+    config_file : str
+        Ruta al archivo JSON que contiene las configuraciones de entrenamiento. Cada entrada en el JSON debe tener la
+        siguiente estructura:
+        
+            {
+                "run_name": {
+                    "model_name": <nombre del modelo>,
+                    "hyperparam": { ... parámetros de entrenamiento ... },
+                    "done": false
+                },
+                ...
+            }
+    
+    max_concurrent_threads : int, opcional (por defecto = 1)
+        Número máximo de entrenamientos a ejecutar de forma concurrente.
+    
+    Retorna:
+    --------
+    None
+    """
+    # Cargar configuraciones de entrenamiento desde el JSON
+    with open(config_file, "r") as f:
+        training_dict = json.load(f)
+    
+    # Lock para asegurar actualizaciones seguras al archivo JSON desde múltiples hilos
+    json_lock = Lock()
+    
+    def training_wrapper(key, config):
+        """
+        Función wrapper que ejecuta el entrenamiento de un run y actualiza su estado en el JSON.
+        
+        Parámetros:
+        -----------
+        key : str
+            Clave identificadora única para el run.
+        config : dict
+            Diccionario con la configuración del entrenamiento (incluye model_name, hyperparam y done).
+        """
+        model_name = config.get("model_name")
+        # Obtener la ruta del modelo: se descarga o se recupera según la implementación de get_backbone_path
+        model_path = get_backbone_path(model_name)
+        # Recuperar los hiperparámetros de entrenamiento
+        train_params = config.get("hyperparam", {})
+        try:
+            # Ejecutar el entrenamiento
+            thread_safe_train(model_path, train_params)
+            # Al finalizar, marcar el run como completado y actualizar el archivo JSON
+            with json_lock:
+                training_dict[key]["done"] = True
+                with open(config_file, "w") as f_w:
+                    json.dump(training_dict, f_w, indent=4)
+            print(f"Entrenamiento completado para: {key}")
+        except Exception as e:
+            print(f"El entrenamiento para {key} falló con error: {e}")
+    
+    # Crear un ThreadPoolExecutor que limite el número de tareas concurrentes
+    with ThreadPoolExecutor(max_workers=max_concurrent_threads) as executor:
+        futures = []
+        for key, config in training_dict.items():
+            if not config.get("done", False):
+                futures.append(executor.submit(training_wrapper, key, config))
+        
+        # Esperar a que todas las tareas finalicen
+        for future in as_completed(futures):
+            # Si deseas capturar excepciones globales podrías hacerlo aquí:
+            try:
+                future.result()
+            except Exception as exc:
+                print(f"Una tarea falló: {exc}")
+
+    print(f"Todos los entrenamientos de {config_file} han sido completados.")
+
+
+def create_training_json(dataset_yaml_list, model_name_list, optimizer_list, project_name, freeze_dict, json_file, extra_params):
+    """
+    Crea un archivo JSON con configuraciones de entrenamiento generadas a partir de listas de parámetros.
+    
+    Para cada combinación de dataset, modelo y optimizador, se genera una configuración que incluye:
+      - La ruta al dataset YAML.
+      - Los parámetros de entrenamiento como: optimizador, cantidad de capas a congelar (si aplica),
+        directorio del proyecto, nombre del run, y parámetros adicionales.
+    
+    Parámetros:
+    -----------
+    dataset_yaml_list : list
+        Lista de nombres de archivos YAML que definen los datasets (por ejemplo, ['Deepfish.yaml', 'Deepfish_LO.yaml']).
+    model_name_list : list
+        Lista de nombres de modelos (ejemplo: ['yolov8n-seg', 'yolov9c-seg']) que se utilizarán.
+    optimizer_list : list
+        Lista de optimizadores a usar (por ejemplo, ["SGD", "AdamW"]).
+    project_name : str
+        Nombre del proyecto (usado para definir el directorio donde se guardarán los resultados).
+    freeze_dict : dict
+        Diccionario que indica si se debe aplicar congelamiento del backbone para cada modelo.
+        Cada clave es el nombre de un modelo y el valor es un booleano (True para congelar, False para no congelar).
+    json_file : str
+        Ruta del archivo JSON en el que se guardarán las configuraciones de entrenamiento.
+    extra_params : dict
+        Diccionario con otros parámetros adicionales de entrenamiento (por ejemplo, {"epochs": 80, "batch": 8}).
+    
+    Retorna:
+    --------
+    None
+    """
+    training_dict = {}
     for dataset in dataset_yaml_list:
         dataset_path = os.path.join(YAML_DIRECTORY, dataset)
         dataset_name, _ = os.path.splitext(dataset)
         
         if os.path.isfile(dataset_path):
             for model_name in model_name_list:
-                model_path = get_backbone_path(model_name)
                 for optimizer in optimizer_list:
-                    project_dir= os.path.join(TRAINING_DIRECTORY, project_name)
-                    
-                    # En caso de ser necesario, cambiar nombre y numero de capas a congelar
-                    if freeze_dict[model_name] is True:
+                    project_dir = os.path.join(TRAINING_DIRECTORY, project_name)
+
+                    # En caso de ser necesario, ajustar el nombre y número de capas a congelar
+                    if freeze_dict.get(model_name, False) is True:
                         ast = "*"
-                        freeze_num = MODEL_BACKBONE_LAYERS[model_name]
+                        freeze_num = MODEL_BACKBONE_LAYERS.get(model_name)
                     else:
                         ast = ""
                         freeze_num = None
+                        
+                    if optimizer in ["AdamW"]:
+                        lr0 = 0.001
+                    else:
+                        lr0 = 0.005
 
-                    # Crear el nombre del run y el diccionario de hperparámetros
+                    # Crear el nombre del run y definir el diccionario de hiperparámetros
                     run_name = os.path.join(dataset_name, f"{model_name}{ast}_{optimizer}")
-                    train_params = dict(data=dataset_path, epochs=epochs, optimizer=optimizer, freeze=freeze_num,
-                                        project=project_dir, name=run_name)
+                    train_params = {"data": dataset_path, "optimizer": optimizer, "freeze": freeze_num, "lr0": lr0,
+                                    "project": project_dir, "name": run_name, **extra_params}
                     
-                    # Realizar el enternamiento con los hiperparámetros entregados
-                    thread_safe_train(model_path, train_params)
+                    # Agregar la configuración al diccionario general de entrenamiento
+                    training_dict[run_name] = {"model_name": model_name, "hyperparams": train_params,
+                                               "done": False, "trt": False, "trt16": False, "trt8": False}
+    
+    # Asegurarse de que el directorio donde se guardará el archivo JSON existe
+    json_dir = os.path.dirname(json_file)
+    if json_dir and not os.path.exists(json_dir):
+        os.makedirs(json_dir, exist_ok=True)
+    
+    # Guardar el diccionario de configuraciones en un archivo JSON
+    with open(json_file, "w") as f:
+        json.dump(training_dict, f, indent=4)
+    
+    print(f"Training JSON guardado en {json_file}")
+
+
+def rename_file(original_path: str, new_name: str) -> str:
+    """
+    Renombra un archivo manteniendo su directorio original.
+
+    Args:
+        original_path (str): Ruta completa del archivo original.
+        new_name (str): Nuevo nombre del archivo (sin cambiar el directorio).
+
+    Returns:
+        str: La ruta completa del archivo renombrado.
+    """
+    # Obtener el directorio del archivo original
+    dir_name = os.path.dirname(original_path)
+    # Crear la nueva ruta con el mismo directorio y el nuevo nombre
+    new_path = os.path.join(dir_name, new_name)
+    # Renombrar el archivo
+    os.rename(original_path, new_path)
+    return new_path
+
+
+def update_config_file(config_file: str, training_dict: dict) -> None:
+    """
+    Actualiza el archivo de configuración con el contenido de training_dict.
+
+    Args:
+        config_file (str): Ruta al archivo JSON de configuración.
+        training_dict (dict): Diccionario actualizado con la configuración.
+    """
+    try:
+        with open(config_file, "w") as f:
+            json.dump(training_dict, f, indent=4)
+        print(f"Archivo de configuración '{config_file}' actualizado exitosamente.")
+    except Exception as exc:
+        print(f"Error al actualizar el archivo de configuración: {exc}")
+
+
+def process_export(model_weights_path: str,
+                   engine_path: str,
+                   export_dataset_yaml: str,
+                   config_entry: dict,
+                   flag_key: str,
+                   new_engine_name: str,
+                   config_file: str,
+                   training_dict: dict,
+                   extra_params: dict = None) -> None:
+    """
+    Intenta exportar el modelo a TensorRT, renombrar el archivo generado y actualizar
+    el archivo de configuración JSON en caso de éxito.
+
+    Args:
+        model_weights_path (str): Ruta a los pesos del modelo entrenado.
+        engine_path (str): Ruta al archivo engine generado (antes de renombrarlo).
+        export_dataset_yaml (str): Ruta al archivo YAML del dataset de exportación.
+        config_entry (dict): Subdiccionario de configuración del experimento.
+        flag_key (str): Clave a actualizar en la configuración ('trt', 'trt16', 'trt8').
+        new_engine_name (str): Nuevo nombre para el archivo engine exportado.
+        config_file (str): Ruta al archivo JSON de configuración.
+        training_dict (dict): Diccionario completo de la configuración.
+        extra_params (dict, optional): Parámetros adicionales para export_to_tensor_rt.
+                                       Ej: {"half": True} o {"int8": True}.
+    """
+    try:
+        # Construir los parámetros para la exportación
+        export_params = {"data": export_dataset_yaml}
+        if extra_params:
+            export_params.update(extra_params)
+
+        # Ejecutar la exportación a TensorRT
+        export_to_tensor_rt(model_weights_path, export_params)
+        # Renombrar el archivo engine generado
+        rename_file(engine_path, new_engine_name)
+        # Actualizar la configuración local del experimento
+        config_entry[flag_key] = True
+        
+        # Actualizar el archivo JSON inmediatamente después de la exportación exitosa
+        update_config_file(config_file, training_dict)
+        print(f"Exportación exitosa ({flag_key}) -> {new_engine_name}")
+    except Exception as exc:
+        print(f"Error al exportar con {flag_key}: {exc}")
+
+
+def export_experiments(config_file: str) -> None:
+    """
+    Procesa los experimentos definidos en el archivo de configuración JSON.
+    Para cada experimento que ya fue entrenado (done=True) y cuyas exportaciones
+    aún no se han realizado (trt, trt16, trt8 == False), se intenta exportar el modelo
+    a TensorRT en FP32, FP16 e INT8. Tras cada exportación exitosa se actualiza el archivo
+    JSON de configuración, de forma que, en caso de fallar alguna exportación, lo realizado
+    hasta el momento quede guardado.
+
+    Args:
+        config_file (str): Ruta al archivo JSON de configuración.
+    """
+    # Leer el archivo de configuración
+    with open(config_file, "r") as f:
+        training_dict = json.load(f)
+
+    # Recorrer cada experimento definido en la configuración
+    for key, config in training_dict.items():
+        if config.get("done"):
+            hyperparams = config.get("hyperparams", {})
+            # Construir la ruta de los pesos del modelo entrenado
+            model_weights_path = os.path.join(
+                hyperparams.get("project", ""),
+                hyperparams.get("name", ""),
+                "weights",
+                "best.pt"
+            )
+            # La exportación inicialmente genera un archivo 'best.engine'
+            engine_path = os.path.join(os.path.dirname(model_weights_path), "best.engine")
+            # Obtener el path del archivo YAML de exportación (se le añade el prefijo 'export_')
+            export_dataset_yaml = get_export_yaml_path(hyperparams.get("data", ""))
+
+            if os.path.isfile(model_weights_path):
+                # Exportar a TensorRT en FP32
+                if not config.get("trt", False):
+                    process_export(model_weights_path, engine_path, export_dataset_yaml, config, "trt",
+                                   "best_trt_fp32.engine", config_file, training_dict)
+                # Exportar a TensorRT en FP16
+                if not config.get("trt16", False):
+                    process_export(model_weights_path, engine_path, export_dataset_yaml, config, "trt16",
+                                   "best_trt_fp16.engine", config_file, training_dict, extra_params={"half": True})
+                # Exportar a TensorRT en INT8
+                if not config.get("trt8", False):
+                    process_export(model_weights_path, engine_path, export_dataset_yaml, config, "trt8",
+                                   "best_trt_int8.engine", config_file, training_dict, extra_params={"int8": True})
+            else:
+                print(f"Los pesos del modelo no existen: {model_weights_path}")
 
 
 if __name__ == "__main__":
     dataset_yaml_list=['Deepfish.yaml', 'Deepfish_LO.yaml']
+    models_to_use = ALL_MODELS
     optimizers = ["SGD", "AdamW"]
     project_name = "first_run"
-    epochs = 80
+    extra_params = {"epochs": 80, "batch": 8}
+    first_run_json = "training/run1.json"
+    second_run_json = "training/run2.json"
+    
+    #? 1) Primero creamos los archivos JSON que contienen los parámetros de entrenamiento para cada caso.
+    def first_experiment_json():
+        #* I) El primer entrenamiento será con todo en default.
+        freeze_dict = {'yolov8n-seg': False, 'yolov8s-seg': False, 'yolov8m-seg': False, 'yolov8l-seg': False,
+                    'yolov8x-seg': False, 'yolov9c-seg': False, 'yolov9e-seg': False, 'yolo11n-seg': False,
+                    'yolo11s-seg': False, 'yolo11m-seg': False, 'yolo11l-seg': False, 'yolo11x-seg': False}
+        create_training_json(dataset_yaml_list=dataset_yaml_list, model_name_list=models_to_use, optimizer_list=optimizers,
+                            project_name=project_name , freeze_dict=freeze_dict, json_file=first_run_json,
+                            extra_params=extra_params)
+        
+        #* II) El segundo entrenamiento será igual pero con transfer learning (congelar backbone)
+        freeze_dict = {'yolov8n-seg': True, 'yolov8s-seg': True, 'yolov8m-seg': True, 'yolov8l-seg': True,
+                    'yolov8x-seg': True, 'yolov9c-seg': True, 'yolov9e-seg': True, 'yolo11n-seg': True,
+                    'yolo11s-seg': True, 'yolo11m-seg': True, 'yolo11l-seg': True, 'yolo11x-seg': True}
+        create_training_json(dataset_yaml_list=dataset_yaml_list, model_name_list=models_to_use, optimizer_list=optimizers,
+                            project_name=project_name , freeze_dict=freeze_dict, json_file=second_run_json,
+                            extra_params=extra_params)
+    # first_experiment_json()
 
-    #? 1) Realizamos un entrenamiento con todo en default y opt = [SGD, AdamW]
-    freeze_dict = {'yolov8n-seg': False, 'yolov8s-seg': False, 'yolov8m-seg': False, 'yolov8l-seg': False,
-                   'yolov8x-seg': False, 'yolov9c-seg': False, 'yolov9e-seg': False, 'yolo11n-seg': False,
-                   'yolo11s-seg': False, 'yolo11m-seg': False, 'yolo11l-seg': False, 'yolo11x-seg': False}
-    train_run(dataset_yaml_list=dataset_yaml_list, model_name_list=ALL_MODELS, optimizer_list=optimizers,
-              project_name=project_name , freeze_dict=freeze_dict, epochs=epochs)
+    #? 2) Luego leemos los arhivos JSON y entrenamos acorde
+    # train_run(config_file=first_run_json)
+    # train_run(config_file=second_run_json)
 
-    #? 2) Luego lo mismo pero todos los entrenamientos son tranfer learning (congelar backbone)
-    freeze_dict = {'yolov8n-seg': True, 'yolov8s-seg': True, 'yolov8m-seg': True, 'yolov8l-seg': True,
-                   'yolov8x-seg': True, 'yolov9c-seg': True, 'yolov9e-seg': True, 'yolo11n-seg': True,
-                   'yolo11s-seg': True, 'yolo11m-seg': True, 'yolo11l-seg': True, 'yolo11x-seg': True}
-    train_run(dataset_yaml_list=dataset_yaml_list, model_name_list=ALL_MODELS, optimizer_list=optimizers,
-              project_name=project_name , freeze_dict=freeze_dict, epochs=epochs)
+    #? 3) Exportamos los entrenamientos con TensorRT
+    export_experiments(first_run_json)
+    export_experiments(second_run_json)
