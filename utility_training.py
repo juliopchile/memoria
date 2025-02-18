@@ -181,7 +181,7 @@ def create_training_json(dataset_yaml_list, model_name_list, optimizer_list, pro
                     
                     # Agregar la configuración al diccionario general de entrenamiento
                     training_dict[run_name] = {"model_name": model_name, "hyperparams": train_params,
-                                               "done": False, "trt": False, "trt16": False, "trt8": False}
+                                               "done": False, "trt32": False, "trt16": False, "trt8": False}
     
     # Asegurarse de que el directorio donde se guardará el archivo JSON existe
     json_dir = os.path.dirname(json_file)
@@ -358,5 +358,5 @@ if __name__ == "__main__":
     # train_run(config_file=second_run_json)
 
     #? 3) Exportamos los entrenamientos con TensorRT
-    export_experiments(first_run_json)
-    export_experiments(second_run_json)
+    #export_experiments(first_run_json)
+    #export_experiments(second_run_json)

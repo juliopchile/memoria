@@ -11,8 +11,8 @@ TRAINING_DIRECTORY = "training"             # Path donde se guardan los modelos 
 
 # Diccionario usado para descargar datasets desde Roboflow.
 DATASETS_ROBOFLOW_LINKS = {
-    "Deepfish": dict(workspace="memristor", project="deepfish-segmentation-ocdlj", version=3, name="Deepfish"),
-    "Deepfish_LO": dict(workspace="memristor", project="deepfish-segmentation-ocdlj", version=4, name="Deepfish_LO")
+    "Deepfish": dict(workspace="memristor", project="deepfish-segmentation-ocdlj", version=10, name="Deepfish"),
+    "Deepfish_LO": dict(workspace="memristor", project="deepfish-segmentation-ocdlj", version=9, name="Deepfish_LO")
 }
 
 # Lista de archivos YAML de los datasets a entrenar (ordenados!!).

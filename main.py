@@ -3,7 +3,7 @@ import json
 from ultralytics import YOLO
 
 from utility_models import export_to_tensor_rt
-from utility_training import create_training_json, train_run
+from utility_training import create_training_json, train_run, export_experiments
 from config import *
 
 
@@ -40,6 +40,5 @@ if __name__ == "__main__":
     # train_run(config_file=second_run_json)
 
     #? 3) Exportamos los entrenamientos con TensorRT
-
-    
-    
+    export_experiments(first_run_json)
+    export_experiments(second_run_json)

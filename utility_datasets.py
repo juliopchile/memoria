@@ -360,7 +360,7 @@ def get_export_yaml_path(dataset_yaml: str) -> str:
 
 
 def setup_datasets():
-    datasets_a_descargar = ["Deepfish", "Deepfish_LO", "Salmon", "Salmon_LO", "Shiny_v4"]
+    datasets_a_descargar = ["Deepfish", "Deepfish_LO", "Salmon", "Salmon_LO"]
 
     # Descargar los datasets necesarios desde Roboflow
     for name, info in DATASETS_ROBOFLOW_LINKS.items():
