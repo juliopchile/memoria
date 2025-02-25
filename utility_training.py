@@ -1,5 +1,8 @@
 import os
 import json
+import copy
+import pandas as pd
+import numpy as np
 from threading import Lock
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from ultralytics import YOLO
@@ -89,7 +92,8 @@ def train_run(config_file, max_concurrent_threads=1):
         # Obtener la ruta del modelo: se descarga o se recupera según la implementación de get_backbone_path
         model_path = get_backbone_path(model_name)
         # Recuperar los hiperparámetros de entrenamiento
-        train_params = config.get("hyperparam", {})
+        train_params = config.get("hyperparams", {})
+
         try:
             # Ejecutar el entrenamiento
             thread_safe_train(model_path, train_params)
@@ -310,19 +314,146 @@ def export_experiments(config_file: str) -> None:
 
             if os.path.isfile(model_weights_path):
                 # Exportar a TensorRT en FP32
-                if not config.get("trt", False):
-                    process_export(model_weights_path, engine_path, export_dataset_yaml, config, "trt",
-                                   "best_trt_fp32.engine", config_file, training_dict)
+                if not config.get("trt32", False):
+                    process_export(model_weights_path, engine_path, export_dataset_yaml, config, "trt32",
+                                   "best_trt_fp32.engine", config_file, training_dict, extra_params={"batch": 1})
                 # Exportar a TensorRT en FP16
                 if not config.get("trt16", False):
                     process_export(model_weights_path, engine_path, export_dataset_yaml, config, "trt16",
-                                   "best_trt_fp16.engine", config_file, training_dict, extra_params={"half": True})
+                                   "best_trt_fp16.engine", config_file, training_dict, extra_params={"half": True, "batch": 1})
                 # Exportar a TensorRT en INT8
                 if not config.get("trt8", False):
                     process_export(model_weights_path, engine_path, export_dataset_yaml, config, "trt8",
-                                   "best_trt_int8.engine", config_file, training_dict, extra_params={"int8": True})
+                                   "best_trt_int8.engine", config_file, training_dict, extra_params={"int8": True, "batch": 1})
             else:
                 print(f"Los pesos del modelo no existen: {model_weights_path}")
+
+
+def delete_exportations(config_file):
+    with open(config_file, "r") as f:
+        training_dict = json.load(f)
+
+    # Recorrer cada experimento definido en la configuración
+    for key, config in training_dict.items():
+        hyperparams = config["hyperparams"]
+        weights_path = os.path.join(hyperparams["project"], hyperparams["name"], "weights")
+
+        model_paths = [
+            "best_trt_fp32.engine",
+            "best_trt_fp16.engine",
+            "best_trt_int8.engine",
+            "best.onnx",
+            "best.cache"
+        ]
+
+        for model_file in model_paths:
+            model_path = os.path.join(weights_path, model_file)
+            if os.path.exists(model_path):
+                try:
+                    os.remove(model_path)
+                    print(f"Archivo eliminado: {model_path}")
+                except Exception as e:
+                    print(f"Error al eliminar {model_path}: {e}")
+            else:
+                print(f"Archivo no encontrado: {model_path}")
+
+
+def add_f1_scores(metrics: dict) -> dict:
+    """Calculate and add F1 scores to a copy of the given metrics dictionary, keeping the desired order."""
+    new_metrics = copy.deepcopy(metrics)  # Create a copy to avoid modifying the original
+
+    # Extract precision and recall for (B)
+    precision_B = new_metrics.get('metrics/precision(B)', 0)
+    recall_B = new_metrics.get('metrics/recall(B)', 0)
+    F1_B = 2 * (precision_B * recall_B) / (precision_B + recall_B) if (precision_B + recall_B) > 0 else 0
+
+    # Extract precision and recall for (M)
+    precision_M = new_metrics.get('metrics/precision(M)', 0)
+    recall_M = new_metrics.get('metrics/recall(M)', 0)
+    F1_M = 2 * (precision_M * recall_M) / (precision_M + recall_M) if (precision_M + recall_M) > 0 else 0
+
+    # Create a new dictionary with the desired order
+    ordered_metrics = {}
+    for key, value in new_metrics.items():
+        ordered_metrics[key] = value
+        if key == 'metrics/recall(B)':
+            ordered_metrics['metrics/F1_score(B)'] = np.float64(F1_B)
+        if key == 'metrics/recall(M)':
+            ordered_metrics['metrics/F1_score(M)'] = np.float64(F1_M)
+
+    return ordered_metrics
+
+
+def safe_validate(model_path, extra_config):
+    model = YOLO(model_path, task="segment")
+    val_metrics = model.val(**extra_config)
+    return val_metrics
+
+
+def validate_experiment(dataframe, parameters):
+    model_pt_path = parameters["model_pt_path"]
+    validation_params = parameters["validation_params"]
+    model_name = parameters["model_name"]
+    dataset_name = parameters["dataset_name"]
+    optimizer = parameters["optimizer"]
+    model_format = parameters["format"]
+    
+    try:
+        val_results = safe_validate(model_pt_path, validation_params)
+        data = add_f1_scores(val_results.results_dict) | val_results.speed
+        cleaned_data = {key.replace("metrics/", ""): value for key, value in data.items()}
+        cleaned_data.update(Model=model_name, Dataset=dataset_name, Optimizer=optimizer, Format=model_format)
+        row_data = pd.DataFrame([cleaned_data])
+        dataframe = pd.concat([dataframe, row_data], ignore_index=True)
+        return dataframe
+    except Exception as error:
+        print(error)
+
+
+def validate_run(config_file, results_path):
+    with open(config_file, "r") as f:
+        config_dict = json.load(f)
+        
+    dataframe = pd.DataFrame()
+
+    for key, config in config_dict.items():
+        dataset_name, temp = os.path.split(key)
+        model_name, optimizer = temp.split("_")
+
+        hyperparams = config["hyperparams"]
+        done = config["done"]
+        trt32 = config["trt32"]
+        trt16 = config["trt16"]
+        trt8 = config["trt8"]
+
+        # Paths
+        dataset_yaml = hyperparams["data"]
+        model_pt_path = os.path.join(hyperparams["project"],hyperparams["name"], "weights", "best.pt")
+        model_trt32_path = os.path.join(hyperparams["project"],hyperparams["name"], "weights", "best_trt_fp32.engine")
+        model_trt16_path = os.path.join(hyperparams["project"],hyperparams["name"], "weights", "best_trt_fp16.engine")
+        model_trt8_path = os.path.join(hyperparams["project"],hyperparams["name"], "weights", "best_trt_int8.engine")
+
+        validation_params = {"data": dataset_yaml, "device": "cuda:0", "split": "val"}
+
+        if done:
+            parameters = {"model_pt_path": model_pt_path, "validation_params": validation_params, "model_name": model_name,
+                          "dataset_name": dataset_name, "optimizer": optimizer, "format": "Pytorch"}
+            dataframe = validate_experiment(dataframe, parameters)
+        if trt32:
+            parameters = {"model_pt_path": model_trt32_path, "validation_params": validation_params, "model_name": model_name,
+                          "dataset_name": dataset_name, "optimizer": optimizer, "format": "TensorRT-F32"}
+            dataframe = validate_experiment(dataframe, parameters)
+        if trt16:
+            parameters = {"model_pt_path": model_trt16_path, "validation_params": validation_params, "model_name": model_name,
+                          "dataset_name": dataset_name, "optimizer": optimizer, "format": "TensorRT-F16"}
+            dataframe = validate_experiment(dataframe, parameters)
+        if trt8:
+            parameters = {"model_pt_path": model_trt8_path, "validation_params": validation_params, "model_name": model_name,
+                          "dataset_name": dataset_name, "optimizer": optimizer, "format": "TensorRT-INT8"}
+            dataframe = validate_experiment(dataframe, parameters)
+
+    print("llegué aquí")
+    dataframe.to_csv(results_path, index=False)
 
 
 if __name__ == "__main__":
@@ -358,5 +489,9 @@ if __name__ == "__main__":
     # train_run(config_file=second_run_json)
 
     #? 3) Exportamos los entrenamientos con TensorRT
-    #export_experiments(first_run_json)
-    #export_experiments(second_run_json)
+    # export_experiments(first_run_json)
+    # export_experiments(second_run_json)
+    
+    #? 4) Realizamos validación para todos los modelos entrenados y exportados.
+    # validate_run(first_run_json, "training/results_1.csv")
+    # validate_run(second_run_json, "training/results_2.csv")
