@@ -452,7 +452,6 @@ def validate_run(config_file, results_path):
                           "dataset_name": dataset_name, "optimizer": optimizer, "format": "TensorRT-INT8"}
             dataframe = validate_experiment(dataframe, parameters)
 
-    print("llegué aquí")
     dataframe.to_csv(results_path, index=False)
 
 
