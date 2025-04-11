@@ -1,0 +1,52 @@
+{
+    "Deepfish_yolov8l-seg_SGD": {
+        "model": "yolov8l-seg",
+        "tuning_params": {
+            "data": "/home/memorista01/tesis/datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD"
+        },
+        "done": false,
+        "use_ray": true,
+        "use_freeze": false
+    },
+    "Deepfish_yolov8x-seg_SGD": {
+        "model": "yolov8x-seg",
+        "tuning_params": {
+            "data": "/home/memorista01/tesis/datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD"
+        },
+        "done": false,
+        "use_ray": true,
+        "use_freeze": false
+    },
+    "Deepfish_yolov9e-seg_SGD": {
+        "model": "yolov9e-seg",
+        "tuning_params": {
+            "data": "/home/memorista01/tesis/datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD"
+        },
+        "done": false,
+        "use_ray": true,
+        "use_freeze": false
+    },
+    "Deepfish_yolo11l-seg_SGD": {
+        "model": "yolo11l-seg",
+        "tuning_params": {
+            "data": "/home/memorista01/tesis/datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD"
+        },
+        "done": false,
+        "use_ray": true,
+        "use_freeze": false
+    },
+    "Deepfish_yolo11x-seg_SGD": {
+        "model": "yolo11x-seg",
+        "tuning_params": {
+            "data": "/home/memorista01/tesis/datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD"
+        },
+        "done": false,
+        "use_ray": true,
+        "use_freeze": false
+    }
+}
