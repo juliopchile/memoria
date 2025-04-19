@@ -1,5 +1,6 @@
 # Este archivo contiene constantes utilizadas para organizar los Path y nombres de algunos archivos.
 import os
+from ray import tune
 
 # ? CONFIGURACIÓN DE DATASETS
 
@@ -33,54 +34,21 @@ MODEL_BACKBONE_LAYERS = {'yolov8n-seg': 10, 'yolov8s-seg': 10, 'yolov8m-seg': 10
 BACKBONES_DIR = os.path.join('models', 'backbone')
 
 # ? CASOS A HACER TUNING (BUSQUEDA DE HIPERPARÁMETROS)
-# Lista de nombres de casos, para iterar sobre ellos y saber si saltarlos o no.
-TUNING_NAMES_LIST_DEEPFISH = [
-    "Deepfish_yolov8n-seg_AdamW",
-    "Deepfish_yolov8n-seg_SGD",
-    "Deepfish_LO_yolov8n-seg_AdamW",
-    "Deepfish_LO_yolov8n-seg_SGD",
-    "Deepfish_yolov8s-seg_AdamW",
-    "Deepfish_yolov8s-seg_SGD",
-    "Deepfish_LO_yolov8s-seg_AdamW",
-    "Deepfish_LO_yolov8s-seg_SGD",
-    "Deepfish_yolov8m-seg_AdamW",
-    "Deepfish_yolov8m-seg_SGD",
-    "Deepfish_LO_yolov8m-seg_AdamW",
-    "Deepfish_LO_yolov8m-seg_SGD",
-    "Deepfish_yolov8l-seg_AdamW",
-    "Deepfish_yolov8l-seg_SGD",
-    "Deepfish_LO_yolov8l-seg_AdamW",
-    "Deepfish_LO_yolov8l-seg_SGD",
-    "Deepfish_yolov8x-seg_AdamW",
-    "Deepfish_yolov8x-seg_SGD",
-    "Deepfish_LO_yolov8x-seg_AdamW",
-    "Deepfish_LO_yolov8x-seg_SGD",
-    "Deepfish_yolov9c-seg_AdamW",
-    "Deepfish_yolov9c-seg_SGD",
-    "Deepfish_LO_yolov9c-seg_AdamW",
-    "Deepfish_LO_yolov9c-seg_SGD",
-    "Deepfish_yolov9e-seg_AdamW",
-    "Deepfish_yolov9e-seg_SGD",
-    "Deepfish_LO_yolov9e-seg_AdamW",
-    "Deepfish_LO_yolov9e-seg_SGD",
-    "Deepfish_yolo11n-seg_AdamW",
-    "Deepfish_yolo11n-seg_SGD",
-    "Deepfish_LO_yolo11n-seg_AdamW",
-    "Deepfish_LO_yolo11n-seg_SGD",
-    "Deepfish_yolo11s-seg_AdamW",
-    "Deepfish_yolo11s-seg_SGD",
-    "Deepfish_LO_yolo11s-seg_AdamW",
-    "Deepfish_LO_yolo11s-seg_SGD",
-    "Deepfish_yolo11m-seg_AdamW",
-    "Deepfish_yolo11m-seg_SGD",
-    "Deepfish_LO_yolo11m-seg_AdamW",
-    "Deepfish_LO_yolo11m-seg_SGD",
-    "Deepfish_yolo11l-seg_AdamW",
-    "Deepfish_yolo11l-seg_SGD",
-    "Deepfish_LO_yolo11l-seg_AdamW",
-    "Deepfish_LO_yolo11l-seg_SGD",
-    "Deepfish_yolo11x-seg_AdamW",
-    "Deepfish_yolo11x-seg_SGD",
-    "Deepfish_LO_yolo11x-seg_AdamW",
-    "Deepfish_LO_yolo11x-seg_SGD"
-]
+SEARCH_SPACES = {
+        False: {
+                'lr0': (1e-4, 0.01),
+                'lrf': (0.01, 0.5),
+                'momentum': (0.6, 0.98),
+                'weight_decay': (0.0, 0.001),
+                'warmup_epochs': (0.0, 5.0),
+                'warmup_momentum': (0.0, 0.95)
+        },
+        True: {
+                'lr0': tune.uniform(1e-4, 0.01),
+                'lrf': tune.uniform(0.01, 0.5),
+                'momentum': tune.uniform(0.6, 0.98),
+                'weight_decay': tune.uniform(0.0, 0.001),
+                'warmup_epochs': tune.uniform(0.0, 5.0),
+                'warmup_momentum': tune.uniform(0.0, 0.95)
+        }
+}

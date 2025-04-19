@@ -34,8 +34,9 @@ def thread_safe_train(model_path, params):
     None
     """
     local_model = YOLO(model_path)
-    local_model.train(**params)
+    result = local_model.train(**params)
     del local_model
+    return result
 
 
 def train_run(config_file, max_concurrent_threads=1):
