@@ -16,27 +16,27 @@
         "model_name": "yolov8l-seg",
         "use_ray": true,
         "use_freeze": false,
-        "done": false,
+        "done": true,
         "best_results": {
-            "trial_id": "80d97_00028",
+            "trial_id": "e52e8_00023",
             "config": {
-                "lr0": 0.003614261285475044,
-                "lrf": 0.09376663546327929,
-                "momentum": 0.7134882906162927,
-                "weight_decay": 0.0005383252967205443,
-                "warmup_epochs": 3.153505116091852,
-                "warmup_momentum": 0.23013290880039103,
+                "lr0": 0.0030345856866932875,
+                "lrf": 0.2299461404244075,
+                "momentum": 0.8951954327477759,
+                "weight_decay": 0.0009668616736757851,
+                "warmup_epochs": 1.2301246943309552,
+                "warmup_momentum": 0.6742103392538771,
                 "optimizer": "SGD",
                 "batch": 8,
                 "single_cls": true,
                 "cos_lr": true
             },
             "metrics": {
-                "precision(M)": 0.98727,
-                "recall(M)": 0.98163,
-                "mAP50(M)": 0.99393,
-                "mAP50-95(M)": 0.7898,
-                "F1_score(M)": 0.9844419219868962
+                "precision(M)": 1.0,
+                "recall(M)": 0.97219,
+                "mAP50(M)": 0.99406,
+                "mAP50-95(M)": 0.81091,
+                "F1_score(M)": 0.9858989245458095
             }
         }
     },
