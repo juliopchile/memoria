@@ -199,7 +199,7 @@ def raytune_serie_a_diccionario(serie):
     return resultado
 
 
-def procesar_result_grid(result_grid):
+def procesar_result_grid(result_grid: ResultGrid):
     # Obtenemos el mejor caso de cada entrenamiento
     all_best_metrics_df = result_grid.get_dataframe(filter_metric="metrics/mAP50(M)", filter_mode="max")
 
