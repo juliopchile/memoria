@@ -506,7 +506,6 @@ if __name__ == "__main__":
     extra_params = {"epochs": 80, "batch": 8}
     first_run_json = "training/run1.json"
     second_run_json = "training/run2.json"
-    results_path = 
 
     #? 1) Primero creamos los archivos JSON que contienen los parámetros de entrenamiento para cada caso.
     def first_experiment_json():
