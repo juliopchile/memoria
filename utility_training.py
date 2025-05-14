@@ -15,7 +15,7 @@ from config import *
 def thread_safe_train(model_path, params):
     """
     Entrena un modelo YOLO en un dataset especificado utilizando una instancia local del modelo de manera segura para hilos.
-    
+
     Parámetros:
     -----------
     model_path : str
@@ -28,7 +28,7 @@ def thread_safe_train(model_path, params):
           - project: directorio del proyecto para almacenar los resultados.
           - name: nombre del run de entrenamiento.
           - otros parámetros adicionales (por ejemplo, epochs, batch, etc.)
-    
+
     Retorna:
     --------
     None
@@ -43,18 +43,18 @@ def train_run(config_file, max_concurrent_threads=1):
     """
     Ejecuta entrenamientos de modelos basados en las configuraciones definidas en un archivo JSON, 
     limitando el número de entrenamientos concurrentes a 'max_concurrent_threads'.
-    
+
     Para cada configuración de entrenamiento en el archivo JSON que no esté marcada como completada 
     ("done": False), se envía una tarea a un ThreadPoolExecutor con límite de hilos concurrentes. Una vez 
     finalizado el entrenamiento de una tarea, se actualiza su estado a True en el diccionario y se guarda 
     la actualización en el archivo JSON.
-    
+
     Parámetros:
     -----------
     config_file : str
         Ruta al archivo JSON que contiene las configuraciones de entrenamiento. Cada entrada en el JSON debe tener la
         siguiente estructura:
-        
+
             {
                 "run_name": {
                     "model_name": <nombre del modelo>,
@@ -63,10 +63,10 @@ def train_run(config_file, max_concurrent_threads=1):
                 },
                 ...
             }
-    
+
     max_concurrent_threads : int, opcional (por defecto = 1)
         Número máximo de entrenamientos a ejecutar de forma concurrente.
-    
+
     Retorna:
     --------
     None
@@ -74,14 +74,14 @@ def train_run(config_file, max_concurrent_threads=1):
     # Cargar configuraciones de entrenamiento desde el JSON
     with open(config_file, "r") as f:
         training_dict = json.load(f)
-    
+
     # Lock para asegurar actualizaciones seguras al archivo JSON desde múltiples hilos
     json_lock = Lock()
-    
+
     def training_wrapper(key, config):
         """
         Función wrapper que ejecuta el entrenamiento de un run y actualiza su estado en el JSON.
-        
+
         Parámetros:
         -----------
         key : str
@@ -106,14 +106,14 @@ def train_run(config_file, max_concurrent_threads=1):
             print(f"Entrenamiento completado para: {key}")
         except Exception as e:
             print(f"El entrenamiento para {key} falló con error: {e}")
-    
+
     # Crear un ThreadPoolExecutor que limite el número de tareas concurrentes
     with ThreadPoolExecutor(max_workers=max_concurrent_threads) as executor:
         futures = []
         for key, config in training_dict.items():
             if not config.get("done", False):
                 futures.append(executor.submit(training_wrapper, key, config))
-        
+
         # Esperar a que todas las tareas finalicen
         for future in as_completed(futures):
             # Si deseas capturar excepciones globales podrías hacerlo aquí:
@@ -128,12 +128,12 @@ def train_run(config_file, max_concurrent_threads=1):
 def create_training_json(dataset_yaml_list, model_name_list, optimizer_list, project_name, freeze_dict, json_file, extra_params):
     """
     Crea un archivo JSON con configuraciones de entrenamiento generadas a partir de listas de parámetros.
-    
+
     Para cada combinación de dataset, modelo y optimizador, se genera una configuración que incluye:
       - La ruta al dataset YAML.
       - Los parámetros de entrenamiento como: optimizador, cantidad de capas a congelar (si aplica),
         directorio del proyecto, nombre del run, y parámetros adicionales.
-    
+
     Parámetros:
     -----------
     dataset_yaml_list : list
@@ -151,7 +151,7 @@ def create_training_json(dataset_yaml_list, model_name_list, optimizer_list, pro
         Ruta del archivo JSON en el que se guardarán las configuraciones de entrenamiento.
     extra_params : dict
         Diccionario con otros parámetros adicionales de entrenamiento (por ejemplo, {"epochs": 80, "batch": 8}).
-    
+
     Retorna:
     --------
     None
@@ -160,7 +160,7 @@ def create_training_json(dataset_yaml_list, model_name_list, optimizer_list, pro
     for dataset in dataset_yaml_list:
         dataset_path = os.path.join(YAML_DIRECTORY, dataset)
         dataset_name, _ = os.path.splitext(dataset)
-        
+
         if os.path.isfile(dataset_path):
             for model_name in model_name_list:
                 for optimizer in optimizer_list:
@@ -173,7 +173,7 @@ def create_training_json(dataset_yaml_list, model_name_list, optimizer_list, pro
                     else:
                         ast = ""
                         freeze_num = None
-                        
+
                     if optimizer in ["AdamW"]:
                         lr0 = 0.001
                     else:
@@ -183,20 +183,20 @@ def create_training_json(dataset_yaml_list, model_name_list, optimizer_list, pro
                     run_name = os.path.join(dataset_name, f"{model_name}{ast}_{optimizer}")
                     train_params = {"data": dataset_path, "optimizer": optimizer, "freeze": freeze_num, "lr0": lr0,
                                     "project": project_dir, "name": run_name, **extra_params}
-                    
+
                     # Agregar la configuración al diccionario general de entrenamiento
                     training_dict[run_name] = {"model_name": model_name, "hyperparams": train_params,
                                                "done": False, "trt32": False, "trt16": False, "trt8": False}
-    
+
     # Asegurarse de que el directorio donde se guardará el archivo JSON existe
     json_dir = os.path.dirname(json_file)
     if json_dir and not os.path.exists(json_dir):
         os.makedirs(json_dir, exist_ok=True)
-    
+
     # Guardar el diccionario de configuraciones en un archivo JSON
     with open(json_file, "w") as f:
         json.dump(training_dict, f, indent=4)
-    
+
     print(f"Training JSON guardado en {json_file}")
 
 
@@ -273,7 +273,7 @@ def process_export(model_weights_path: str,
         rename_file(engine_path, new_engine_name)
         # Actualizar la configuración local del experimento
         config_entry[flag_key] = True
-        
+
         # Actualizar el archivo JSON inmediatamente después de la exportación exitosa
         update_config_file(config_file, training_dict)
         print(f"Exportación exitosa ({flag_key}) -> {new_engine_name}")
@@ -398,7 +398,7 @@ def validate_experiment(dataframe, parameters):
     dataset_name = parameters["dataset_name"]
     optimizer = parameters["optimizer"]
     model_format = parameters["format"]
-    
+
     try:
         val_results = safe_validate(model_pt_path, validation_params)
         data = add_f1_scores(val_results.results_dict) | val_results.speed
@@ -414,7 +414,7 @@ def validate_experiment(dataframe, parameters):
 def validate_run(config_file, results_path):
     with open(config_file, "r") as f:
         config_dict = json.load(f)
-        
+
     dataframe = pd.DataFrame()
 
     for key, config in config_dict.items():
@@ -481,7 +481,7 @@ def validate_tuned(best_tunes_list, results_path):
         dataset_name = os.path.splitext(os.path.basename(hyperparams["data"]))[0]
         validation_params.update(data=hyperparams["data"])
         weights_path = os.path.join(hyperparams["project"], hyperparams["name"], "weights")
-        
+
         for file, formato in [("best.pt", "Pytorch"), ("best.engine", "TensorRT-INT8")]:
             model_weights_path = os.path.join(weights_path, file)
             try:

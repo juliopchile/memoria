@@ -4,28 +4,22 @@ import shutil
 import yaml
 from ultralytics.data.converter import convert_coco
 from roboflow import Roboflow
+from typing import Tuple, List, Dict
+from roboflow.core.dataset import Dataset
 
 from config import DATASETS_COCO, DATASETS_YOLO, YAML_DIRECTORY, DATASETS_ROBOFLOW_LINKS
 from supersecrets import API_KEY
 
 
-def download_roboflow_dataset(workspace, project_id, version_number, model_format, location):
-    """
-    Descarga un dataset de Roboflow y lo guarda en la ubicación especificada.
+def download_roboflow_dataset(workspace: str, project_id: str, version_number: int, model_format: str, location: str) -> Dataset | None:
+    """Descarga un dataset de Roboflow y lo guarda en la ubicación especificada.
 
-    Args:
-        workspace (str): El nombre del workspace en Roboflow.
-        project_id (str): El ID del proyecto en Roboflow.
-        version_number (int): El número de versión del dataset.
-        model_format (str): El formato del modelo a descargar.
-        location (str): La ubicación donde se guardará el dataset.
-
-    Returns:
-        dict: Información sobre el dataset descargado.
-        None: Si ocurre un error durante la descarga.
-
-    Example:
-        download_roboflow_dataset('my_workspace', 'my_project', 1, 'yolov8', 'datasets/my_dataset')
+    :param str workspace: El nombre del workspace en Roboflow.
+    :param str project_id: El ID del proyecto en Roboflow.
+    :param int version_number: El número de versión del dataset.
+    :param str model_format: El formato del modelo a descargar.
+    :param str location: La ubicación donde se guardará el dataset.
+    :return Dataset: Dataset Object o None.
     """
     try:
         rf = Roboflow(api_key=API_KEY)
@@ -37,7 +31,13 @@ def download_roboflow_dataset(workspace, project_id, version_number, model_forma
         return None
 
 
-def copy_files(input_path, output_path, extension):
+def copy_files(input_path: str, output_path: str, extension: str | Tuple[str]):
+    """Copia archivos desde un directorio a otro si estos cumplen con cierta extensión.
+
+    :param str input_path: Directorio con los archivos.
+    :param str output_path: Directorio donde moverlos.
+    :param str | Tuple[str] extension: Extensión o tupla de extensiones.
+    """
     # Itera a través de los archivos en el directorio de entrada
     for filename in os.listdir(input_path):
         # Verifica si el archivo tiene una extensión de imagen
@@ -48,7 +48,7 @@ def copy_files(input_path, output_path, extension):
 
             # Copia el archivo
             shutil.copy2(src_file, dest_file)
-    
+
 
 def copy_images(input_path, output_path):
     """
@@ -82,7 +82,7 @@ def copy_labels(input_path, output_path):
     extension = ('txt')
 
     copy_files(input_path, output_path, extension)
-    
+
 
 def dataset_coco_to_yolo(name, path_dataset):
     """
@@ -121,38 +121,38 @@ def obtain_coco_classes(coco_labels_dir):
         if file.endswith(".json"):
             json_file = os.path.join(coco_labels_dir, file)
             break
-    
+
     # Si no se encuentra ningún archivo JSON
     if json_file is None:
         raise FileNotFoundError("No se encontró un archivo JSON en el directorio proporcionado.")
-    
+
     # Abrir y cargar el archivo JSON
     with open(json_file, 'r') as f:
         coco_data = json.load(f)
-    
+
     # Crear el diccionario de clases
     classes_dict = {}
-    
+
     # Filtrar categorías basadas en la supercategoría
     if 'categories' in coco_data:
         for category in coco_data['categories']:
             class_id = category['id']
             class_name = category['name']
             supercategory = category.get('supercategory', None)
-            
+
             # Excluir clases con supercategory "none"
             if supercategory != "none":
                 classes_dict[class_id] = class_name
     else:
         raise KeyError("El archivo JSON no contiene la clave 'categories'.")
-    
+
     return classes_dict
 
 
 def combine_and_reindex_classes(class_dicts):
     # Crear un diccionario combinado con todas las clases
     combined_classes = {}
-    
+
     for class_dict in class_dicts:
         for class_id, class_name in class_dict.items():
             if class_name not in combined_classes.values():
@@ -164,7 +164,7 @@ def combine_and_reindex_classes(class_dicts):
     for class_name in combined_classes.values():
         reindexed_classes[new_id] = class_name
         new_id += 1
-    
+
     return reindexed_classes
 
 
@@ -193,7 +193,7 @@ def create_datasets_yaml(dataset_path: str, subdirectories: list, classes: dict)
     yaml_path = os.path.join(dataset_path, 'data.yaml')
     with open(yaml_path, 'w') as f:
         yaml.dump(yaml_file, f, default_flow_style=False)
-  
+
 
 def copy_images_to_new_dataset(name, path_dataset, output_dataset_path):
     """
@@ -271,20 +271,20 @@ def create_export_datasets(datasets_directory):
                 for subdirectory in ["test", "train", "valid"]:
                     subdirectory_path = os.path.join(directory_path, subdirectory)
                     target_path = os.path.join(dataset_export_path, directory, "train")
-                    
+
                     if directory == "images":
                         copy_images(subdirectory_path, target_path)
                     elif directory == "labels":
                         copy_labels(subdirectory_path, target_path)
-    
+
             # Copiar el archivo data.yaml y modificarlo
             data_yaml_path = os.path.join(dataset_path, "data.yaml")
             export_yaml_path = os.path.join(dataset_export_path, "data.yaml")
-            
+
             if os.path.exists(data_yaml_path):
                 # Crear el directorio destino si no existe
                 os.makedirs(dataset_export_path, exist_ok=True)
-                
+
                 # Copiar el archivo data.yaml al nuevo directorio de exportación
                 shutil.copy(data_yaml_path, export_yaml_path)
 
@@ -294,7 +294,7 @@ def create_export_datasets(datasets_directory):
 
                 # Cambiar el campo 'path' al path absoluto del dataset exportado
                 yaml_file['path'] = os.path.abspath(dataset_export_path)
-                
+
                 # Cambiar los campos 'train', 'val', y 'test' para que apunten a 'train'
                 yaml_file['train'] = os.path.join("images", "train")
                 yaml_file['val'] = os.path.join("images", "train")
@@ -303,7 +303,7 @@ def create_export_datasets(datasets_directory):
                 # Guardar el archivo YAML modificado
                 with open(export_yaml_path, 'w') as f:
                     yaml.dump(yaml_file, f, default_flow_style=False)
-                
+
                 print(f"Archivo data.yaml modificado y guardado en {export_yaml_path}")
             else:
                 print(f"No se encontró data.yaml en {dataset_path}, omitiendo...")
@@ -325,12 +325,12 @@ def create_yaml_directory(yaml_directory: str, yolo_datasets: str):
     # Iterar sobre los directorios de datasets en yolo_datasets
     for dataset in os.listdir(yolo_datasets):
         current_dataset_yaml_file = os.path.join(yolo_datasets, dataset, "data.yaml")
-        
+
         # Verificar si el archivo data.yaml existe en el dataset
         if os.path.exists(current_dataset_yaml_file):
             # Definir la ruta de destino en yaml_directory con el nombre {dataset}.yaml
             dest_yaml_file = os.path.join(yaml_directory, f"{dataset}.yaml")
-            
+
             # Copiar el archivo data.yaml a la nueva ubicación
             shutil.copy(current_dataset_yaml_file, dest_yaml_file)
             print(f"Archivo {current_dataset_yaml_file} copiado como {dest_yaml_file}")
@@ -341,20 +341,20 @@ def create_yaml_directory(yaml_directory: str, yolo_datasets: str):
 def get_export_yaml_path(dataset_yaml: str) -> str:
     """
     Dado el path de un archivo YAML de dataset, retorna el path de su versión de exportación.
-    
+
     Args:
         dataset_yaml (str): Ruta del archivo YAML del dataset.
-    
+
     Returns:
         str: Ruta del archivo de exportación con el prefijo 'export_' en el mismo directorio.
     """
     # Obtener el directorio y el nombre del archivo sin extensión
     dir_name = os.path.dirname(dataset_yaml)
     dataset_name_without_ext = os.path.splitext(os.path.basename(dataset_yaml))[0]
-    
+
     # Construir el nuevo nombre de archivo
     export_yaml_name = f"export_{dataset_name_without_ext}.yaml"
-    
+
     # Retornar la ruta completa
     return os.path.join(dir_name, export_yaml_name)
 
@@ -387,7 +387,7 @@ def setup_datasets():
 
     # Crea una carpeta donde se pueden hayar copias de los data.yaml de cada dataset para mayor accesibilidad
     create_yaml_directory(YAML_DIRECTORY, DATASETS_YOLO)
-    
+
 
 if __name__ == "__main__":
     setup_datasets()

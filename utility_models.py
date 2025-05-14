@@ -7,7 +7,7 @@ from config import ALL_MODELS, BACKBONES_DIR
 def get_backbone_path(model_name: str):
     """
     Utility function to get a downloaded backbone model path given the model name.
-    
+
     Args:
         model_name (str): The name of the model.
 
@@ -15,7 +15,7 @@ def get_backbone_path(model_name: str):
         str: The full path to the model file.
     """
     return os.path.join(BACKBONES_DIR, model_name + ".pt")
-    
+
 
 def download_models(models_to_download: list = None):
     """

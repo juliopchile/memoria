@@ -12,7 +12,7 @@ def quitar_asterisco(datagrama, mascara):
 def crear_lista_diccionarios(datagram, datagrams, group, groups, metrics, label, labels, order, xlabel, ylabel, title=None, legend=True):
     """
     Crea una lista de diccionarios para configurar gráficos basados en los parámetros proporcionados.
-    
+
     Parámetros:
     - datagram: Lista con un solo DataFrame.
     - datagrams: Lista con dos DataFrames.
@@ -24,16 +24,16 @@ def crear_lista_diccionarios(datagram, datagrams, group, groups, metrics, label,
     - order: Orden de las categorías para el grupo.
     - xlabel: Etiqueta para el eje X.
     - ylabel: Lista de etiquetas para el eje Y, correspondiente a cada métrica.
-    
+
     Retorna:
     - Una lista de diccionarios, cada uno configurado para un gráfico específico.
     """
     lista_diccionarios = []
     largo = len(datagrams)
-    
+
     for i, metrica in enumerate(metrics):
         ylabel_actual = ylabel[i]
-        
+
         # Diccionario para un solo datagrama
         dict_solo = {
             "datagrams": datagram,
@@ -47,7 +47,7 @@ def crear_lista_diccionarios(datagram, datagrams, group, groups, metrics, label,
             "legend": legend,
         }
         lista_diccionarios.append(dict_solo)
-        
+
         # Diccionario para dos datagramas
         dict_multiple = {
             "datagrams": datagrams,
@@ -61,7 +61,7 @@ def crear_lista_diccionarios(datagram, datagrams, group, groups, metrics, label,
             "legend": legend,
         }
         lista_diccionarios.append(dict_multiple)
-    
+
     return lista_diccionarios
 
 
@@ -101,7 +101,7 @@ def plot_metric(datagrams, metrics, groups_by, order, labels, xlabel=None, ylabe
     ax.tick_params(axis='x', rotation=45)  # Rotar etiquetas del eje x
     ax.grid(True)
     mi_figura.tight_layout()  # Ajustar el diseño usando la figura
-    
+
     plt.show()
 
     return mi_figura  # Devolver la figura para uso posterior
@@ -155,7 +155,7 @@ def comparar_metricas(datagrama, columna, casos_a_comparar, thr=0.6):
 
     NON_NUMERICAL_METRICS = ["Model", "Dataset", "Format", "Optimizer", "TransferLearning"]
     non_numerical_metrics_excluded = [item for item in NON_NUMERICAL_METRICS if item != columna]
-    
+
     # Verificamos que casos_a_comparar tenga exactamente dos elementos
     if len(casos_a_comparar) != 2:
         raise ValueError("casos_a_comparar debe contener exactamente dos elementos.")
@@ -208,7 +208,7 @@ def comparar_metricas(datagrama, columna, casos_a_comparar, thr=0.6):
     # Calculamos la reducción del error para "loss"
     reduccion_error_all = {"loss": calcular_reduccion_error(pivot_all, caso1, caso2, "loss")}
     reduccion_error_df_all = pd.DataFrame(reduccion_error_all, index=pivot_all.index).reset_index()
-    
+
     reduccion_error_thr = {"loss": calcular_reduccion_error(pivot_thr, caso1, caso2, "loss")}
     reduccion_error_df_thr = pd.DataFrame(reduccion_error_thr, index=pivot_thr.index).reset_index()
 
@@ -256,11 +256,11 @@ def crear_datagramas_filtrados(resultados, columna, opciones, orden=None):
     """
     # Desempaquetar los resultados
     diff_all, diff_thr, mejora_all, mejora_thr, factor_all, factor_thr, red_err_all, red_err_thr = resultados
-    
+
     # Función auxiliar para procesar un par de DataFrames (con y sin outliers)
     def procesar_par_df(df_all, df_thr, es_reduccion_error=False):
         promedios = []
-        
+
         # 1) Filtrar y calcular promedios para cada opción
         for opcion in opciones:
             # Con outliers (df_all)
@@ -270,7 +270,7 @@ def crear_datagramas_filtrados(resultados, columna, opciones, orden=None):
             mean_all[columna] = opcion
             mean_all["Outlier"] = True
             promedios.append(mean_all)
-            
+
             # Sin outliers (df_thr)
             filtro_thr = df_thr[df_thr[columna] == opcion]
             mean_thr = filtro_thr.select_dtypes(include='number').mean()
@@ -278,18 +278,18 @@ def crear_datagramas_filtrados(resultados, columna, opciones, orden=None):
             mean_thr[columna] = opcion
             mean_thr["Outlier"] = False
             promedios.append(mean_thr)
-        
+
         # Calcular promedios generales (Todos)
         mean_all_general = df_all.select_dtypes(include='number').mean()
         mean_all_general[columna] = "Todos"
         mean_all_general["Outlier"] = True
         promedios.append(mean_all_general)
-        
+
         mean_thr_general = df_thr.select_dtypes(include='number').mean()
         mean_thr_general[columna] = "Todos"
         mean_thr_general["Outlier"] = False
         promedios.append(mean_thr_general)
-        
+
         # 3) Tabular los datos
         tabla = pd.DataFrame(promedios)
         if orden is not None:
@@ -302,19 +302,19 @@ def crear_datagramas_filtrados(resultados, columna, opciones, orden=None):
         #    
         #else:
         #    tabla = pd.DataFrame(promedios).sort_values(by="Outlier", ascending=False)
-        
+
         # Si es reducción del error, mantener solo la columna "loss"
         if es_reduccion_error:
             tabla = tabla[[columna, "Outlier", "loss"]]
-        
+
         return tabla
-    
+
     # Procesar cada tipo de comparación
     tabla_diff = procesar_par_df(diff_all, diff_thr)
     tabla_diffr = procesar_par_df(mejora_all, mejora_thr)
     tabla_diffm = procesar_par_df(factor_all, factor_thr)
     tabla_diffre = procesar_par_df(red_err_all, red_err_thr, es_reduccion_error=True)
-    
+
     return tabla_diff, tabla_diffr, tabla_diffm, tabla_diffre
 
 
@@ -339,7 +339,7 @@ def crear_tabla_comparativa_para_formatos(diff_datagram_1, diff_datagram_2, dif_
 
 def crear_tabla_comparativa_para_modelos_yolo(yolon, yolos, yolom, yolol, yolox, transfer_learning=False, outlier=False):
     columns_to_show = ["F1_score(M)", "mAP50(M)", "mAP50-95(M)", "fitness", "preprocess", "inference", "postprocess"]
-    
+
     # Diccionario de modelos
     modelos = {
         "YOLOn": yolon,
@@ -348,14 +348,14 @@ def crear_tabla_comparativa_para_modelos_yolo(yolon, yolos, yolom, yolol, yolox,
         "YOLOl": yolol,
         "YOLOx": yolox
     }
-    
+
     # Lista para almacenar DataFrames procesados
     dfs = []
     for nombre, modelo in modelos.items():
         df = modelo.loc[(modelo["Outlier"] == outlier) & (modelo["TransferLearning"] == transfer_learning), columns_to_show].reset_index(drop=True)
         df["Model"] = nombre
         dfs.append(df)
-    
+
     return pd.concat(dfs, ignore_index=True)
 
 
@@ -363,22 +363,22 @@ def crear_tabla_promedios_modelos_yolo(df, extra_conditions=None):
     # Si no se proporciona extra_conditions, usar un diccionario vacío
     if extra_conditions is None:
         extra_conditions = {}
-    
+
     # Columnas a analizar
     columns_to_show = ["F1_score(M)", "mAP50(M)", "mAP50-95(M)"]
-    
+
     # Listas de modelos
     modelos_yolov8 = ["yolov8n-seg", "yolov8s-seg", "yolov8m-seg", "yolov8l-seg", "yolov8x-seg"]
     modelos_yolov9 = ["yolov9c-seg", "yolov9e-seg"]
     modelos_yolo11 = ["yolo11n-seg", "yolo11s-seg", "yolo11m-seg", "yolo11l-seg", "yolo11x-seg"]
-    
+
     # Función auxiliar para aplicar condiciones extras
     def apply_extra_conditions(df, conditions):
         condition = True  # Base inicial
         for key, value in conditions.items():
             condition = condition & (df[key].isin(value))  # Combinar condiciones
         return condition
-    
+
     # Función para calcular medias y desviaciones estándar
     def calcular_metricas(df, modelos, extra_conditions):
         metricas = {}
@@ -393,12 +393,12 @@ def crear_tabla_promedios_modelos_yolo(df, extra_conditions=None):
                 "max": max_values
             }
         return metricas
-    
+
     # Calcular métricas para YOLOv8 y YOLO11
     metricas_yolov8 = calcular_metricas(df, modelos_yolov8, extra_conditions)
     metricas_yolov9 = calcular_metricas(df, modelos_yolov9, extra_conditions)
     metricas_yolo11 = calcular_metricas(df, modelos_yolo11, extra_conditions)
-    
+
     # Función para convertir métricas en DataFrame
     def metricas_a_dataframe(metricas, modelos):
         data = []
@@ -420,12 +420,12 @@ def crear_tabla_promedios_modelos_yolo(df, extra_conditions=None):
             }
             data.append(row)
         return pd.DataFrame(data)
-    
+
     # Crear DataFrames finales
     df_yolov8_metrics = metricas_a_dataframe(metricas_yolov8, modelos_yolov8)
     df_yolov9_metrics = metricas_a_dataframe(metricas_yolov9, modelos_yolov9)
     df_yolo11_metrics = metricas_a_dataframe(metricas_yolo11, modelos_yolo11)
-    
+
     return df_yolov8_metrics, df_yolov9_metrics, df_yolo11_metrics
 
 
@@ -433,17 +433,17 @@ def crear_tabla_promedios_dataset(df, datasets, extra_conditions=None):
     # Si no se proporciona extra_conditions, usar un diccionario vacío
     if extra_conditions is None:
         extra_conditions = {}
-    
+
     # Columnas a analizar
     columns_to_show = ["F1_score(M)", "mAP50(M)", "mAP50-95(M)"]
-    
+
     # Función auxiliar para aplicar condiciones extras
     def apply_extra_conditions(df, conditions):
         condition = True  # Base inicial
         for key, value in conditions.items():
             condition = condition & (df[key].isin(value))  # Combinar condiciones
         return condition
-    
+
     # Función para calcular medias y desviaciones estándar
     def calcular_metricas(df, datasets, extra_conditions):
         metricas = {}
@@ -458,10 +458,10 @@ def crear_tabla_promedios_dataset(df, datasets, extra_conditions=None):
                 "max": max_values
             }
         return metricas
-    
+
     # Calcular métricas para YOLOv8 y YOLO11
     metricas_dataset = calcular_metricas(df, datasets, extra_conditions)
-    
+
     # Función para convertir métricas en DataFrame
     def metricas_a_dataframe(metricas, datasets):
         data = []
@@ -483,8 +483,8 @@ def crear_tabla_promedios_dataset(df, datasets, extra_conditions=None):
             }
             data.append(row)
         return pd.DataFrame(data)
-    
+
     # Crear DataFrames finales
     df_dataset = metricas_a_dataframe(metricas_dataset, datasets)
-    
+
     return df_dataset
