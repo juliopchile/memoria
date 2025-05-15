@@ -1,37 +1,33 @@
 import os
 import json
 import copy
+from typing import Any, Dict, List, Optional
 import pandas as pd
+from pandas import DataFrame
 import numpy as np
 from threading import Lock
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from ultralytics import YOLO
+from ultralytics.utils.metrics import DetMetrics
 
 from utility_models import get_backbone_path, export_to_tensor_rt
 from utility_datasets import get_export_yaml_path
 from config import *
 
 
-def thread_safe_train(model_path, params):
-    """
-    Entrena un modelo YOLO en un dataset especificado utilizando una instancia local del modelo de manera segura para hilos.
+def thread_safe_train(model_path: str, params: Dict) -> Dict | None:
+    """ Entrena un modelo YOLO en un dataset especificado utilizando una instancia local del modelo de manera segura para hilos.
 
-    Parámetros:
-    -----------
-    model_path : str
-        Ruta del modelo pre-entrenado o backbone descargado.
-    params : dict
-        Diccionario con los parámetros e hiperparámetros de entrenamiento, el cual puede incluir:
-          - data: ruta al archivo YAML del dataset.
-          - optimizer: optimizador a utilizar (por ejemplo, "SGD" o "AdamW").
-          - freeze: número de capas a congelar o None si no se congela el backbone.
-          - project: directorio del proyecto para almacenar los resultados.
-          - name: nombre del run de entrenamiento.
-          - otros parámetros adicionales (por ejemplo, epochs, batch, etc.)
-
-    Retorna:
-    --------
-    None
+    :param str model_path: Ruta del modelo pre-entrenado o backbone descargado.
+    :param Dict params: Diccionario con los parámetros e hiperparámetros de entrenamiento, el cual puede incluir:
+    
+        - data: ruta al archivo YAML del dataset.
+        - optimizer: optimizador a utilizar (por ejemplo, "SGD" o "AdamW").
+        - freeze: número de capas a congelar o None si no se congela el backbone.
+        - project: directorio del proyecto para almacenar los resultados.
+        - name: nombre del run de entrenamiento.
+        - otros parámetros adicionales (por ejemplo, epochs, batch, etc.)
+    :return Dict | None: Diccionario con los resultados del entrenamiento. Si este falla entonces None.
     """
     local_model = YOLO(model_path)
     result = local_model.train(**params)
@@ -39,9 +35,8 @@ def thread_safe_train(model_path, params):
     return result
 
 
-def train_run(config_file, max_concurrent_threads=1):
-    """
-    Ejecuta entrenamientos de modelos basados en las configuraciones definidas en un archivo JSON, 
+def train_run(config_file: str, max_concurrent_threads: int = 1):
+    """ Ejecuta entrenamientos de modelos basados en las configuraciones definidas en un archivo JSON, 
     limitando el número de entrenamientos concurrentes a 'max_concurrent_threads'.
 
     Para cada configuración de entrenamiento en el archivo JSON que no esté marcada como completada 
@@ -49,27 +44,19 @@ def train_run(config_file, max_concurrent_threads=1):
     finalizado el entrenamiento de una tarea, se actualiza su estado a True en el diccionario y se guarda 
     la actualización en el archivo JSON.
 
-    Parámetros:
-    -----------
-    config_file : str
-        Ruta al archivo JSON que contiene las configuraciones de entrenamiento. Cada entrada en el JSON debe tener la
-        siguiente estructura:
+    Cada entrada en el archivo JSON debe tener la siguiente estructura:
 
-            {
-                "run_name": {
-                    "model_name": <nombre del modelo>,
-                    "hyperparam": { ... parámetros de entrenamiento ... },
-                    "done": false
-                },
-                ...
-            }
+        {
+            "run_name": {
+                "model_name": <nombre del modelo>,
+                "hyperparam": { ... parámetros de entrenamiento ... },
+                "done": false
+            },
+            ...
+        }
 
-    max_concurrent_threads : int, opcional (por defecto = 1)
-        Número máximo de entrenamientos a ejecutar de forma concurrente.
-
-    Retorna:
-    --------
-    None
+    :param str config_file: Ruta al archivo JSON que contiene las configuraciones de entrenamiento.
+    :param int max_concurrent_threads: Número máximo de entrenamientos a ejecutar de forma concurrente, por defecto 1.
     """
     # Cargar configuraciones de entrenamiento desde el JSON
     with open(config_file, "r") as f:
@@ -78,17 +65,13 @@ def train_run(config_file, max_concurrent_threads=1):
     # Lock para asegurar actualizaciones seguras al archivo JSON desde múltiples hilos
     json_lock = Lock()
 
-    def training_wrapper(key, config):
-        """
-        Función wrapper que ejecuta el entrenamiento de un run y actualiza su estado en el JSON.
+    def training_wrapper(key: str, config: Dict):
+        """ Función wrapper que ejecuta el entrenamiento de un run y actualiza su estado en el JSON.
 
-        Parámetros:
-        -----------
-        key : str
-            Clave identificadora única para el run.
-        config : dict
-            Diccionario con la configuración del entrenamiento (incluye model_name, hyperparam y done).
+        :param str key: Clave identificadora única para el ru
+        :param Dict config: Diccionario con la configuración del entrenamiento (incluye model_name, hyperparam y done).
         """
+
         model_name = config.get("model_name")
         # Obtener la ruta del modelo: se descarga o se recupera según la implementación de get_backbone_path
         model_path = get_backbone_path(model_name)
@@ -125,36 +108,23 @@ def train_run(config_file, max_concurrent_threads=1):
     print(f"Todos los entrenamientos de {config_file} han sido completados.")
 
 
-def create_training_json(dataset_yaml_list, model_name_list, optimizer_list, project_name, freeze_dict, json_file, extra_params):
-    """
-    Crea un archivo JSON con configuraciones de entrenamiento generadas a partir de listas de parámetros.
+def create_training_json(dataset_yaml_list: List[str], model_name_list: List[str], optimizer_list: List[str],
+                         project_name: str, freeze_dict: Dict[str, bool], json_file: str, extra_params: Dict):
+    """ Crea un archivo JSON con configuraciones de entrenamiento generadas a partir de listas de parámetros.
 
     Para cada combinación de dataset, modelo y optimizador, se genera una configuración que incluye:
       - La ruta al dataset YAML.
       - Los parámetros de entrenamiento como: optimizador, cantidad de capas a congelar (si aplica),
         directorio del proyecto, nombre del run, y parámetros adicionales.
 
-    Parámetros:
-    -----------
-    dataset_yaml_list : list
-        Lista de nombres de archivos YAML que definen los datasets (por ejemplo, ['Deepfish.yaml', 'Deepfish_LO.yaml']).
-    model_name_list : list
-        Lista de nombres de modelos (ejemplo: ['yolov8n-seg', 'yolov9c-seg']) que se utilizarán.
-    optimizer_list : list
-        Lista de optimizadores a usar (por ejemplo, ["SGD", "AdamW"]).
-    project_name : str
-        Nombre del proyecto (usado para definir el directorio donde se guardarán los resultados).
-    freeze_dict : dict
-        Diccionario que indica si se debe aplicar congelamiento del backbone para cada modelo.
-        Cada clave es el nombre de un modelo y el valor es un booleano (True para congelar, False para no congelar).
-    json_file : str
-        Ruta del archivo JSON en el que se guardarán las configuraciones de entrenamiento.
-    extra_params : dict
-        Diccionario con otros parámetros adicionales de entrenamiento (por ejemplo, {"epochs": 80, "batch": 8}).
-
-    Retorna:
-    --------
-    None
+    :param List[str] dataset_yaml_list: Lista de nombres de archivos YAML que definen los datasets (por ejemplo, ['Deepfish.yaml', 'Deepfish_LO.yaml']).
+    :param List[str] model_name_list: Lista de nombres de modelos (ejemplo: ['yolov8n-seg', 'yolov9c-seg']) que se utilizarán.
+    :param List[str] optimizer_list: Lista de optimizadores a usar (por ejemplo, ["SGD", "AdamW"]).
+    :param str project_name: Nombre del proyecto (usado para definir el directorio donde se guardarán los resultados).
+    :param Dict[str, bool] freeze_dict: Diccionario que indica si se debe aplicar congelamiento del backbone para cada modelo.
+    Cada clave es el nombre de un modelo y el valor es un booleano (True para congelar, False para no congelar).
+    :param str json_file: Ruta del archivo JSON en el que se guardarán las configuraciones de entrenamiento.
+    :param Dict extra_params: Diccionario con otros parámetros adicionales de entrenamiento (por ejemplo, {"epochs": 80, "batch": 8}).
     """
     training_dict = {}
     for dataset in dataset_yaml_list:
@@ -201,15 +171,11 @@ def create_training_json(dataset_yaml_list, model_name_list, optimizer_list, pro
 
 
 def rename_file(original_path: str, new_name: str) -> str:
-    """
-    Renombra un archivo manteniendo su directorio original.
+    """ Renombra un archivo manteniendo su directorio original.
 
-    Args:
-        original_path (str): Ruta completa del archivo original.
-        new_name (str): Nuevo nombre del archivo (sin cambiar el directorio).
-
-    Returns:
-        str: La ruta completa del archivo renombrado.
+    :param str original_path: Ruta completa del archivo original.
+    :param str new_name: Nuevo nombre del archivo (sin cambiar el directorio).
+    :return str: La ruta completa del archivo renombrado.
     """
     # Obtener el directorio del archivo original
     dir_name = os.path.dirname(original_path)
@@ -220,13 +186,11 @@ def rename_file(original_path: str, new_name: str) -> str:
     return new_path
 
 
-def update_config_file(config_file: str, training_dict: dict) -> None:
-    """
-    Actualiza el archivo de configuración con el contenido de training_dict.
+def update_config_file(config_file: str, training_dict: Dict) -> None:
+    """ Actualiza el archivo de configuración con el contenido de training_dict.
 
-    Args:
-        config_file (str): Ruta al archivo JSON de configuración.
-        training_dict (dict): Diccionario actualizado con la configuración.
+    :param str config_file: Ruta al archivo JSON de configuración.
+    :param Dict training_dict: Diccionario actualizado con la configuración.
     """
     try:
         with open(config_file, "w") as f:
@@ -239,32 +203,29 @@ def update_config_file(config_file: str, training_dict: dict) -> None:
 def process_export(model_weights_path: str,
                    engine_path: str,
                    export_dataset_yaml: str,
-                   config_entry: dict,
+                   config_entry: Dict,
                    flag_key: str,
                    new_engine_name: str,
                    config_file: str,
-                   training_dict: dict,
-                   extra_params: dict = None) -> None:
-    """
-    Intenta exportar el modelo a TensorRT, renombrar el archivo generado y actualizar
+                   training_dict: Dict,
+                   extra_params: Optional[Dict] = None) -> None:
+    """ Intenta exportar el modelo a TensorRT, renombrar el archivo generado y actualizar
     el archivo de configuración JSON en caso de éxito.
 
-    Args:
-        model_weights_path (str): Ruta a los pesos del modelo entrenado.
-        engine_path (str): Ruta al archivo engine generado (antes de renombrarlo).
-        export_dataset_yaml (str): Ruta al archivo YAML del dataset de exportación.
-        config_entry (dict): Subdiccionario de configuración del experimento.
-        flag_key (str): Clave a actualizar en la configuración ('trt', 'trt16', 'trt8').
-        new_engine_name (str): Nuevo nombre para el archivo engine exportado.
-        config_file (str): Ruta al archivo JSON de configuración.
-        training_dict (dict): Diccionario completo de la configuración.
-        extra_params (dict, optional): Parámetros adicionales para export_to_tensor_rt.
-                                       Ej: {"half": True} o {"int8": True}.
+    :param str model_weights_path: Ruta a los pesos del modelo entrenado.
+    :param str engine_path: Ruta al archivo engine generado (antes de renombrarlo).
+    :param str export_dataset_yaml: Ruta al archivo YAML del dataset de exportación.
+    :param Dict config_entry: Subdiccionario de configuración del experimento.
+    :param str flag_key: Clave a actualizar en la configuración ('trt', 'trt16', 'trt8').
+    :param str new_engine_name: Nuevo nombre para el archivo engine exportado.
+    :param str config_file: Ruta al archivo JSON de configuración.
+    :param Dict training_dict: Diccionario completo de la configuración.
+    :param Optional[Dict] extra_params: Parámetros adicionales para export_to_tensor_rt., por defecto None.
     """
     try:
         # Construir los parámetros para la exportación
         export_params = {"data": export_dataset_yaml}
-        if extra_params:
+        if extra_params is not None:
             export_params.update(extra_params)
 
         # Ejecutar la exportación a TensorRT
@@ -282,16 +243,14 @@ def process_export(model_weights_path: str,
 
 
 def export_experiments(config_file: str) -> None:
-    """
-    Procesa los experimentos definidos en el archivo de configuración JSON.
+    """ Procesa los experimentos definidos en el archivo de configuración JSON.
     Para cada experimento que ya fue entrenado (done=True) y cuyas exportaciones
     aún no se han realizado (trt, trt16, trt8 == False), se intenta exportar el modelo
     a TensorRT en FP32, FP16 e INT8. Tras cada exportación exitosa se actualiza el archivo
     JSON de configuración, de forma que, en caso de fallar alguna exportación, lo realizado
     hasta el momento quede guardado.
 
-    Args:
-        config_file (str): Ruta al archivo JSON de configuración.
+    :param str config_file: Ruta al archivo JSON de configuración.
     """
     # Leer el archivo de configuración
     with open(config_file, "r") as f:
@@ -330,7 +289,11 @@ def export_experiments(config_file: str) -> None:
                 print(f"Los pesos del modelo no existen: {model_weights_path}")
 
 
-def delete_exportations(config_file):
+def delete_exportations(config_file: str):
+    """ Remueve los archivos de exportación de los modelos entrenados en el archivo de configuración.
+
+    :param str config_file: Ruta al archivo JSON de configuración.
+    """
     with open(config_file, "r") as f:
         training_dict = json.load(f)
 
@@ -359,8 +322,12 @@ def delete_exportations(config_file):
                 print(f"Archivo no encontrado: {model_path}")
 
 
-def add_f1_scores(metrics: dict) -> dict:
-    """Calculate and add F1 scores to a copy of the given metrics dictionary, keeping the desired order."""
+def add_f1_scores(metrics: Dict[str, float]) -> Dict[str, float]:
+    """ Calcula y añade el F1 score a un diccionario de metricas.
+
+    :param Dict[str, float] metrics: Diccionario con métricas de evaluación.
+    :return Dict[str, float]: Diccionario con métricas de evaluación incluyendo el F1 score.
+    """
     new_metrics = copy.deepcopy(metrics)  # Create a copy to avoid modifying the original
 
     # Extract precision and recall for (B)
@@ -385,19 +352,31 @@ def add_f1_scores(metrics: dict) -> dict:
     return ordered_metrics
 
 
-def safe_validate(model_path, extra_config):
+def safe_validate(model_path: str, extra_config: Dict) -> DetMetrics:
+    """ Realiza una validación de un modelo YOLO de forma segura utilizando una instancia local.
+
+    :param str model_path: Ruta del modelo entrenado a evaluar.
+    :param Dict extra_config: Diccionario con configuración extra para la validación.
+    :return DetMetrics: Resultados de la validación.
+    """
     model = YOLO(model_path, task="segment")
     val_metrics = model.val(**extra_config)
     return val_metrics
 
 
-def validate_experiment(dataframe, parameters):
-    model_pt_path = parameters["model_pt_path"]
-    validation_params = parameters["validation_params"]
-    model_name = parameters["model_name"]
-    dataset_name = parameters["dataset_name"]
-    optimizer = parameters["optimizer"]
-    model_format = parameters["format"]
+def validate_experiment(dataframe: DataFrame, parameters: Dict[str, Dict | str]) -> DataFrame | None:
+    """ Realiza la validación de dataset para un conjunto de modelos y guarda los resultados en un Datagrama.
+
+    :param DataFrame dataframe: Datagrama con datos a actualizar.
+    :param Dict[str, Dict  |  str] parameters: Diccionario con parámetros varios a utilizar.
+    :return DataFrame | None: Datagrama con los datos actualizados. Si algo falla no retorna nada.
+    """
+    model_pt_path: str = parameters["model_pt_path"]
+    validation_params: Dict = parameters["validation_params"]
+    model_name: str = parameters["model_name"]
+    dataset_name: str = parameters["dataset_name"]
+    optimizer: str = parameters["optimizer"]
+    model_format: str = parameters["format"]
 
     try:
         val_results = safe_validate(model_pt_path, validation_params)
@@ -411,7 +390,13 @@ def validate_experiment(dataframe, parameters):
         print(error)
 
 
-def validate_run(config_file, results_path):
+def validate_run(config_file: str, results_path: str):
+    """ Lee un archivo de configuración con todos los casos a evaluar y realiza una validación de estos.
+    Los resultados de todas las validaciones de guardan en un archivo CSV.
+
+    :param str config_file: Archivo JSON de configuración a leer.
+    :param str results_path: Archivo CSV donde se guardarán los resultados de las validaciones.
+    """
     with open(config_file, "r") as f:
         config_dict = json.load(f)
 
@@ -456,14 +441,23 @@ def validate_run(config_file, results_path):
     dataframe.to_csv(results_path, index=False)
 
 
-def train_tuned(best_tunes_list):
+def train_tuned(best_tunes_list: List[dict[str, Any]]):
+    """ Realiza el entrenamiento de los mejores casos del tuning.
+
+    :param List[dict[str, Any]] best_tunes_list: Lista de diccionarios con los hiperparámetros de los mejores tuning.
+    """
     default_params = {"epochs": 80, "single_cls": True, "cos_lr": True, "optimizer": "SGD"}
     for best_tune in best_tunes_list:
         model_name = best_tune["model"]
         params = {**default_params, **best_tune["params"]}
         thread_safe_train(get_backbone_path(model_name), params)
 
-def export_tuned(best_tunes_list):
+
+def export_tuned(best_tunes_list: List[dict[str, Any]]):
+    """ Realiza la exportación en TensorRT de los mejores casos del tuning ya entrenados.
+
+    :param List[dict[str, Any]] best_tunes_list: Lista de diccionarios con los hiperparámetros de los mejores tuning.
+    """
     export_params = {"int8": True, "batch": 1}
     for best_tune in best_tunes_list:
         hyperparams = best_tune["params"]
@@ -472,7 +466,13 @@ def export_tuned(best_tunes_list):
         # Realizar exportación con TensorRT
         export_to_tensor_rt(model_path=model_weights_path, extra_params=export_params)
 
-def validate_tuned(best_tunes_list, results_path):
+
+def validate_tuned(best_tunes_list: List[dict[str, Any]], results_path: str):
+    """ Realiza la validación de los mejores casos del tuning ya entrenados y exportados.
+
+    :param List[dict[str, Any]] best_tunes_list: Lista de diccionarios con los hiperparámetros de los mejores tuning.
+    :param str results_path: Archivo CSV donde se guardarán los resultados de las validaciones.
+    """
     validation_params = {"device": "cuda:0", "split": "val"}
     dataframe = pd.DataFrame()
     for best_tune in best_tunes_list:
@@ -496,6 +496,7 @@ def validate_tuned(best_tunes_list, results_path):
                 print(error)
 
     dataframe.to_csv(results_path, index=False)
+
 
 if __name__ == "__main__":
     #! I) Entrenamiento inicial

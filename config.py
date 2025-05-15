@@ -1,6 +1,5 @@
 # Este archivo contiene constantes utilizadas para organizar los Path y nombres de algunos archivos.
 import os
-from ray import tune
 
 # ? CONFIGURACIÓN DE DATASETS
 
@@ -33,25 +32,7 @@ MODEL_BACKBONE_LAYERS = {'yolov8n-seg': 10, 'yolov8s-seg': 10, 'yolov8m-seg': 10
 # Dirección donde guardar los modelos YOLO sin entrenar.
 BACKBONES_DIR = os.path.join('models', 'backbone')
 
-# ? CASOS A HACER TUNING (BUSQUEDA DE HIPERPARÁMETROS)
-SEARCH_SPACES = {
-        False: {
-                'lr0': (1e-4, 0.01),
-                'lrf': (0.01, 0.5),
-                'momentum': (0.6, 0.98),
-                'weight_decay': (0.0, 0.001),
-                'warmup_epochs': (0.0, 5.0),
-                'warmup_momentum': (0.0, 0.95)
-        },
-        True: {
-                'lr0': tune.uniform(1e-4, 0.01),
-                'lrf': tune.uniform(0.01, 0.5),
-                'momentum': tune.uniform(0.6, 0.98),
-                'weight_decay': tune.uniform(0.0, 0.001),
-                'warmup_epochs': tune.uniform(0.0, 5.0),
-                'warmup_momentum': tune.uniform(0.0, 0.95)
-        }
-}
+# ? MEJORES RESULTADOS DE TUNING
 
 BEST_DEEPFISH_TUNES = [
     {"model": "yolov8l-seg",
