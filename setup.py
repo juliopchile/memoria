@@ -10,10 +10,10 @@ from utility_datasets import setup_datasets
 if __name__ == "__main__":
     # Instalar y configurar el dataset de Deepfish
     setup_datasets()
-    
+
     # Instalar los modelos YOLO a entrenar
     download_models()
-    
+
     # Para instalar "ray" simplemente corre un tuning usando el parametro 'use_ray=True'
     model = YOLO("models/backbone/yolo11n-seg.pt")
     model.tune(iterations=5, epochs=10, optimizer="SGD", gpu_per_trial=1, use_ray=True)
