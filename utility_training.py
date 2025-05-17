@@ -147,12 +147,12 @@ def create_training_json(dataset_yaml_list: List[str], model_name_list: List[str
                     if optimizer in ["AdamW"]:
                         lr0 = 0.001
                     else:
-                        lr0 = 0.005
+                        lr0 = 0.01
 
                     # Crear el nombre del run y definir el diccionario de hiperparámetros
                     run_name = os.path.join(dataset_name, f"{model_name}{ast}_{optimizer}")
-                    train_params = {"data": dataset_path, "optimizer": optimizer, "freeze": freeze_num, "lr0": lr0,
-                                    "project": project_dir, "name": run_name, **extra_params}
+                    train_params = {"data": dataset_path, "optimizer": optimizer, "freeze": freeze_num, "lr0": lr0, "cos_lr": True, 
+                                    "single_cls": True, "project": project_dir, "name": run_name, **extra_params}
 
                     # Agregar la configuración al diccionario general de entrenamiento
                     training_dict[run_name] = {"model_name": model_name, "hyperparams": train_params,
@@ -500,13 +500,13 @@ def validate_tuned(best_tunes_list: List[dict[str, Any]], results_path: str):
 
 if __name__ == "__main__":
     #! I) Entrenamiento inicial
-    dataset_yaml_list=['Deepfish.yaml', 'Deepfish_LO.yaml']
+    dataset_yaml_list=['Salmones.yaml', 'Salmones_LO.yaml']
     models_to_use = ALL_MODELS
     optimizers = ["SGD", "AdamW"]
     project_name = "first_run"
     extra_params = {"epochs": 80, "batch": 8}
-    first_run_json = "training/run1.json"
-    second_run_json = "training/run2.json"
+    first_run_json = "training/run4.json"
+    second_run_json = "training/run5.json"
 
     #? 1) Primero creamos los archivos JSON que contienen los parámetros de entrenamiento para cada caso.
     def first_experiment_json():
@@ -528,16 +528,16 @@ if __name__ == "__main__":
     # first_experiment_json()
 
     #? 2) Luego leemos los arhivos JSON y entrenamos acorde
-    # train_run(config_file=first_run_json)
-    # train_run(config_file=second_run_json)
+    train_run(config_file=first_run_json)
+    train_run(config_file=second_run_json)
 
     #? 3) Exportamos los entrenamientos con TensorRT
     # export_experiments(first_run_json)
     # export_experiments(second_run_json)
 
     #? 4) Realizamos validación para todos los modelos entrenados y exportados.
-    # validate_run(first_run_json, "training/results_1.csv")
-    # validate_run(second_run_json, "training/results_2.csv")
+    # validate_run(first_run_json, "training/results_4.csv")
+    # validate_run(second_run_json, "training/results_5.csv")
 
     #! I) Análisis de los resultados
     # Revisar "analisis_deepfish.ipynb"
@@ -549,7 +549,7 @@ if __name__ == "__main__":
     # train_tuned(BEST_DEEPFISH_TUNES)
 
     #! IV) Exportar en TensorRT
-    export_tuned(BEST_DEEPFISH_TUNES)
+    # export_tuned(BEST_DEEPFISH_TUNES)
 
     #! IV) Validar
-    validate_tuned(BEST_DEEPFISH_TUNES, "training/results_3.csv")
+    # validate_tuned(BEST_DEEPFISH_TUNES, "training/results_6.csv")

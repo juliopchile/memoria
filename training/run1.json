@@ -1,0 +1,818 @@
+{
+    "Deepfish/yolov8n-seg_SGD": {
+        "model_name": "yolov8n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov8n-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov8n-seg_AdamW": {
+        "model_name": "yolov8n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov8n-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov8s-seg_SGD": {
+        "model_name": "yolov8s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov8s-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov8s-seg_AdamW": {
+        "model_name": "yolov8s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov8s-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov8m-seg_SGD": {
+        "model_name": "yolov8m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov8m-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov8m-seg_AdamW": {
+        "model_name": "yolov8m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov8m-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov8l-seg_SGD": {
+        "model_name": "yolov8l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov8l-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov8l-seg_AdamW": {
+        "model_name": "yolov8l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov8l-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov8x-seg_SGD": {
+        "model_name": "yolov8x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov8x-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov8x-seg_AdamW": {
+        "model_name": "yolov8x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov8x-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov9c-seg_SGD": {
+        "model_name": "yolov9c-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov9c-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov9c-seg_AdamW": {
+        "model_name": "yolov9c-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov9c-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov9e-seg_SGD": {
+        "model_name": "yolov9e-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov9e-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolov9e-seg_AdamW": {
+        "model_name": "yolov9e-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish/yolov9e-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolo11n-seg_SGD": {
+        "model_name": "yolo11n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish/yolo11n-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolo11n-seg_AdamW": {
+        "model_name": "yolo11n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish/yolo11n-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolo11s-seg_SGD": {
+        "model_name": "yolo11s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish/yolo11s-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolo11s-seg_AdamW": {
+        "model_name": "yolo11s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish/yolo11s-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolo11m-seg_SGD": {
+        "model_name": "yolo11m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish/yolo11m-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolo11m-seg_AdamW": {
+        "model_name": "yolo11m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish/yolo11m-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolo11l-seg_SGD": {
+        "model_name": "yolo11l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish/yolo11l-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolo11l-seg_AdamW": {
+        "model_name": "yolo11l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish/yolo11l-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolo11x-seg_SGD": {
+        "model_name": "yolo11x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish/yolo11x-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish/yolo11x-seg_AdamW": {
+        "model_name": "yolo11x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish/yolo11x-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov8n-seg_SGD": {
+        "model_name": "yolov8n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov8n-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov8n-seg_AdamW": {
+        "model_name": "yolov8n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov8n-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov8s-seg_SGD": {
+        "model_name": "yolov8s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov8s-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov8s-seg_AdamW": {
+        "model_name": "yolov8s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov8s-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov8m-seg_SGD": {
+        "model_name": "yolov8m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov8m-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov8m-seg_AdamW": {
+        "model_name": "yolov8m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov8m-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov8l-seg_SGD": {
+        "model_name": "yolov8l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov8l-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov8l-seg_AdamW": {
+        "model_name": "yolov8l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov8l-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov8x-seg_SGD": {
+        "model_name": "yolov8x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov8x-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov8x-seg_AdamW": {
+        "model_name": "yolov8x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov8x-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov9c-seg_SGD": {
+        "model_name": "yolov9c-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov9c-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov9c-seg_AdamW": {
+        "model_name": "yolov9c-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov9c-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov9e-seg_SGD": {
+        "model_name": "yolov9e-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov9e-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolov9e-seg_AdamW": {
+        "model_name": "yolov9e-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolov9e-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolo11n-seg_SGD": {
+        "model_name": "yolo11n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolo11n-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolo11n-seg_AdamW": {
+        "model_name": "yolo11n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolo11n-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolo11s-seg_SGD": {
+        "model_name": "yolo11s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolo11s-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolo11s-seg_AdamW": {
+        "model_name": "yolo11s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolo11s-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolo11m-seg_SGD": {
+        "model_name": "yolo11m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolo11m-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolo11m-seg_AdamW": {
+        "model_name": "yolo11m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolo11m-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolo11l-seg_SGD": {
+        "model_name": "yolo11l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolo11l-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolo11l-seg_AdamW": {
+        "model_name": "yolo11l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolo11l-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolo11x-seg_SGD": {
+        "model_name": "yolo11x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": null,
+            "lr0": 0.005,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolo11x-seg_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    },
+    "Deepfish_LO/yolo11x-seg_AdamW": {
+        "model_name": "yolo11x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Deepfish_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": null,
+            "lr0": 0.001,
+            "project": "training/first_run",
+            "name": "Deepfish_LO/yolo11x-seg_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": true,
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
+    }
+}

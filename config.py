@@ -1,4 +1,4 @@
-# Este archivo contiene constantes utilizadas para organizar los Path y nombres de algunos archivos.
+# Este archivo contiene constantes utilizadas para organizar las rutas y nombres de algunos archivos.
 import os
 
 # ? CONFIGURACIÓN DE DATASETS
@@ -16,7 +16,7 @@ DATASETS_ROBOFLOW_LINKS = {
 }
 
 # Lista de archivos YAML de los datasets a entrenar (ordenados!!).
-DATASETS_YAML_LIST = ['Deepfish.yaml', 'Deepfish_LO.yaml', 'Salmons.yaml', 'Salmons_LO.yaml']
+DATASETS_YAML_LIST = ['Deepfish.yaml', 'Deepfish_LO.yaml', 'Salmones.yaml', 'Salmones_LO.yaml']
 
 
 # ? CONFIGURACIÓN DE MODELOS
@@ -31,6 +31,7 @@ MODEL_BACKBONE_LAYERS = {'yolov8n-seg': 10, 'yolov8s-seg': 10, 'yolov8m-seg': 10
 
 # Dirección donde guardar los modelos YOLO sin entrenar.
 BACKBONES_DIR = os.path.join('models', 'backbone')
+
 
 # ? MEJORES RESULTADOS DE TUNING
 

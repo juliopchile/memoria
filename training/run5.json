@@ -1,0 +1,914 @@
+{
+    "Salmones/yolov8n-seg*_SGD": {
+        "model_name": "yolov8n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "freeze": 10,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov8n-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov8n-seg*_AdamW": {
+        "model_name": "yolov8n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "AdamW",
+            "freeze": 10,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov8n-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov8s-seg*_SGD": {
+        "model_name": "yolov8s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "freeze": 10,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov8s-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov8s-seg*_AdamW": {
+        "model_name": "yolov8s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "AdamW",
+            "freeze": 10,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov8s-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov8m-seg*_SGD": {
+        "model_name": "yolov8m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "freeze": 10,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov8m-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov8m-seg*_AdamW": {
+        "model_name": "yolov8m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "AdamW",
+            "freeze": 10,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov8m-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov8l-seg*_SGD": {
+        "model_name": "yolov8l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "freeze": 10,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov8l-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov8l-seg*_AdamW": {
+        "model_name": "yolov8l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "AdamW",
+            "freeze": 10,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov8l-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov8x-seg*_SGD": {
+        "model_name": "yolov8x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "freeze": 10,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov8x-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov8x-seg*_AdamW": {
+        "model_name": "yolov8x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "AdamW",
+            "freeze": 10,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov8x-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov9c-seg*_SGD": {
+        "model_name": "yolov9c-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "freeze": 10,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov9c-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov9c-seg*_AdamW": {
+        "model_name": "yolov9c-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "AdamW",
+            "freeze": 10,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov9c-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov9e-seg*_SGD": {
+        "model_name": "yolov9e-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "freeze": 30,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov9e-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolov9e-seg*_AdamW": {
+        "model_name": "yolov9e-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "AdamW",
+            "freeze": 30,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolov9e-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolo11n-seg*_SGD": {
+        "model_name": "yolo11n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "freeze": 11,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolo11n-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolo11n-seg*_AdamW": {
+        "model_name": "yolo11n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "AdamW",
+            "freeze": 11,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolo11n-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolo11s-seg*_SGD": {
+        "model_name": "yolo11s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "freeze": 11,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolo11s-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolo11s-seg*_AdamW": {
+        "model_name": "yolo11s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "AdamW",
+            "freeze": 11,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolo11s-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolo11m-seg*_SGD": {
+        "model_name": "yolo11m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "freeze": 11,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolo11m-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolo11m-seg*_AdamW": {
+        "model_name": "yolo11m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "AdamW",
+            "freeze": 11,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolo11m-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolo11l-seg*_SGD": {
+        "model_name": "yolo11l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "freeze": 11,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolo11l-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolo11l-seg*_AdamW": {
+        "model_name": "yolo11l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "AdamW",
+            "freeze": 11,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolo11l-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolo11x-seg*_SGD": {
+        "model_name": "yolo11x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "freeze": 11,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolo11x-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones/yolo11x-seg*_AdamW": {
+        "model_name": "yolo11x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones.yaml",
+            "optimizer": "AdamW",
+            "freeze": 11,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones/yolo11x-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov8n-seg*_SGD": {
+        "model_name": "yolov8n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": 10,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov8n-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov8n-seg*_AdamW": {
+        "model_name": "yolov8n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": 10,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov8n-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov8s-seg*_SGD": {
+        "model_name": "yolov8s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": 10,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov8s-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov8s-seg*_AdamW": {
+        "model_name": "yolov8s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": 10,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov8s-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov8m-seg*_SGD": {
+        "model_name": "yolov8m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": 10,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov8m-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov8m-seg*_AdamW": {
+        "model_name": "yolov8m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": 10,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov8m-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov8l-seg*_SGD": {
+        "model_name": "yolov8l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": 10,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov8l-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov8l-seg*_AdamW": {
+        "model_name": "yolov8l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": 10,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov8l-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov8x-seg*_SGD": {
+        "model_name": "yolov8x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": 10,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov8x-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov8x-seg*_AdamW": {
+        "model_name": "yolov8x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": 10,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov8x-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov9c-seg*_SGD": {
+        "model_name": "yolov9c-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": 10,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov9c-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov9c-seg*_AdamW": {
+        "model_name": "yolov9c-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": 10,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov9c-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov9e-seg*_SGD": {
+        "model_name": "yolov9e-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": 30,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov9e-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolov9e-seg*_AdamW": {
+        "model_name": "yolov9e-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": 30,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolov9e-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolo11n-seg*_SGD": {
+        "model_name": "yolo11n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": 11,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolo11n-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolo11n-seg*_AdamW": {
+        "model_name": "yolo11n-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": 11,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolo11n-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolo11s-seg*_SGD": {
+        "model_name": "yolo11s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": 11,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolo11s-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolo11s-seg*_AdamW": {
+        "model_name": "yolo11s-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": 11,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolo11s-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolo11m-seg*_SGD": {
+        "model_name": "yolo11m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": 11,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolo11m-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolo11m-seg*_AdamW": {
+        "model_name": "yolo11m-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": 11,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolo11m-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolo11l-seg*_SGD": {
+        "model_name": "yolo11l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": 11,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolo11l-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolo11l-seg*_AdamW": {
+        "model_name": "yolo11l-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": 11,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolo11l-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolo11x-seg*_SGD": {
+        "model_name": "yolo11x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "SGD",
+            "freeze": 11,
+            "lr0": 0.01,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolo11x-seg*_SGD",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    },
+    "Salmones_LO/yolo11x-seg*_AdamW": {
+        "model_name": "yolo11x-seg",
+        "hyperparams": {
+            "data": "datasets_yaml/Salmones_LO.yaml",
+            "optimizer": "AdamW",
+            "freeze": 11,
+            "lr0": 0.001,
+            "cos_lr": true,
+            "single_cls": true,
+            "project": "training/first_run",
+            "name": "Salmones_LO/yolo11x-seg*_AdamW",
+            "epochs": 80,
+            "batch": 8
+        },
+        "done": false,
+        "trt32": false,
+        "trt16": false,
+        "trt8": false
+    }
+}

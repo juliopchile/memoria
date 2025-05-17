@@ -351,9 +351,89 @@ def get_export_yaml_path(dataset_yaml: str) -> str:
     return os.path.join(dir_name, export_yaml_name)
 
 
+def create_labels_only_dataset(dataset_path: str):
+    """ Crea un nuevo dataset YOLO que incluye solo las imágenes con etiquetas correspondientes en el subdirectorio 'train', 
+    mientras copia todo el contenido de 'valid' y 'test' sin filtrar. También genera un nuevo archivo 'data.yaml' 
+    con el 'path' actualizado.
+
+    Nota:
+        Se asume que el dataset original tiene la siguiente estructura:
+        - images/
+            - train/
+            - valid/
+            - test/
+        - labels/
+            - train/
+            - valid/
+            - test/
+        - data.yaml
+
+    :param str dataset_path: Ruta al directorio del dataset original.
+    """
+    # Obtener el nombre del dataset original y crear el nuevo nombre
+    dataset_name = os.path.basename(dataset_path)
+    new_dataset_name = dataset_name + "_LO"
+    parent_dir = os.path.dirname(dataset_path)
+    new_dataset_path = os.path.join(parent_dir, new_dataset_name)
+
+    # Crear el directorio del nuevo dataset
+    os.makedirs(new_dataset_path, exist_ok=True)
+
+    # Crear la estructura de subdirectorios
+    for subset in ['train', 'valid', 'test']:
+        for dir_type in ['images', 'labels']:
+            dir_path = os.path.join(new_dataset_path, dir_type, subset)
+            os.makedirs(dir_path, exist_ok=True)
+
+    # Filtrar y copiar para el subdirectorio "train"
+    labels_train_path = os.path.join(dataset_path, 'labels', 'train')
+    images_train_path = os.path.join(dataset_path, 'images', 'train')
+    new_labels_train_path = os.path.join(new_dataset_path, 'labels', 'train')
+    new_images_train_path = os.path.join(new_dataset_path, 'images', 'train')
+
+    if os.path.exists(labels_train_path):
+        txt_files = [f for f in os.listdir(labels_train_path) if f.endswith('.txt')]
+        for txt_file in txt_files:
+            base_name = os.path.splitext(txt_file)[0]
+            # Buscar imagen con extensiones comunes
+            for ext in ['.jpg', '.jpeg', '.png', '.bmp']:
+                img_file = base_name + ext
+                img_path = os.path.join(images_train_path, img_file)
+                if os.path.exists(img_path):
+                    shutil.copy(img_path, os.path.join(new_images_train_path, img_file))
+                    shutil.copy(os.path.join(labels_train_path, txt_file), 
+                              os.path.join(new_labels_train_path, txt_file))
+                    break
+
+    # Copiar todo para "valid" y "test" sin filtrar
+    for subset in ['valid', 'test']:
+        images_subset_path = os.path.join(dataset_path, 'images', subset)
+        labels_subset_path = os.path.join(dataset_path, 'labels', subset)
+        new_images_subset_path = os.path.join(new_dataset_path, 'images', subset)
+        new_labels_subset_path = os.path.join(new_dataset_path, 'labels', subset)
+
+        if os.path.exists(images_subset_path):
+            shutil.copytree(images_subset_path, new_images_subset_path, dirs_exist_ok=True)
+        if os.path.exists(labels_subset_path):
+            shutil.copytree(labels_subset_path, new_labels_subset_path, dirs_exist_ok=True)
+
+    # Copiar y actualizar el archivo data.yaml
+    original_yaml_path = os.path.join(dataset_path, 'data.yaml')
+    new_yaml_path = os.path.join(new_dataset_path, 'data.yaml')
+    
+    if os.path.exists(original_yaml_path):
+        with open(original_yaml_path, 'r') as f:
+            data = yaml.safe_load(f)
+        data['path'] = os.path.abspath(new_dataset_path)
+        with open(new_yaml_path, 'w') as f:
+            yaml.dump(data, f)
+    else:
+        print(f"Advertencia: No se encontró data.yaml en {dataset_path}")
+
+
 def setup_datasets():
     """ Función de ayuda que intenta descargar datasets desde Roboflow, convertirlos a formato YOLO, ordenarlos y crear los YAML correspondientes. """
-    datasets_a_descargar = ["Deepfish", "Deepfish_LO", "Salmon", "Salmon_LO"]
+    datasets_a_descargar = ["Deepfish", "Deepfish_LO", "Salmones", "Salmones_LO"]
 
     # Descargar los datasets necesarios desde Roboflow
     for name, info in DATASETS_ROBOFLOW_LINKS.items():
@@ -383,4 +463,5 @@ def setup_datasets():
 
 
 if __name__ == "__main__":
+    create_labels_only_dataset("datasets_yolo/Salmones")
     setup_datasets()
