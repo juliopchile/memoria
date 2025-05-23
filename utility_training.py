@@ -1,13 +1,14 @@
 import os
 import json
 import copy
+import shutil
 from typing import Any, Dict, List, Optional
-import pandas as pd
-from pandas import DataFrame
-import numpy as np
 from threading import Lock
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import pandas as pd
+import numpy as np
 from ultralytics import YOLO
+from pandas import DataFrame
 from ultralytics.utils.metrics import DetMetrics
 
 from utility_models import get_backbone_path, export_to_tensor_rt
@@ -27,7 +28,7 @@ def thread_safe_train(model_path: str, params: Dict) -> Dict | None:
         - project: directorio del proyecto para almacenar los resultados.
         - name: nombre del run de entrenamiento.
         - otros parámetros adicionales (por ejemplo, epochs, batch, etc.)
-    :return Dict | None: Diccionario con los resultados del entrenamiento. Si este falla entonces None.
+    :return Dict | None: Diccionario con los resultados del entrenamiento. Si este falla entonces es None.
     """
     local_model = YOLO(model_path)
     result = local_model.train(**params)
@@ -71,16 +72,18 @@ def train_run(config_file: str, max_concurrent_threads: int = 1):
         :param str key: Clave identificadora única para el ru
         :param Dict config: Diccionario con la configuración del entrenamiento (incluye model_name, hyperparam y done).
         """
-
         model_name = config.get("model_name")
         # Obtener la ruta del modelo: se descarga o se recupera según la implementación de get_backbone_path
         model_path = get_backbone_path(model_name)
         # Recuperar los hiperparámetros de entrenamiento
         train_params = config.get("hyperparams", {})
+        # Path donde se guardará el train (project + name)
+        train_full_path = os.path.join(train_params.get("project", "project"), train_params.get("name", "name"))
 
         try:
             # Ejecutar el entrenamiento
-            thread_safe_train(model_path, train_params)
+            train_results = thread_safe_train(model_path, train_params)
+            del train_results
             # Al finalizar, marcar el run como completado y actualizar el archivo JSON
             with json_lock:
                 training_dict[key]["done"] = True
@@ -88,6 +91,8 @@ def train_run(config_file: str, max_concurrent_threads: int = 1):
                     json.dump(training_dict, f_w, indent=4)
             print(f"Entrenamiento completado para: {key}")
         except Exception as e:
+            if os.path.exists(train_full_path):
+                shutil.rmtree(train_full_path)
             print(f"El entrenamiento para {key} falló con error: {e}")
 
     # Crear un ThreadPoolExecutor que limite el número de tareas concurrentes
@@ -532,8 +537,8 @@ if __name__ == "__main__":
     train_run(config_file=second_run_json)
 
     #? 3) Exportamos los entrenamientos con TensorRT
-    # export_experiments(first_run_json)
-    # export_experiments(second_run_json)
+    export_experiments(first_run_json)
+    export_experiments(second_run_json)
 
     #? 4) Realizamos validación para todos los modelos entrenados y exportados.
     # validate_run(first_run_json, "training/results_4.csv")

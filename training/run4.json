@@ -203,7 +203,7 @@
             "epochs": 80,
             "batch": 6
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -222,7 +222,7 @@
             "epochs": 80,
             "batch": 6
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -241,7 +241,7 @@
             "epochs": 80,
             "batch": 4
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -260,7 +260,7 @@
             "epochs": 80,
             "batch": 4
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -279,7 +279,7 @@
             "epochs": 80,
             "batch": 8
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -298,7 +298,7 @@
             "epochs": 80,
             "batch": 8
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -317,7 +317,7 @@
             "epochs": 80,
             "batch": 8
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -336,7 +336,7 @@
             "epochs": 80,
             "batch": 8
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -355,7 +355,7 @@
             "epochs": 80,
             "batch": 8
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -374,7 +374,7 @@
             "epochs": 80,
             "batch": 8
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -393,7 +393,7 @@
             "epochs": 80,
             "batch": 6
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -412,7 +412,7 @@
             "epochs": 80,
             "batch": 6
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -431,7 +431,7 @@
             "epochs": 80,
             "batch": 4
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -450,7 +450,7 @@
             "epochs": 80,
             "batch": 4
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -469,7 +469,7 @@
             "epochs": 80,
             "batch": 8
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -488,7 +488,7 @@
             "epochs": 80,
             "batch": 8
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -507,7 +507,7 @@
             "epochs": 80,
             "batch": 8
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -526,7 +526,7 @@
             "epochs": 80,
             "batch": 8
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -545,7 +545,7 @@
             "epochs": 80,
             "batch": 8
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -564,7 +564,7 @@
             "epochs": 80,
             "batch": 8
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -583,7 +583,7 @@
             "epochs": 80,
             "batch": 6
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -602,7 +602,7 @@
             "epochs": 80,
             "batch": 6
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -621,7 +621,7 @@
             "epochs": 80,
             "batch": 4
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -640,7 +640,7 @@
             "epochs": 80,
             "batch": 4
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -659,7 +659,7 @@
             "epochs": 80,
             "batch": 6
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
@@ -678,7 +678,7 @@
             "epochs": 80,
             "batch": 6
         },
-        "done": false,
+        "done": true,
         "trt32": false,
         "trt16": false,
         "trt8": false
