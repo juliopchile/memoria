@@ -533,8 +533,8 @@ if __name__ == "__main__":
     # first_experiment_json()
 
     #? 2) Luego leemos los arhivos JSON y entrenamos acorde
-    train_run(config_file=first_run_json)
-    train_run(config_file=second_run_json)
+    # train_run(config_file=first_run_json)
+    # train_run(config_file=second_run_json)
 
     #? 3) Exportamos los entrenamientos con TensorRT
     export_experiments(first_run_json)
