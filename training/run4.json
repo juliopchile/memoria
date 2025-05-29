@@ -280,9 +280,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones/yolo11n-seg_AdamW": {
         "model_name": "yolo11n-seg",
@@ -299,9 +299,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones/yolo11s-seg_SGD": {
         "model_name": "yolo11s-seg",
@@ -318,9 +318,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones/yolo11s-seg_AdamW": {
         "model_name": "yolo11s-seg",
@@ -337,9 +337,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones/yolo11m-seg_SGD": {
         "model_name": "yolo11m-seg",
@@ -356,9 +356,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones/yolo11m-seg_AdamW": {
         "model_name": "yolo11m-seg",
@@ -375,9 +375,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones/yolo11l-seg_SGD": {
         "model_name": "yolo11l-seg",
@@ -394,9 +394,9 @@
             "batch": 6
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones/yolo11l-seg_AdamW": {
         "model_name": "yolo11l-seg",
@@ -413,9 +413,9 @@
             "batch": 6
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones/yolo11x-seg_SGD": {
         "model_name": "yolo11x-seg",
@@ -432,9 +432,9 @@
             "batch": 4
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones/yolo11x-seg_AdamW": {
         "model_name": "yolo11x-seg",
@@ -451,9 +451,9 @@
             "batch": 4
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov8n-seg_SGD": {
         "model_name": "yolov8n-seg",
@@ -470,9 +470,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov8n-seg_AdamW": {
         "model_name": "yolov8n-seg",
@@ -489,9 +489,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov8s-seg_SGD": {
         "model_name": "yolov8s-seg",
@@ -508,9 +508,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov8s-seg_AdamW": {
         "model_name": "yolov8s-seg",
@@ -527,9 +527,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov8m-seg_SGD": {
         "model_name": "yolov8m-seg",
@@ -546,9 +546,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov8m-seg_AdamW": {
         "model_name": "yolov8m-seg",
@@ -565,9 +565,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov8l-seg_SGD": {
         "model_name": "yolov8l-seg",
@@ -584,9 +584,9 @@
             "batch": 6
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov8l-seg_AdamW": {
         "model_name": "yolov8l-seg",
@@ -603,9 +603,9 @@
             "batch": 6
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov8x-seg_SGD": {
         "model_name": "yolov8x-seg",
@@ -622,9 +622,9 @@
             "batch": 4
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov8x-seg_AdamW": {
         "model_name": "yolov8x-seg",
@@ -641,9 +641,9 @@
             "batch": 4
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov9c-seg_SGD": {
         "model_name": "yolov9c-seg",
@@ -660,9 +660,9 @@
             "batch": 6
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov9c-seg_AdamW": {
         "model_name": "yolov9c-seg",
@@ -679,9 +679,9 @@
             "batch": 6
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov9e-seg_SGD": {
         "model_name": "yolov9e-seg",
@@ -698,9 +698,9 @@
             "batch": 4
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolov9e-seg_AdamW": {
         "model_name": "yolov9e-seg",
@@ -717,9 +717,9 @@
             "batch": 4
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolo11n-seg_SGD": {
         "model_name": "yolo11n-seg",
@@ -736,9 +736,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolo11n-seg_AdamW": {
         "model_name": "yolo11n-seg",
@@ -755,9 +755,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolo11s-seg_SGD": {
         "model_name": "yolo11s-seg",
@@ -774,9 +774,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolo11s-seg_AdamW": {
         "model_name": "yolo11s-seg",
@@ -793,9 +793,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolo11m-seg_SGD": {
         "model_name": "yolo11m-seg",
@@ -812,9 +812,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolo11m-seg_AdamW": {
         "model_name": "yolo11m-seg",
@@ -831,9 +831,9 @@
             "batch": 8
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolo11l-seg_SGD": {
         "model_name": "yolo11l-seg",
@@ -850,9 +850,9 @@
             "batch": 6
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolo11l-seg_AdamW": {
         "model_name": "yolo11l-seg",
@@ -869,9 +869,9 @@
             "batch": 6
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolo11x-seg_SGD": {
         "model_name": "yolo11x-seg",
@@ -888,9 +888,9 @@
             "batch": 4
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     },
     "Salmones_LO/yolo11x-seg_AdamW": {
         "model_name": "yolo11x-seg",
@@ -907,8 +907,8 @@
             "batch": 4
         },
         "done": true,
-        "trt32": false,
-        "trt16": false,
-        "trt8": false
+        "trt32": true,
+        "trt16": true,
+        "trt8": true
     }
 }

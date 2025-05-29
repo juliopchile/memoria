@@ -21,7 +21,7 @@ def thread_safe_train(model_path: str, params: Dict) -> Dict | None:
 
     :param str model_path: Ruta del modelo pre-entrenado o backbone descargado.
     :param Dict params: Diccionario con los parámetros e hiperparámetros de entrenamiento, el cual puede incluir:
-    
+
         - data: ruta al archivo YAML del dataset.
         - optimizer: optimizador a utilizar (por ejemplo, "SGD" o "AdamW").
         - freeze: número de capas a congelar o None si no se congela el backbone.
@@ -293,6 +293,7 @@ def export_experiments(config_file: str) -> None:
             else:
                 print(f"Los pesos del modelo no existen: {model_weights_path}")
 
+    print(f"Todas las exportaciones de {config_file} han sido completadas.")
 
 def delete_exportations(config_file: str):
     """ Remueve los archivos de exportación de los modelos entrenados en el archivo de configuración.
@@ -537,12 +538,12 @@ if __name__ == "__main__":
     # train_run(config_file=second_run_json)
 
     #? 3) Exportamos los entrenamientos con TensorRT
-    export_experiments(first_run_json)
-    export_experiments(second_run_json)
+    # export_experiments(first_run_json)
+    # export_experiments(second_run_json)
 
     #? 4) Realizamos validación para todos los modelos entrenados y exportados.
-    # validate_run(first_run_json, "training/results_4.csv")
-    # validate_run(second_run_json, "training/results_5.csv")
+    validate_run(first_run_json, "training/results_4.csv")
+    validate_run(second_run_json, "training/results_5.csv")
 
     #! I) Análisis de los resultados
     # Revisar "analisis_deepfish.ipynb"
