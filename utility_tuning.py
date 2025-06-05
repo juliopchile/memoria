@@ -1,7 +1,7 @@
 import os
 import json
 import logging
-from typing import Any, Dict, List, Literal, Tuple
+from typing import Any, cast
 import numpy as np
 from copy import deepcopy
 from ultralytics import YOLO
@@ -35,17 +35,17 @@ logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
 
-def create_tune_dict(models: List[str], datasets: List[str], optimizers: List[str], use_ray: bool = False, use_freeze: bool = False,
-                     extra_params: Dict[str, Any] = None) -> Dict[str, Dict[str, Any]]:
+def create_tune_dict(models: list[str], datasets: list[str], optimizers: list[str], use_ray: bool = False, use_freeze: bool = False,
+                     extra_params: dict[str, Any] | None = None) -> dict[str, dict[str, Any]]:
     """ Esta función crea diccionarios que definen los parámetros de configuración para realizar diferentes tunings con Ultralytics.
 
-    :param List[str] models: Lista de nombres de modelos a tunear.
-    :param List[str] datasets: Lista de datasets a usar.
-    :param List[str] optimizers: Lista de optimizadores a usar.
+    :param list[str] models: Lista de nombres de modelos a tunear.
+    :param list[str] datasets: Lista de datasets a usar.
+    :param list[str] optimizers: Lista de optimizadores a usar.
     :param bool use_ray: Determina si usar tuning con RayTune, por defecto False.
     :param bool use_freeze: Determina si realizar congelamiento de capas, por defecto False.
-    :param Dict[str, Any] extra_params: Diccionario de parámetros extras a evaluar, por defecto None.
-    :return Dict[str, Dict[str, Any]]: Diccionario con los distintos tunes definidos. Los items del diccionario son:
+    :param dict[str, Any] extra_params: Diccionario de parámetros extras a evaluar, por defecto None.
+    :return dict[str, dict[str, Any]]: Diccionario con los distintos tunes definidos. Los items del diccionario son:
     
         - "model_params": Diccionario con {"model": model_path, "task": "segment"}.
         - "tuning_params": Diccionario con {"data": data_yaml, "optimizer": optimizer}.
@@ -80,10 +80,10 @@ def create_tune_dict(models: List[str], datasets: List[str], optimizers: List[st
     return tune_dict
 
 
-def save_tune_config(tune_dict: Dict[str, Dict[str, Any]], json_file: str):
+def save_tune_config(tune_dict: dict[str, dict[str, Any]], json_file: str):
     """ Guarda la información de un diccionario de tuning en un archivo JSON.
 
-    :param Dict[str, Dict[str, Any]] tune_dict: Diccionario de configuraciones de tuning.
+    :param dict[str, dict[str, Any]] tune_dict: Diccionario de configuraciones de tuning.
     :param str json_file: Ruta donde guardar como archivo JSON.
     """
     # Crea el directorio si no existe
@@ -95,11 +95,11 @@ def save_tune_config(tune_dict: Dict[str, Dict[str, Any]], json_file: str):
         json.dump(tune_dict, archivo, ensure_ascii=False, indent=4)
 
 
-def load_tune_config(json_file: str) -> Dict[str, Dict[str, Any]]:
+def load_tune_config(json_file: str) -> dict[str, dict[str, Any]]:
     """ Carga las configuraciones para el tuning desde un arhivo JSON a un diccionario.
 
     :param str json_file: Ruta del archivo JSON.
-    :return Dict[str, Dict[str, Any]]: Diccionario con las configuraciones de tuning.
+    :return dict[str, dict[str, Any]]: Diccionario con las configuraciones de tuning.
     Los items del diccionario debiesen ser:
     
         - "model_params": Diccionario con {"model": model_path, "task": "segment"}.
@@ -151,11 +151,11 @@ def run_tuning_file(json_file: str):
                 continue
 
 
-def do_tuning(tune_config: Dict[str, Any]) -> Tuple[bool, Dict | None]:
+def do_tuning(tune_config: dict[str, Any]) -> tuple[bool, dict | None]:
     """ Se realiza un tuning utilizando un diccionario de configuración.
 
-    :param Dict[str, Any] tune_config: Diccionario de configuración del tuning.
-    :return Tuple[bool, Dict | None]: Tupla de valores que identifican los resultados del tuning.
+    :param dict[str, Any] tune_config: Diccionario de configuración del tuning.
+    :return tuple[bool, dict | None]: Tupla de valores que identifican los resultados del tuning.
     """
     try:
         # Cargar parámetros del diccionario
@@ -188,11 +188,11 @@ def do_tuning(tune_config: Dict[str, Any]) -> Tuple[bool, Dict | None]:
         return False, None
 
 
-def thread_safe_tuning(model_params: Dict[str, Any], tuning_params: Dict[str, Any]) -> ResultGrid | None:
+def thread_safe_tuning(model_params: dict[str, Any], tuning_params: dict[str, Any]) -> ResultGrid | None:
     """ Realiza la búsqueda de hiperparámetros por medio del tuning de un modelo. Se retornan los resultados si aplica.
 
-    :param Dict[str, Any] model_params: Diccionario con {"model": model_path, "task": "segment"}.
-    :param Dict[str, Any] tuning_params: Diccionario con los parámetros de configuració para realizar el tuning.
+    :param dict[str, Any] model_params: Diccionario con {"model": model_path, "task": "segment"}.
+    :param dict[str, Any] tuning_params: Diccionario con los parámetros de configuració para realizar el tuning.
     :return ResultGrid | None: Retorna los resultados del tuning si se realizó con RayTune, en otro caso retorna None.
     """
     # Cargar el modelo
@@ -208,7 +208,7 @@ def raytune_filtar_metrics(df: DataFrame) -> Series:
     """ Se filtra un Datagrama de resultados de un tuning y se retorna una Serie.
 
     :param DataFrame df: Datagrama con los resultados del tuning.
-    :return Series: Serie con los datos que solicitan
+    :return Series: Serie con los datos que se solicitan
     """
     # Lista de columnas específicas a incluir
     add_columnas = ["metrics/precision(M)", "metrics/recall(M)", "metrics/mAP50(M)", "metrics/mAP50-95(M)", "trial_id"]
@@ -220,17 +220,17 @@ def raytune_filtar_metrics(df: DataFrame) -> Series:
 
     # Seleccionar la fila con el máximo "metrics/mAP50(M)" usando idxmax
     idx_max = df_filtrado["metrics/mAP50(M)"].idxmax()
-    fila_seleccionada = df_filtrado.loc[idx_max].copy()
+    fila_seleccionada = cast(Series, df_filtrado.loc[idx_max].copy())
 
     # Calcular F1_score(M) con manejo de división por cero
-    precision = fila_seleccionada.get("metrics/precision(M)", 0)
-    recall = fila_seleccionada.get("metrics/recall(M)", 0)
-    fila_seleccionada["metrics/F1_score(M)"] = 2 * (precision * recall) / (precision + recall) if precision + recall > 0 else 0.0
+    precision = cast(float, fila_seleccionada.get("metrics/precision(M)", 0.0))
+    recall = cast(float, fila_seleccionada.get("metrics/recall(M)", 0.0))
+    fila_seleccionada["metrics/F1_score(M)"] = 2 * (precision * recall) / (precision + recall) if precision + recall > 0.0 else 0.0
 
     return fila_seleccionada
 
 
-def raytune_serie_a_diccionario(serie: Series) -> Dict[str, Any]:
+def raytune_serie_a_diccionario(serie: Series) -> dict[str, Any]:
     """ Convierte una Serie de Pandas en un diccionario estructurado.
 
     - Los índices que comienzan con "config/" se agrupan en un subdiccionario "config".
@@ -238,7 +238,7 @@ def raytune_serie_a_diccionario(serie: Series) -> Dict[str, Any]:
     - Los demás índices se añaden directamente al diccionario principal.
 
     :param Series serie: La Serie de entrada.
-    :return Dict[str, Any]: El diccionario estructurado.
+    :return dict[str, Any]: El diccionario estructurado.
     """
     resultado = {}
     config_dict = {}
@@ -253,14 +253,18 @@ def raytune_serie_a_diccionario(serie: Series) -> Dict[str, Any]:
         elif isinstance(valor, np.ndarray):
             valor = valor.tolist() # Convierte arrays NumPy a listas
 
-        if indice.startswith("config/"):
-            # Eliminar el prefijo "config/" y añadir al subdiccionario config
-            clave_config = indice.replace("config/", "", 1)
-            config_dict[clave_config] = valor
-        elif indice.startswith("metrics/"):
-            # Eliminar el prefijo "metrics/" y añadir al subdiccionario metrics
-            clave_metrics = indice.replace("metrics/", "", 1)
-            metrics_dict[clave_metrics] = valor
+        if isinstance(indice, str):
+            if indice.startswith("config/"):
+                # Eliminar el prefijo "config/" y añadir al subdiccionario config
+                clave_config = indice.replace("config/", "", 1)
+                config_dict[clave_config] = valor
+            elif indice.startswith("metrics/"):
+                # Eliminar el prefijo "metrics/" y añadir al subdiccionario metrics
+                clave_metrics = indice.replace("metrics/", "", 1)
+                metrics_dict[clave_metrics] = valor
+            else:
+                # Añadir directamente al diccionario principal
+                resultado[indice] = valor
         else:
             # Añadir directamente al diccionario principal
             resultado[indice] = valor
@@ -274,11 +278,11 @@ def raytune_serie_a_diccionario(serie: Series) -> Dict[str, Any]:
     return resultado
 
 
-def procesar_result_grid(result_grid: ResultGrid) -> Dict[str, Any]:
+def procesar_result_grid(result_grid: ResultGrid) -> dict[str, Any]:
     """ Se procesa la grilla de resultados que retorna el realizar tuning con RayTune.
 
     :param ResultGrid result_grid: Grilla de resultados obtenida.
-    :return Dict[str, Any]: Diccionario con los resultadso del tuning.
+    :return dict[str, Any]: Diccionario con los resultadso del tuning.
     """
     # Obtenemos el mejor caso de cada entrenamiento
     all_best_metrics_df = result_grid.get_dataframe(filter_metric="metrics/mAP50(M)", filter_mode="max")

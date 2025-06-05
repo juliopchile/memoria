@@ -1,5 +1,4 @@
 import os
-from typing import Dict, List
 from ultralytics import YOLO
 
 from config import ALL_MODELS, BACKBONES_DIR
@@ -19,10 +18,10 @@ def get_backbone_path(model_name: str):
     return os.path.join(BACKBONES_DIR, model_name + ".pt")
 
 
-def download_models(models_to_download: List[str] = None):
+def download_models(models_to_download: list[str] | None = None):
     """ Descarga los modelos especificados en la lista. Sin lista se descargan todos los modelos.
 
-    :param (List[str], Optional) models_to_download: Lista de los nombres de modelos a descargar. Por defecto es None.
+    :param (list[str]) models_to_download: Lista de los nombres de modelos a descargar. Por defecto es None.
     """
     os.makedirs(BACKBONES_DIR, exist_ok=True)
     if models_to_download is None:
@@ -33,21 +32,21 @@ def download_models(models_to_download: List[str] = None):
         del model
 
 
-def export_to_onnx(model_path: str, extra_params: Dict[str, str]):
+def export_to_onnx(model_path: str, extra_params: dict[str, str]):
     """ Exporta un modelo YOLO en formato Pytorch al formato ONNX.
 
     :param str model_path: Dirección de los pesos del modelo a exportar.
-    :param Dict[str, str] extra_params: Parametros extras de configuración.
+    :param dict[str, str] extra_params: Parametros extras de configuración.
     """
     model = YOLO(model=model_path)
     model.export(format="onnx", **extra_params)
 
 
-def export_to_tensor_rt(model_path: str, extra_params: Dict[str, str]):
+def export_to_tensor_rt(model_path: str, extra_params: dict[str, str]):
     """ Exporta un modelo YOLO en formato Pytorch al formato TensorRT.
 
     :param str model_path: Dirección de los pesos del modelo a exportar.
-    :param Dict[str, str] extra_params: Parametros extras de configuración.
+    :param dict[str, str] extra_params: Parametros extras de configuración.
     """
     model = YOLO(model=model_path)
     model.export(format="engine", **extra_params)

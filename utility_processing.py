@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, Tuple, Union
+from typing import cast
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -8,12 +8,12 @@ from pandas import DataFrame, Series
 # ? Este archivo contiene funciones de utilidad utilizadas en los archivos de analisis '.ipynb'.
 # ? Principalmente hay manipulación de Datagramas y ploteo de imagenes.
 
-def quitar_asterisco(datagrama: DataFrame, mascara: List[str]) -> DataFrame:
+def quitar_asterisco(datagrama: DataFrame, mascara: list[str]) -> DataFrame:
     """ Separa un Datagrama según una máscara para la columna "Model".
     Luego además limpia asteríscos en estas columnas.
 
     :param DataFrame datagrama: Datagrama a limpiar.
-    :param List[str] mascara: Lista de casos a incluir.
+    :param list[str] mascara: Lista de casos a incluir.
     :return DataFrame: Datagrama filtrado y limpiado.
     """
     nuevo_datagrama = datagrama[datagrama["Model"].isin(mascara)].copy()
@@ -21,24 +21,24 @@ def quitar_asterisco(datagrama: DataFrame, mascara: List[str]) -> DataFrame:
     return nuevo_datagrama
 
 
-def crear_lista_diccionarios(datagram: List[DataFrame], datagrams: List[DataFrame], group: List[str], groups: List[str],
-                             metrics: List[str], label: List[str], labels: List[str], order: List[str], xlabel: str,
-                             ylabel: List[str], title: Optional[str] = None, legend: bool = True) -> List[Dict[str, str | List[str] | DataFrame]]:
+def crear_lista_diccionarios(datagram: list[DataFrame], datagrams: list[DataFrame], group: list[str], groups: list[str],
+                             metrics: list[str], label: list[str], labels: list[str], order: list[str], xlabel: str,
+                             ylabel: list[str], title: str | None = None, legend: bool = True) -> list[dict[str, str | list[str] | DataFrame]]:
     """ Crea una lista de diccionarios para configurar gráficos basados en los parámetros proporcionados.
 
-    :param List[DataFrame] datagram: Lista con un solo Datagrama.
-    :param List[DataFrame] datagrams: Lista con dos Datagramas.
-    :param List[str] group: Lista con un solo nombre de columna para agrupar.
-    :param List[str] groups: Lista con dos nombres de columnas para agrupar.
-    :param List[str] metrics: Lista de métricas a graficar.
-    :param List[str] label: Lista con una sola etiqueta para el gráfico con un solo Datagrama.
-    :param List[str] labels: Lista con dos etiquetas para el gráfico con dos Datagramas.
-    :param List[str] order: Orden de las categorías para el grupo.
+    :param list[DataFrame] datagram: Lista con un solo Datagrama.
+    :param list[DataFrame] datagrams: Lista con dos Datagramas.
+    :param list[str] group: Lista con un solo nombre de columna para agrupar.
+    :param list[str] groups: Lista con dos nombres de columnas para agrupar.
+    :param list[str] metrics: Lista de métricas a graficar.
+    :param list[str] label: Lista con una sola etiqueta para el gráfico con un solo Datagrama.
+    :param list[str] labels: Lista con dos etiquetas para el gráfico con dos Datagramas.
+    :param list[str] order: Orden de las categorías para el grupo.
     :param str xlabel: Etiqueta para el eje X.
-    :param List[str] ylabel: Lista de etiquetas para el eje Y, correspondiente a cada métrica.
+    :param list[str] ylabel: Lista de etiquetas para el eje Y, correspondiente a cada métrica.
     :param str title: Titulo de las figuras, por defecto es None.
     :param bool legend: Define si mostrar o no una leyenda, por defecto False.
-    :return List[Dict[str, str | List[str] | DataFrame]]: Lista de diccionarios con las configuraciones para poder plotear las figuras.
+    :return list[dict[str, str | list[str] | DataFrame]]: Lista de diccionarios con las configuraciones para poder plotear las figuras.
     """
     lista_diccionarios = []
     largo = len(datagrams)
@@ -77,19 +77,19 @@ def crear_lista_diccionarios(datagram: List[DataFrame], datagrams: List[DataFram
     return lista_diccionarios
 
 
-def plot_metric(datagrams: DataFrame, metrics: List[str], groups_by: List[str], order: List[str], labels: List[str],
-                xlabel: Optional[str]=None, ylabel: Optional[str]=None, title: Optional[str]=None, legend: bool = False) -> Figure:
+def plot_metric(datagrams: DataFrame, metrics: list[str], groups_by: list[str], order: list[str], labels: list[str],
+                xlabel: str | None = None, ylabel: str | None = None, title: str | None = None, legend: bool = False) -> Figure:
     """ Plotea y retorna una figura con curvas para un Datagrama entregado.
     Se realiza un scatter plot y además se dibuja una curva promedio para esos puntos.
 
     :param DataFrame datagrams: Datagrama con los datos a mostrar.
-    :param List[str] metrics: Lista de métricas (columnas) a mostrar.
-    :param List[str] groups_by: Lista de columnas para agrupar los datos. Es el eje X del plot.
-    :param List[str] order: Lista de llaves con el que ordenar el eje X.
-    :param List[str] labels: Nombre de cada curva. Solo se mostrará si legend es True.
-    :param Optional[str] xlabel: Nombre del eje X, por defecto None.
-    :param Optional[str] ylabel: Nombre del eje Y, por defecto None.
-    :param Optional[str] title: Titulo de la figura, por defecto None.
+    :param list[str] metrics: Lista de métricas (columnas) a mostrar.
+    :param list[str] groups_by: Lista de columnas para agrupar los datos. Es el eje X del plot.
+    :param list[str] order: Lista de llaves con el que ordenar el eje X.
+    :param list[str] labels: Nombre de cada curva. Solo se mostrará si legend es True.
+    :param str xlabel: Nombre del eje X, por defecto None.
+    :param str ylabel: Nombre del eje Y, por defecto None.
+    :param str title: Titulo de la figura, por defecto None.
     :param bool legend: Define si mostrar o no una leyenda, por defecto False.
     :return Figure: Figura matplotlib con las curvas dibujadas.
     """
@@ -104,6 +104,7 @@ def plot_metric(datagrams: DataFrame, metrics: List[str], groups_by: List[str], 
     # Iterar sobre los datagramas y plotear sus datos
     for i, (df, label, metric, group_by) in enumerate(zip(datagrams, labels, metrics, groups_by)):
         # Filtrar las filas que tengan NaN en la métrica seleccionada
+        df = cast(DataFrame, df)
         df_filtered = df.dropna(subset=[metric])
 
         # Crear el scatter plot con barras de dispersión en el eje
@@ -134,8 +135,8 @@ def plot_metric(datagrams: DataFrame, metrics: List[str], groups_by: List[str], 
     return mi_figura  # Devolver la figura para uso posterior
 
 
-def comparar_metricas(datagrama: DataFrame, columna: str, casos_a_comparar: List[str] | Tuple[str, str],
-                      thr: float = 0.6) -> Tuple[DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame]:
+def comparar_metricas(datagrama: DataFrame, columna: str, casos_a_comparar: list[str] | tuple[str, str],
+                      thr: float = 0.6) -> tuple[DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame]:
     """ Compara métricas numéricas entre dos casos específicos de una columna dada en un DataFrame.
 
     Esta función genera comparaciones entre dos casos (casos_a_comparar[0] y casos_a_comparar[1])
@@ -145,10 +146,10 @@ def comparar_metricas(datagrama: DataFrame, columna: str, casos_a_comparar: List
 
     :param DataFrame datagrama: El DataFrame que contiene los datos a analizar.
     :param str columna: Nombre de la columna cuyos casos se desea comparar (e.g., "Optimizer").
-    :param List[str] | Tuple[str, str] casos_a_comparar: Lista o tupla con dos valores de la columna a comparar (e.g., ["AdamW", "SGD"]).
+    :param list[str] | tuple[str, str] casos_a_comparar: Lista o tupla con dos valores de la columna a comparar (e.g., ["AdamW", "SGD"]).
     :param float thr: Umbral para filtrar filas donde se tiene F1_score(M) <= thr., por defecto 0.6.
     :raises ValueError: Si casos_a_comparar no contiene exactamente dos elementos.
-    :return Tuple[DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame]: Una tupla con seis DataFrames:
+    :return tuple[DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame]: Una tupla con seis DataFrames:
     
         - ``diff_df_all``: Diferencia absoluta (caso2 - caso1) para todas las filas válidas.
         - ``diff_df_thr``: Diferencia absoluta (caso2 - caso1) con umbral aplicado.
@@ -234,17 +235,17 @@ def comparar_metricas(datagrama: DataFrame, columna: str, casos_a_comparar: List
             reduccion_error_df_all, reduccion_error_df_thr)
 
 
-def crear_datagramas_filtrados(resultados: Tuple[DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame],
-                               columna: str, opciones: List[str], orden: Optional[List[str]] = None
-                               ) -> Tuple[DataFrame, DataFrame, DataFrame, DataFrame]:
+def crear_datagramas_filtrados(resultados: tuple[DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame],
+                               columna: str, opciones: list[str], orden: list[str] | None = None
+                               ) -> tuple[DataFrame, DataFrame, DataFrame, DataFrame]:
     """ Crea tablas de promedios, filtrados por valores de una columna y separados por casos con/sin outliers.
 
-    :param Tuple[DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame] resultados: Tupla con los Datagramas de comparaciones: 
+    :param tuple[DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame, DataFrame] resultados: Tupla con los Datagramas de comparaciones: 
     (``diff_all``, ``diff_thr``, ``mejora_all``, ``mejora_thr``, ``factor_all``, ``factor_thr``, ``red_err_all``, ``red_err_thr``)
     :param str columna: Nombre de la columna por la cual filtrar (e.g., "Format").
-    :param List[str] opciones: Lista de valores únicos en la columna para filtrar (e.g., ["Pytorch", "TensorRT-F32", ...]).
-    :param Optional[List[str]] orden: Lista opcional, similar a ``opciones`` pero establece el orden de los datos, por defecto None.
-    :return Tuple[DataFrame, DataFrame, DataFrame, DataFrame]: Cuatro DataFrames tabulados:
+    :param list[str] opciones: Lista de valores únicos en la columna para filtrar (e.g., ["Pytorch", "TensorRT-F32", ...]).
+    :param list[str] orden: Lista opcional, similar a ``opciones`` pero establece el orden de los datos, por defecto None.
+    :return tuple[DataFrame, DataFrame, DataFrame, DataFrame]: Cuatro DataFrames tabulados:
 
         - ``tabla_diff``: Para diferencias absolutas.
         - ``tabla_diffr``: Para mejoras relativas.
@@ -375,36 +376,36 @@ def crear_tabla_comparativa_para_modelos_yolo(yolon: DataFrame, yolos: DataFrame
     return pd.concat(dfs, ignore_index=True)
 
 
-def apply_extra_conditions(df: DataFrame, conditions: Dict) -> DataFrame:
+def apply_extra_conditions(df: DataFrame, conditions: dict) -> Series:
     """ Función auxiliar que evalúa una condición de pertenencia a una columna en un Datagrama.
 
     :param DataFrame df: Datagrama con los datos.
-    :param Dict conditions: Condicion de pertenencia a considerar.
+    :param dict conditions: Condicion de pertenencia a considerar.
     :return DataFrame: Datagrama de booleanos que mapean los casos a considerar.
     """
-    condition = True  # Base inicial
+    condition = pd.Series(True, index=df.index)
     for key, value in conditions.items():
-        condition = condition & (df[key].isin(value))  # Combinar condiciones
+        condition = condition & (df[key].isin(value))
     return condition
 
 
-def calcular_metricas(df: DataFrame, col_to_eval: str, casos: List[str], columns_to_show: List[str], extra_conditions: Dict) -> Dict[str, Series]:
+def calcular_metricas(df: DataFrame, col_to_eval: str, casos: list[str], columns_to_show: list[str], extra_conditions: dict) -> dict[str, Series]:
     """ Función de utilidad que calcula la media, desviación estandar y el máximo de un Datagrama.
 
     :param DataFrame df: Datagrama con los datos a analizar.
     :param str col_to_eval: Columna a usar para evaluar las condiciones (e.g., "Model").
-    :param List[str] casos: Casos a considerar (e.g., ["yolov9c-seg", "yolov9e-seg"]).
-    :param List[str] columns_to_show: Columnas a mostrar en la Serie retornada (e.g., ["F1_score(M)", "mAP50(M)", "mAP50-95(M)"]).
-    :param Dict extra_conditions: Condiciones lógicas extras a considerar cuando se filtren los casos.
-    :return Dict[str, Series]: Serie con las medidas de media, desviación estandar y valor máximo.
+    :param list[str] casos: Casos a considerar (e.g., ["yolov9c-seg", "yolov9e-seg"]).
+    :param list[str] columns_to_show: Columnas a mostrar en la Serie retornada (e.g., ["F1_score(M)", "mAP50(M)", "mAP50-95(M)"]).
+    :param dict extra_conditions: Condiciones lógicas extras a considerar cuando se filtren los casos.
+    :return dict[str, Series]: Serie con las medidas de media, desviación estandar y valor máximo.
     """
     metricas = {}
-    for caso in casos:
-        condition = (df[col_to_eval] == caso) & apply_extra_conditions(df, extra_conditions)
+    for modelo in casos:
+        condition = (df[col_to_eval] == modelo) & apply_extra_conditions(df, extra_conditions)
         mean_values = df.loc[condition, columns_to_show].mean()
         std_values = df.loc[condition, columns_to_show].std()
         max_values = df.loc[condition, columns_to_show].max()
-        metricas[caso] = {
+        metricas[modelo] = {
             "mean": mean_values,
             "std": std_values,
             "max": max_values
@@ -412,12 +413,12 @@ def calcular_metricas(df: DataFrame, col_to_eval: str, casos: List[str], columns
     return metricas
 
 
-def metricas_a_dataframe(metricas: Series, col_to_eval: str, casos: List[str]) -> DataFrame:
+def metricas_a_dataframe(metricas: dict[str, Series], col_to_eval: str, casos: list[str]) -> DataFrame:
     """ Función de utilidad que convierte una Serie con métricas en un Datagrama y añade columnas.
 
-    :param Series metricas: Serie con las métricas de media y dispersión.
+    :param dict[str, Series] metricas: Diccionario de series con las métricas de media y dispersión.
     :param str col_to_eval: Columna a usar para evaluar las condiciones (e.g., "Dataset").
-    :param List[str] casos: Casos a considerar (e.g., ["Deepfish", "Deepfish_LO"]).
+    :param list[str] casos: Casos a considerar (e.g., ["Deepfish", "Deepfish_LO"]).
     :return DataFrame: Datagrama con las métricas y columnas correspondientes.
     """
     data = []
@@ -441,13 +442,13 @@ def metricas_a_dataframe(metricas: Series, col_to_eval: str, casos: List[str]) -
     return pd.DataFrame(data)
 
 
-def crear_tabla_promedios_modelos_yolo(df: DataFrame, extra_conditions: Optional[Dict[str, List]] = None) -> Tuple[DataFrame, DataFrame, DataFrame]:
+def crear_tabla_promedios_modelos_yolo(df: DataFrame, extra_conditions: dict[str, list] | None = None) -> tuple[DataFrame, DataFrame, DataFrame]:
     """ Cálcula métricas de media y dispersión para los diferentes resultados de modelos YOLO dentro de un datagrama.
     Se usa para comparar los modelos entre sí.
 
     :param DataFrame df: Datagrama con las métricas de validación de los modelos.
-    :param Optional[Dict[str, List]] extra_conditions: Diccionario con condiciones extras para filtrar el datagrama (e.g., {"Format": ["Pytorch"], "TransferLearning": [True]}), por defecto None.
-    :return Tuple[DataFrame, DataFrame, DataFrame]: Tres datagramas tabulados:
+    :param dict[str, list] extra_conditions: Diccionario con condiciones extras para filtrar el datagrama (e.g., {"Format": ["Pytorch"], "TransferLearning": [True]}), por defecto None.
+    :return tuple[DataFrame, DataFrame, DataFrame]: Tres datagramas tabulados:
 
         - ``df_yolov8_metrics``: Metricas para YOLOv8.
         - ``df_yolov9_metrics``: Metricas para YOLOv9.
@@ -478,12 +479,12 @@ def crear_tabla_promedios_modelos_yolo(df: DataFrame, extra_conditions: Optional
     return df_yolov8_metrics, df_yolov9_metrics, df_yolo11_metrics
 
 
-def crear_tabla_promedios_dataset(df: DataFrame, datasets: List[str], extra_conditions: Optional[Dict[str, List]] = None) -> DataFrame:
+def crear_tabla_promedios_dataset(df: DataFrame, datasets: list[str], extra_conditions: dict[str, list] | None = None) -> DataFrame:
     """ Cálcula métricas de media y dispersión para los diferentes datasets dentro de un datagrama.
     Se usa para comparar los datasets con y sin imagenes de fondo.
 
     :param DataFrame df: Datagrama con las métricas de validación de los modelos.
-    :param Optional[Dict[str, List]] extra_conditions: Diccionario con condiciones extras para filtrar el Datagrama (e.g., {"Format": ["Pytorch"], "TransferLearning": [True]}), por defecto None.
+    :param dict[str, list] extra_conditions: Diccionario con condiciones extras para filtrar el Datagrama (e.g., {"Format": ["Pytorch"], "TransferLearning": [True]}), por defecto None.
     :return DataFrame: Datagrama tabulado con comparaciones por dataset.
     """
     # Si no se proporciona extra_conditions, usar un diccionario vacío

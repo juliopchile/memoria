@@ -1,8 +1,8 @@
 import os
 import json
 import shutil
+from typing import cast
 import yaml
-from typing import Tuple, List, Dict
 from ultralytics.data.converter import convert_coco
 from roboflow import Roboflow
 from roboflow.core.dataset import Dataset
@@ -31,12 +31,12 @@ def download_roboflow_dataset(workspace: str, project_id: str, version_number: i
         return None
 
 
-def copy_files(input_path: str, output_path: str, extension: str | Tuple[str, ...]):
+def copy_files(input_path: str, output_path: str, extension: str | tuple[str, ...]):
     """ Copia archivos desde un directorio a otro si estos cumplen con cierta extensión.
 
     :param str input_path: La ruta del directorio de entrada que contiene los archivos.
     :param str output_path: La ruta del directorio de salida donde se copiarán las archivos.
-    :param str | Tuple[str] extension: Extensión o tupla de extensiones a procesar.
+    :param str | tuple[str] extension: Extensión o tupla de extensiones a procesar.
     """
     # Itera a través de los archivos en el directorio de entrada
     for filename in os.listdir(input_path):
@@ -106,13 +106,13 @@ def dataset_coco_to_yolo(name: str, path_dataset: str):
     create_datasets_yaml(yolo_path, directories, classes_dict)
 
 
-def obtain_coco_classes(coco_labels_dir: str) -> Dict[int, str]:
+def obtain_coco_classes(coco_labels_dir: str) -> dict[int, str]:
     """ Obtiene un diccionario con las clases de un dataset COCO. Se ignoran clases con 'supercategory' igual a none.
 
     :param str coco_labels_dir: Directorio donde se encuentra el archivo '_annotations.coco.json'
     :raises FileNotFoundError: Error si no se encontró archivo JSON.
     :raises KeyError: Error si el archivo JSON carece del campo 'categories'.
-    :return Dict[int, str]: Diccionario con el el ID y nombre de las clases del dataset.
+    :return dict[int, str]: Diccionario con el el ID y nombre de las clases del dataset.
     """
     # Buscar el archivo JSON dentro del directorio
     json_file = None
@@ -148,12 +148,12 @@ def obtain_coco_classes(coco_labels_dir: str) -> Dict[int, str]:
     return classes_dict
 
 
-def combine_and_reindex_classes(class_dicts: List[Dict[int, str]]) -> Dict[int, str]:
+def combine_and_reindex_classes(class_dicts: list[dict[int, str]]) -> dict[int, str]:
     """ Toma una lsita de diccionarios, cada una contiene las ID y nombres de clases en un dataset.
     Luego se combinan estos diccionarios de clases en uno solo y re-indexionan desde el 0.
 
-    :param List[Dict[int, str]] class_dicts: Lista de diccionario de clases.
-    :return Dict[int, str]: Diccionario de clases combinado y re-indexado.
+    :param list[dict[int, str]] class_dicts: Lista de diccionario de clases.
+    :return dict[int, str]: Diccionario de clases combinado y re-indexado.
     """
     # Crear un diccionario combinado con todas las clases
     combined_classes = {}
@@ -173,18 +173,18 @@ def combine_and_reindex_classes(class_dicts: List[Dict[int, str]]) -> Dict[int, 
     return reindexed_classes
 
 
-def create_datasets_yaml(dataset_path: str, subdirectories: List[str], classes: Dict[int, str]):
+def create_datasets_yaml(dataset_path: str, subdirectories: list[str], classes: dict[int, str]):
     """ Crea el archivo 'data.yaml' de un dataset dado.
 
     :param str dataset_path: Directorio donde se encuentra el dataset. Donde se guardará el archivo YAML.
     :param list subdirectories: Lista de tareas incluidas en el dataset, pueden ser ('train', 'valid', 'test').
-    :param Dict[int, str] classes: Diccionario de clases a usar.
+    :param dict[int, str] classes: Diccionario de clases a usar.
     """
     # Obtener la cantidad de clases
     num_classes = len(classes)
 
     # Crear el diccionario para el archivo YAML
-    yaml_file = {'path': os.path.abspath(dataset_path)}
+    yaml_file = cast(dict[str, str | int | list],{'path': os.path.abspath(dataset_path)})
 
     # Añadir las rutas solo si están en los subdirectorios
     if "train" in subdirectories:
@@ -438,22 +438,23 @@ def setup_datasets():
     # Descargar los datasets necesarios desde Roboflow
     for name, info in DATASETS_ROBOFLOW_LINKS.items():
         if name in datasets_a_descargar:
+            workspace = cast(str, info['workspace'])
+            project = cast(str, info['project'])
+            version = cast(int, info['version'])
+            name = cast(str, info['name'])
             path_install_dataset_seg = os.path.join(DATASETS_COCO, f"{info['name']}")
-            workspace = info['workspace']
-            project = info['project']
-            version = info['version']
 
             # Descargar dataset en formato COCO desde Roboflow, en el directorio 'datasets_coco'.
             download_roboflow_dataset(workspace, project, version, "coco-segmentation", path_install_dataset_seg)
 
             # Crear etiquetados en formato YOLO, en el directorio 'datasets_yolo'.
-            dataset_coco_to_yolo(info['name'], path_install_dataset_seg)
+            dataset_coco_to_yolo(name, path_install_dataset_seg)
 
             # Copiar las imagenes desde el dataset descargado en 'datasets_coco' al nuevo en 'datasets_yolo'
-            copy_images_to_new_dataset(info['name'], path_install_dataset_seg, DATASETS_YOLO)
+            copy_images_to_new_dataset(name, path_install_dataset_seg, DATASETS_YOLO)
 
             # Ordenar los labels y borrar carpetas vacías
-            move_and_cleanup(os.path.join(DATASETS_YOLO, info['name']))
+            move_and_cleanup(os.path.join(DATASETS_YOLO, name))
 
     # Crear los datasets de exportación en formato YOLO
     create_export_datasets(DATASETS_YOLO)
