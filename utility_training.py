@@ -339,21 +339,21 @@ def add_f1_scores(metrics: dict[str, float]) -> dict[str, float]:
     # Extract precision and recall for (B)
     precision_B = new_metrics.get('metrics/precision(B)', 0)
     recall_B = new_metrics.get('metrics/recall(B)', 0)
-    F1_B = 2 * (precision_B * recall_B) / (precision_B + recall_B) if (precision_B + recall_B) > 0 else 0
+    f1_b = 2 * (precision_B * recall_B) / (precision_B + recall_B) if (precision_B + recall_B) > 0 else 0
 
     # Extract precision and recall for (M)
     precision_M = new_metrics.get('metrics/precision(M)', 0)
     recall_M = new_metrics.get('metrics/recall(M)', 0)
-    F1_M = 2 * (precision_M * recall_M) / (precision_M + recall_M) if (precision_M + recall_M) > 0 else 0
+    f1_m = 2 * (precision_M * recall_M) / (precision_M + recall_M) if (precision_M + recall_M) > 0 else 0
 
     # Create a new dictionary with the desired order
     ordered_metrics = {}
     for key, value in new_metrics.items():
         ordered_metrics[key] = value
         if key == 'metrics/recall(B)':
-            ordered_metrics['metrics/F1_score(B)'] = np.float64(F1_B)
+            ordered_metrics['metrics/F1_score(B)'] = np.float64(f1_b)
         if key == 'metrics/recall(M)':
-            ordered_metrics['metrics/F1_score(M)'] = np.float64(F1_M)
+            ordered_metrics['metrics/F1_score(M)'] = np.float64(f1_m)
 
     return ordered_metrics
 
@@ -374,8 +374,8 @@ def validate_experiment(dataframe: DataFrame, parameters: dict[str, dict | str])
     """ Realiza la validación de dataset para un conjunto de modelos y guarda los resultados en un Datagrama.
 
     :param DataFrame dataframe: Datagrama con datos a actualizar.
-    :param dict[str, dict  |  str] parameters: Diccionario con parámetros varios a utilizar.
-    :return DataFrame: DataFrame actualizado o, en caso de excepción, el mismo sin cambios.
+    :param dict[str, dict | str] parameters: Diccionario con parámetros varios a utilizar.
+    :return DataFrame: Datagrama actualizado ó, en caso de excepción, el mismo sin cambios.
     """
     model_pt_path = cast(str, parameters["model_pt_path"])
     validation_params = cast(dict, parameters["validation_params"])
