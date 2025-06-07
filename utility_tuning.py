@@ -296,20 +296,20 @@ def procesar_result_grid(result_grid: ResultGrid) -> dict[str, Any]:
 
 if __name__ == "__main__":
     # Definir los parametros para realizar el tuning
-    models = ['yolov8l-seg', 'yolov8x-seg', 'yolov9e-seg', 'yolo11l-seg', 'yolo11x-seg']
-    datasets = ['Deepfish.yaml']
+    models = ['yolov8m-seg', 'yolov8l-seg', 'yolov9c-seg', 'yolo11m-seg', 'yolo11l-seg']
+    datasets = ['Salmones.yaml']
     optimizers = ['SGD']
     use_ray = True      # Utilizar Raytune como tuner
     use_freeze = False  # Congelar backbone? (Transfer Learning)
-    extra_training_params = {"epochs": 80, "iterations": 50, "batch": 8, "single_cls": True, "cos_lr": True}
-    # batch cambiado manualmente a 6 para yolov9e
+    extra_training_params = {"epochs": 50, "iterations": 50, "batch": 8, "single_cls": True, "cos_lr": True}
+    # batch cambiado manualmente en caso de requerirse
 
     # Archivo donde guardar la configuración
-    config_file = "tuning_Deepfish.json"
+    config_file = "tuning_Salmones.json"
 
     # Crear configuraciones y guardarlos en un archivo
-    tune_dict = create_tune_dict(models, datasets, optimizers, use_ray, use_freeze, extra_training_params)
-    save_tune_config(tune_dict, config_file)
+    # tune_dict = create_tune_dict(models, datasets, optimizers, use_ray, use_freeze, extra_training_params)
+    # save_tune_config(tune_dict, config_file)
 
     # Realizar tuning
     run_tuning_file(config_file)
