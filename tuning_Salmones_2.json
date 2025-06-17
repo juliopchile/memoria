@@ -1,0 +1,207 @@
+{
+    "Salmones_yolov8m-seg_SGD": {
+        "model_params": {
+            "model": "training/last_run/Salmones_1/yolov8m-seg/weights/last.pt",
+            "task": "segment"
+        },
+        "tuning_params": {
+            "data": "/home/memorista01/tesis/datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "epochs": 50,
+            "iterations": 50,
+            "batch": 8,
+            "single_cls": true,
+            "cos_lr": true
+        },
+        "model_name": "yolov8m-seg",
+        "use_ray": true,
+        "use_freeze": false,
+        "done": true,
+        "best_results": {
+            "trial_id": "64ed0_00010",
+            "config": {
+                "lr0": 0.008034051043207051,
+                "lrf": 0.2111081527955734,
+                "momentum": 0.6110175152052149,
+                "weight_decay": 0.00019267539871432117,
+                "warmup_epochs": 3.1572722564091205,
+                "warmup_momentum": 0.5619055497856078,
+                "optimizer": "SGD",
+                "batch": 8,
+                "single_cls": true,
+                "cos_lr": true
+            },
+            "metrics": {
+                "precision(M)": 0.93093,
+                "recall(M)": 0.88178,
+                "mAP50(M)": 0.95891,
+                "mAP50-95(M)": 0.83864,
+                "F1_score(M)": 0.9056886709953605
+            }
+        }
+    },
+    "Salmones_yolov8l-seg_SGD": {
+        "model_params": {
+            "model": "training/last_run/Salmones_1/yolov8l-seg/weights/last.pt",
+            "task": "segment"
+        },
+        "tuning_params": {
+            "data": "/home/memorista01/tesis/datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "epochs": 50,
+            "iterations": 50,
+            "batch": 6,
+            "single_cls": true,
+            "cos_lr": true
+        },
+        "model_name": "yolov8l-seg",
+        "use_ray": true,
+        "use_freeze": false,
+        "done": true,
+        "best_results": {
+            "trial_id": "5b3d7_00038",
+            "config": {
+                "lr0": 0.0008479337593161244,
+                "lrf": 0.08787365835932086,
+                "momentum": 0.8994956461792,
+                "weight_decay": 0.00031146533242426154,
+                "warmup_epochs": 3.9643631922356977,
+                "warmup_momentum": 0.8734336695277866,
+                "optimizer": "SGD",
+                "batch": 6,
+                "single_cls": true,
+                "cos_lr": true
+            },
+            "metrics": {
+                "precision(M)": 0.9438,
+                "recall(M)": 0.9024,
+                "mAP50(M)": 0.96411,
+                "mAP50-95(M)": 0.856,
+                "F1_score(M)": 0.9226358141046473
+            }
+        }
+    },
+    "Salmones_yolov9c-seg_SGD": {
+        "model_params": {
+            "model": "training/last_run/Salmones_1/yolov9c-seg/weights/last.pt",
+            "task": "segment"
+        },
+        "tuning_params": {
+            "data": "/home/memorista01/tesis/datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "epochs": 50,
+            "iterations": 50,
+            "batch": 6,
+            "single_cls": true,
+            "cos_lr": true
+        },
+        "model_name": "yolov9c-seg",
+        "use_ray": true,
+        "use_freeze": false,
+        "done": true,
+        "best_results": {
+            "trial_id": "e1937_00021",
+            "config": {
+                "lr0": 0.008272912288534974,
+                "lrf": 0.3076542878785882,
+                "momentum": 0.6108455142664597,
+                "weight_decay": 0.0004341787081335202,
+                "warmup_epochs": 2.950777333880004,
+                "warmup_momentum": 0.6925552544804803,
+                "optimizer": "SGD",
+                "batch": 6,
+                "single_cls": true,
+                "cos_lr": true
+            },
+            "metrics": {
+                "precision(M)": 0.9276,
+                "recall(M)": 0.90888,
+                "mAP50(M)": 0.96415,
+                "mAP50-95(M)": 0.80922,
+                "F1_score(M)": 0.9181445896497649
+            }
+        }
+    },
+    "Salmones_yolo11m-seg_SGD": {
+        "model_params": {
+            "model": "training/last_run/Salmones_1/yolo11m-seg/weights/last.pt",
+            "task": "segment"
+        },
+        "tuning_params": {
+            "data": "/home/memorista01/tesis/datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "epochs": 50,
+            "iterations": 50,
+            "batch": 8,
+            "single_cls": true,
+            "cos_lr": true
+        },
+        "model_name": "yolo11m-seg",
+        "use_ray": true,
+        "use_freeze": false,
+        "done": true,
+        "best_results": {
+            "trial_id": "7b4ba_00049",
+            "config": {
+                "lr0": 0.0027227704422727677,
+                "lrf": 0.2513681185890329,
+                "momentum": 0.6503623721373707,
+                "weight_decay": 2.9894558374365834e-05,
+                "warmup_epochs": 3.0447433083720488,
+                "warmup_momentum": 0.5197838376834178,
+                "optimizer": "SGD",
+                "batch": 8,
+                "single_cls": true,
+                "cos_lr": true
+            },
+            "metrics": {
+                "precision(M)": 0.94502,
+                "recall(M)": 0.89252,
+                "mAP50(M)": 0.9683,
+                "mAP50-95(M)": 0.83532,
+                "F1_score(M)": 0.9180200163261752
+            }
+        }
+    },
+    "Salmones_yolo11l-seg_SGD": {
+        "model_params": {
+            "model": "training/last_run/Salmones_1/yolo11l-seg/weights/last.pt",
+            "task": "segment"
+        },
+        "tuning_params": {
+            "data": "/home/memorista01/tesis/datasets_yaml/Salmones.yaml",
+            "optimizer": "SGD",
+            "epochs": 50,
+            "iterations": 50,
+            "batch": 6,
+            "single_cls": true,
+            "cos_lr": true
+        },
+        "model_name": "yolo11l-seg",
+        "use_ray": true,
+        "use_freeze": false,
+        "done": true,
+        "best_results": {
+            "trial_id": "28301_00007",
+            "config": {
+                "lr0": 0.0039217144064213364,
+                "lrf": 0.11176969604291656,
+                "momentum": 0.773984460522035,
+                "weight_decay": 0.0007591276661194607,
+                "warmup_epochs": 1.2018309528334385,
+                "warmup_momentum": 0.7846370691790276,
+                "optimizer": "SGD",
+                "batch": 6,
+                "single_cls": true,
+                "cos_lr": true
+            },
+            "metrics": {
+                "precision(M)": 0.92675,
+                "recall(M)": 0.89953,
+                "mAP50(M)": 0.96725,
+                "mAP50-95(M)": 0.83807,
+                "F1_score(M)": 0.9129371481919529
+            }
+        }
+    }
+}

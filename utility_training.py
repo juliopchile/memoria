@@ -455,11 +455,12 @@ def train_tuned(best_tunes_list: list[dict[str, Any]]):
 
     :param list[dict[str, Any]] best_tunes_list: Lista de diccionarios con los hiperparámetros de los mejores tuning.
     """
-    default_params = {"epochs": 80, "single_cls": True, "cos_lr": True, "optimizer": "SGD"}
+    default_params = {"epochs": 50, "single_cls": True, "cos_lr": True, "optimizer": "SGD"}
     for best_tune in best_tunes_list:
         model_name = best_tune["model"]
         params = {**default_params, **best_tune["params"]}
-        thread_safe_train(get_backbone_path(model_name), params)
+        #thread_safe_train(get_backbone_path(model_name), params)
+        thread_safe_train(model_name, params)
 
 
 def export_tuned(best_tunes_list: list[dict[str, Any]]):
@@ -468,12 +469,15 @@ def export_tuned(best_tunes_list: list[dict[str, Any]]):
     :param list[dict[str, Any]] best_tunes_list: Lista de diccionarios con los hiperparámetros de los mejores tuning.
     """
     export_params = {"int8": True, "batch": 1}
+    export_params_2 = {"half": True, "batch": 1}
     for best_tune in best_tunes_list:
         hyperparams = best_tune["params"]
         export_params.update(data=get_export_yaml_path(hyperparams["data"]))
         model_weights_path = os.path.join(hyperparams["project"], hyperparams["name"], "weights", "best.pt")
         # Realizar exportación con TensorRT
+        export_to_tensor_rt(model_path=model_weights_path, extra_params=export_params_2)
         export_to_tensor_rt(model_path=model_weights_path, extra_params=export_params)
+        
 
 
 def validate_tuned(best_tunes_list: list[dict[str, Any]], results_path: str):
@@ -555,10 +559,10 @@ if __name__ == "__main__":
     # Revisar "utility_tuning.py" y "tuning_Deepfish.json"
 
     #! III) Realizar entrenamiento de los mejores casos
-    # train_tuned(BEST_DEEPFISH_TUNES)
+    train_tuned(BEST_SALMONES_TUNES_2)
 
     #! IV) Exportar en TensorRT
-    # export_tuned(BEST_DEEPFISH_TUNES)
+    export_tuned(BEST_SALMONES_TUNES_2)
 
     #! IV) Validar
-    # validate_tuned(BEST_DEEPFISH_TUNES, "training/results_6.csv")
+    validate_tuned(BEST_SALMONES_TUNES_2, "training/results_6.csv")

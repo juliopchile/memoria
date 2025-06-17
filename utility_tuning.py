@@ -305,11 +305,11 @@ if __name__ == "__main__":
     # batch cambiado manualmente en caso de requerirse
 
     # Archivo donde guardar la configuración
-    config_file = "tuning_Salmones.json"
+    # config_file = "tuning_Salmones_2.json"
 
     # Crear configuraciones y guardarlos en un archivo
     # tune_dict = create_tune_dict(models, datasets, optimizers, use_ray, use_freeze, extra_training_params)
     # save_tune_config(tune_dict, config_file)
 
     # Realizar tuning
-    run_tuning_file(config_file)
+    # run_tuning_file(config_file)
