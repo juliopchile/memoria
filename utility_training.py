@@ -476,7 +476,7 @@ def export_tuned(best_tunes_list: list[dict[str, Any]]):
         model_weights_path = os.path.join(hyperparams["project"], hyperparams["name"], "weights", "best.pt")
         # Realizar exportación con TensorRT
         export_to_tensor_rt(model_path=model_weights_path, extra_params=export_params_2)
-        export_to_tensor_rt(model_path=model_weights_path, extra_params=export_params)
+        #export_to_tensor_rt(model_path=model_weights_path, extra_params=export_params)
         
 
 
@@ -495,7 +495,7 @@ def validate_tuned(best_tunes_list: list[dict[str, Any]], results_path: str):
         validation_params.update(data=hyperparams["data"])
         weights_path = os.path.join(hyperparams["project"], hyperparams["name"], "weights")
 
-        for file, formato in [("best.pt", "Pytorch"), ("best.engine", "TensorRT-INT8")]:
+        for file, formato in [("best.pt", "Pytorch"), ("best_trt_fp16.engine", "TensorRT-F16"), ("best_trt_int8.engine", "TensorRT-INT8")]:
             model_weights_path = os.path.join(weights_path, file)
             try:
                 # Realizar validación del modelo con el dataset de validación
@@ -559,10 +559,10 @@ if __name__ == "__main__":
     # Revisar "utility_tuning.py" y "tuning_Deepfish.json"
 
     #! III) Realizar entrenamiento de los mejores casos
-    train_tuned(BEST_SALMONES_TUNES_2)
+    # train_tuned(BEST_SALMONES_TUNES_2)
 
     #! IV) Exportar en TensorRT
-    export_tuned(BEST_SALMONES_TUNES_2)
+    # export_tuned(BEST_SALMONES_TUNES_2)
 
     #! IV) Validar
-    validate_tuned(BEST_SALMONES_TUNES_2, "training/results_6.csv")
+    # validate_tuned(BEST_SALMONES_TUNES_2, "training/results_6.csv")
