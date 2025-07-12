@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     # Para instalar "ray" simplemente corre un tuning usando el parametro 'use_ray=True'
     model = YOLO("models/backbone/yolo11n-seg.pt")
-    model.tune(iterations=5, epochs=10, optimizer="SGD", gpu_per_trial=1, use_ray=True)
+    model.tune(iterations=1, epochs=10, optimizer="SGD", gpu_per_trial=1, use_ray=True)
 
     # Para exportar en formato TensorRT sirve con exportar una vez un modelo
     model.export(format="engine")
