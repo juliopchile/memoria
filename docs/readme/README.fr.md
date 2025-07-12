@@ -35,14 +35,23 @@ Pour effectuer l'apprentissage et l'inférence par le GPU, vous devez avoir des 
 
 ## Kit d'outils CUDA
 Il est essentiel d'installer le kit d'outils CUDA sur votre système pour tirer parti de l'apprentissage par le GPU. Le processus d'installation sous Linux est détaillé ci-dessous, mais pour plus de détails ou des versions mises à jour, consultez la [page Nvidia CUDA Toolkit](https://developer.nvidia.com/cuda-downloads).
+```bash
+wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-wsl-ubuntu.pin
+sudo mv cuda-wsl-ubuntu.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/12.9.1/local_installers/cuda-repo-wsl-ubuntu-12-9-local_12.9.1-1_amd64.deb
+sudo dpkg -i cuda-repo-wsl-ubuntu-12-9-local_12.9.1-1_amd64.deb
+sudo cp /var/cuda-repo-wsl-ubuntu-12-9-local/cuda-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit-12-9
+```
 
 # Exigences
 Dans l'environnement Python que vous avez créé, installez les paquets nécessaires en exécutant :
 ```bash
 # Pour utiliser les notebooks
-conda install ipykernel
+conda install jupyter
 # Installer pytorch
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
 # Installer Ultralytics
 pip install ultralytics
 # Installer Roboflow pour importer le jeu de données Deepfish
