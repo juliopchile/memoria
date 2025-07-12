@@ -1,7 +1,7 @@
 names:
 - fish
 nc: 1
-path: /home/memorista01/tesis/datasets_yolo/export_Deepfish_LO
+path: /home/memristor/memoria/datasets_yolo/export_Deepfish_LO
 test: images/train
 train: images/train
 val: images/train
