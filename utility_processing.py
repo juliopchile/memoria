@@ -4,6 +4,7 @@ import seaborn as sns
 import pandas as pd
 from matplotlib.figure import Figure
 from pandas import DataFrame, Series
+plt.style.use("default")
 
 # ? Este archivo contiene funciones de utilidad utilizadas en los archivos de analisis '.ipynb'.
 # ? Principalmente hay manipulación de Datagramas y ploteo de imagenes.
@@ -23,7 +24,7 @@ def quitar_asterisco(datagrama: DataFrame, mascara: list[str]) -> DataFrame:
 
 def crear_lista_diccionarios(datagram: list[DataFrame], datagrams: list[DataFrame], group: list[str], groups: list[str],
                              metrics: list[str], label: list[str], labels: list[str], order: list[str], xlabel: str,
-                             ylabel: list[str], title: str | None = None, legend: bool = True) -> list[dict[str, str | list[str] | DataFrame]]:
+                             ylabel: list[str], title: str | None = None, legend: bool = True, figsize=(7, 3)) -> list[dict[str, str | list[str] | DataFrame]]:
     """ Crea una lista de diccionarios para configurar gráficos basados en los parámetros proporcionados.
 
     :param list[DataFrame] datagram: Lista con un solo Datagrama.
@@ -38,6 +39,7 @@ def crear_lista_diccionarios(datagram: list[DataFrame], datagrams: list[DataFram
     :param list[str] ylabel: Lista de etiquetas para el eje Y, correspondiente a cada métrica.
     :param str title: Titulo de las figuras, por defecto es None.
     :param bool legend: Define si mostrar o no una leyenda, por defecto False.
+    :param tuple figsize: Tamaño de la figura (ancho, alto) a usar al crear la figura.
     :return list[dict[str, str | list[str] | DataFrame]]: Lista de diccionarios con las configuraciones para poder plotear las figuras.
     """
     lista_diccionarios = []
@@ -57,6 +59,7 @@ def crear_lista_diccionarios(datagram: list[DataFrame], datagrams: list[DataFram
             "ylabel": ylabel_actual,
             "title": title,
             "legend": legend,
+            "figsize": figsize,
         }
         lista_diccionarios.append(dict_solo)
 
@@ -71,6 +74,7 @@ def crear_lista_diccionarios(datagram: list[DataFrame], datagrams: list[DataFram
             "ylabel": ylabel_actual,
             "title": title,
             "legend": legend,
+            "figsize": figsize,
         }
         lista_diccionarios.append(dict_multiple)
 
@@ -78,7 +82,8 @@ def crear_lista_diccionarios(datagram: list[DataFrame], datagrams: list[DataFram
 
 
 def plot_metric(datagrams: DataFrame, metrics: list[str], groups_by: list[str], order: list[str], labels: list[str],
-                xlabel: str | None = None, ylabel: str | None = None, title: str | None = None, legend: bool = False) -> Figure:
+                xlabel: str | None = None, ylabel: str | None = None, title: str | None = None, legend: bool = False,
+                figsize=(7, 3), fontsize: int = 10) -> Figure:
     """ Plotea y retorna una figura con curvas para un Datagrama entregado.
     Se realiza un scatter plot y además se dibuja una curva promedio para esos puntos.
 
@@ -91,10 +96,11 @@ def plot_metric(datagrams: DataFrame, metrics: list[str], groups_by: list[str], 
     :param str ylabel: Nombre del eje Y, por defecto None.
     :param str title: Titulo de la figura, por defecto None.
     :param bool legend: Define si mostrar o no una leyenda, por defecto False.
+    :param int fontsize: Tamaño de fuente para etiquetas, ticks y leyenda.
     :return Figure: Figura matplotlib con las curvas dibujadas.
     """
     # Crear la figura como variable
-    mi_figura = plt.figure(figsize=(8, 4))
+    mi_figura = plt.figure(figsize=figsize)
     # Agregar un eje a la figura
     ax = mi_figura.add_subplot(111)
 
@@ -119,14 +125,15 @@ def plot_metric(datagrams: DataFrame, metrics: list[str], groups_by: list[str], 
 
     # Configuración del gráfico usando el objeto ax
     if xlabel is not None:
-        ax.set_xlabel(xlabel)
+        ax.set_xlabel(xlabel, fontsize=fontsize)
     if ylabel is not None:
-        ax.set_ylabel(ylabel)
+        ax.set_ylabel(ylabel, fontsize=fontsize)
     if title is not None:
-        ax.set_title(title)
+        ax.set_title(title, fontsize=fontsize + 2)
     if legend:
-        ax.legend()
-    ax.tick_params(axis='x', rotation=45)  # Rotar etiquetas del eje x
+        ax.legend(fontsize=fontsize)
+    ax.tick_params(axis='x', rotation=45, labelsize=fontsize)  # Rotar etiquetas del eje x y tamaño
+    ax.tick_params(axis='y', labelsize=fontsize)
     ax.grid(True)
     mi_figura.tight_layout()  # Ajustar el diseño usando la figura
 
@@ -501,3 +508,236 @@ def crear_tabla_promedios_dataset(df: DataFrame, datasets: list[str], extra_cond
     df_dataset = metricas_a_dataframe(metricas_dataset, "Dataset", datasets)
 
     return df_dataset
+
+
+def crear_tablas_mejora_tiempos(
+    df: DataFrame,
+    formatos: list[str] | None = None,
+    remove_outliers: bool = False,
+    outlier_groupby: list[str] | None = None,
+    outlier_method: str = "iqr",
+    iqr_k: float = 1.5,
+    z_thresh: float = 3.0,
+    baseline_only: bool = True,
+    min_group_size: int = 3,
+) -> dict[str, DataFrame]:
+    """Crea una tabla por formato que compara tiempos/FPS entre Pytorch y TensorRT.
+    Empareja por (Dataset, Optimizer, Model) y calcula  factor de mejora para cada Model:
+      - Inference (Factor de Mejora): promedio de PT / TRT [>1 es mejor]
+      - Inference (Máx diff): máximo inference_factor por modelo
+      - FPS (Factor de Mejora): promedio de TRT / PT [>1 es mejor]
+      - FPS (Máx diff): rango de factores = max(TRT/PT) - min(TRT/PT)
+
+    Soporta exclusión de outliers en 'inference' antes del emparejamiento.
+
+    :param df: Debe incluir columnas: 'Format','Dataset','Optimizer','Model','inference','FPS'
+    :param formatos: ["TensorRT-F32","TensorRT-F16","TensorRT-INT8"] por defecto.
+    :param remove_outliers: Si True, filtra outliers en 'inference' por grupos.
+    :param outlier_groupby: Claves de agrupación para detectar outliers. Por defecto ["Model","Format"].
+    :param outlier_method: "iqr" o "zscore".
+    :param iqr_k: Multiplicador IQR (1.5 por defecto).
+    :param z_thresh: Umbral |z| para z-score (3.0 por defecto).
+    :param baseline_only: Si True, filtra outliers solo en Pytorch. Si False, filtra en Pytorch y formatos TRT.
+    :param min_group_size: Tamaño mínimo de grupo para activar el filtro (si no, no se filtra).
+    """
+
+    if formatos is None:
+        formatos = ["TensorRT-F32", "TensorRT-F16", "TensorRT-INT8"]
+
+    required_cols = {"Format", "Dataset", "Optimizer", "Model", "inference", "FPS"}
+    missing = required_cols - set(df.columns)
+    if missing:
+        raise ValueError(f"Faltan columnas requeridas en el DataFrame: {missing}")
+
+    # Utilidad: filtrar outliers en 'inference' por grupos
+    def _filtrar_outliers_por_grupo(dfin: DataFrame, group_keys: list[str]) -> DataFrame:
+        if dfin.empty:
+            return dfin
+        sname = "inference"
+
+        def mask_group(g: DataFrame) -> pd.Series:
+            s = g[sname]
+            if len(s) < min_group_size:
+                return pd.Series(True, index=g.index)
+            if outlier_method == "iqr":
+                q1 = s.quantile(0.25)
+                q3 = s.quantile(0.75)
+                iqr = q3 - q1
+                if pd.isna(iqr) or iqr == 0:
+                    return pd.Series(True, index=g.index)
+                low = q1 - iqr_k * iqr
+                high = q3 + iqr_k * iqr
+                return (s >= low) & (s <= high)
+            elif outlier_method == "zscore":
+                mu = s.mean()
+                sigma = s.std(ddof=0)
+                if pd.isna(sigma) or sigma == 0:
+                    return pd.Series(True, index=g.index)
+                z = (s - mu) / sigma
+                return z.abs() <= z_thresh
+            else:
+                return pd.Series(True, index=g.index)
+
+        gb = dfin.groupby(group_keys, group_keys=False)
+        # Detectar en tiempo de ejecución si 'apply' acepta el argumento 'include_groups'
+        import inspect
+        kwargs = {}
+        try:
+            sig = inspect.signature(gb.apply)
+            if 'include_groups' in sig.parameters:
+                kwargs['include_groups'] = False
+        except (ValueError, TypeError):
+            # Si no se puede obtener la firma (método C o similar), fallback sin kwargs
+            kwargs = {}
+        # Llamar a apply con kwargs dinámicos evita errores de tipo estático por argumentos desconocidos
+        mask_raw = gb.apply(mask_group, **kwargs)
+
+        # Normalizar a Series booleana alineada
+        if isinstance(mask_raw, pd.DataFrame):
+            mask = mask_raw.iloc[:, 0]
+        else:
+            mask = mask_raw
+
+        if isinstance(mask.index, pd.MultiIndex):
+            mask.index = mask.index.get_level_values(-1)
+
+        mask = mask.astype(bool).reindex(dfin.index, fill_value=True)
+        return dfin.loc[mask]
+
+    # Copia y filtrado opcional de outliers
+    df_work = df.copy()
+    if remove_outliers:
+        if outlier_groupby is None:
+            outlier_groupby = ["Model", "Format"]
+
+        if baseline_only:
+            m_pt = df_work["Format"] == "Pytorch"
+            df_work = pd.concat(
+                [
+                    _filtrar_outliers_por_grupo(df_work.loc[m_pt], outlier_groupby),
+                    df_work.loc[~m_pt],
+                ],
+                ignore_index=True,
+            )
+        else:
+            m_comp = df_work["Format"].isin(["Pytorch"] + formatos)
+            df_work = pd.concat(
+                [
+                    _filtrar_outliers_por_grupo(df_work.loc[m_comp], outlier_groupby),
+                    df_work.loc[~m_comp],
+                ],
+                ignore_index=True,
+            )
+
+    # Base Pytorch
+    df_pt = (
+        df_work[df_work["Format"] == "Pytorch"]
+        .loc[:, ["Dataset", "Optimizer", "Model", "inference", "FPS"]]
+        .rename(columns={"inference": "inference_pt", "FPS": "fps_pt"})
+    )
+
+    tablas: dict[str, DataFrame] = {}
+
+    columns_to_rename = {
+        "Model": "Models",
+        "inference_factor": "Inference",
+        "inference_factor_max_diff": "Inference (Máx diff)",
+        "fps_diff": "FPS",
+        "fps_max_diff": "FPS (Máx diff)"
+    }
+
+    final_columns = ["Models", "Inference", "Inference (Máx diff)",
+        "FPS", "FPS (Máx diff)"
+    ]
+
+    for fmt in formatos:
+        df_fmt = (
+            df_work[df_work["Format"] == fmt]
+            .loc[:, ["Dataset", "Optimizer", "Model", "inference", "FPS"]]
+            .rename(columns={"inference": "inference_fmt", "FPS": "fps_fmt"})
+        )
+
+        # Emparejar Pytorch con el formato por (Dataset, Optimizer, Model)
+        pairs = df_pt.merge(df_fmt, on=["Dataset", "Optimizer", "Model"], how="inner")
+        if pairs.empty:
+            tablas[fmt] = pd.DataFrame(columns=final_columns)
+            continue
+
+        # Evitar divisiones por cero
+        den_inf_pt = pairs["inference_pt"].replace(0, pd.NA)
+        den_inf_fmt = pairs["inference_fmt"].replace(0, pd.NA)
+        den_fps_pt = pairs["fps_pt"].replace(0, pd.NA)
+        den_fps_fmt = pairs["fps_fmt"].replace(0, pd.NA)
+
+        # Métricas por par
+        pairs["inference_factor"] = den_inf_fmt / den_inf_pt
+        pairs["fps_diff"] = den_fps_fmt - den_fps_pt
+
+        # Agregaciones por Model
+        mean_agg = (
+            pairs.groupby("Model", as_index=False)
+            .agg(inference_factor=("inference_factor", "mean"),
+                fps_diff=("fps_diff", "mean"))
+        )
+
+        range_agg = (
+            pairs.groupby("Model", as_index=False)
+            .agg(inference_factor_max=("inference_factor", "min"),
+                fps_max_diff=("fps_diff", "max"))
+        )
+
+        agg = mean_agg.merge(range_agg, on="Model", how="left")
+        # Máx diff (inference): usar el máximo factor directamente
+        agg["inference_factor_max_diff"] = agg["inference_factor_max"]
+        # FPS (Máx diff) se mantiene como rango max - min
+        agg["fps_max_diff"] = agg["fps_max_diff"]
+
+        result = (
+            agg.rename(columns=columns_to_rename)
+            .loc[:, final_columns]
+            .sort_values("Models")
+            .reset_index(drop=True)
+        )
+
+        tablas[fmt] = result
+
+    return tablas
+
+
+def guardar_figura(fig: Figure, nombre: str, extension: str | None = "png", directorio: str | None = None,
+                   dpi: int = 300, bbox_inches: str = "tight") -> str:
+    """Guarda una figura matplotlib en disco.
+
+    :param Figure fig: Objeto figura a guardar.
+    :param str nombre: Nombre base del archivo (puede incluir o no extensión).
+    :param str | None extension: Extensión deseada (p.ej. 'png', 'pdf'). Si None se usa la extensión incluida en nombre
+                                 o 'png' por defecto.
+    :param str | None directorio: Directorio donde guardar. Si None se guarda en el directorio actual.
+    :param int dpi: Resolución en DPI para formatos raster.
+    :param str bbox_inches: Parámetro bbox_inches pasado a savefig.
+    :return str: Ruta absoluta del archivo guardado.
+    """
+    from pathlib import Path
+
+    # Preparar directorio
+    dir_path = Path(directorio) if directorio is not None else Path.cwd()
+    dir_path.mkdir(parents=True, exist_ok=True)
+
+    # Determinar extensión
+    base = Path(nombre)
+    if extension is None:
+        if base.suffix:
+            ext = base.suffix.lstrip(".")
+            filename = base.name
+        else:
+            ext = "png"
+            filename = base.name
+    else:
+        ext = extension.lstrip(".")
+        filename = base.stem
+
+    target = dir_path / f"{filename}.{ext}"
+
+    # Guardar la figura
+    fig.savefig(target, dpi=dpi, bbox_inches=bbox_inches)
+    return str(target.resolve())
